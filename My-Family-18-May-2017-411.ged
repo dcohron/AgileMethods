@@ -1,0 +1,182 @@
+#  Class: SSW-555
+#  Project:  Homework Assignment #1
+#  Author: David N. Cohron
+#  Date: 18 May 2017
+
+# GEDCOM file for the Brady Family
+
+# Honor Code Statement
+# I pledge on my honor that I have not given or received any 
+# unauthorized assistance on this assignment/examination. 
+# I further pledge that I have not copied any material from 
+# a book, article, the Internet or any other source except 
+# where I have expressly cited the source.
+# Signature: David N. Cohron         Date: 18 May 2017
+
+# References:
+# 1)   https://familyecho.com/
+
+
+
+
+0 HEAD
+1 SOUR Family Echo
+2 WWW http://www.familyecho.com/
+1 FILE My Family
+1 DATE 18 MAY 2017
+1 DEST ANSTFILE
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 SUBM @I1@
+2 NAME Me
+1 SUBN
+1 CHAR UTF-8
+0 @I1@ INDI
+1 NAME Mike /Brady/
+2 GIVN Mike
+2 SURN Brady
+2 _MARNM Brady
+1 SEX M
+1 BIRT
+2 DATE 10 MAR 1940
+1 OCCU Architect
+1 FAMS @F1@
+1 FAMS @F2@
+1 FAMS @F4@
+0 @I2@ INDI
+1 NAME Carol /Martin/
+2 GIVN Carol
+2 SURN Martin
+2 _MARNM Brady
+1 SEX F
+1 BIRT
+2 DATE 10 MAR 1945
+1 FAMS @F1@
+1 FAMS @F5@
+1 FAMC @F3@
+0 @I3@ INDI
+1 NAME Sam /Franklin/
+2 GIVN Sam
+2 SURN Franklin
+2 _MARNM Franklin
+1 SEX M
+1 BIRT
+2 DATE 10 MAR 1930
+1 OCCU Butcher
+1 FAMS @F3@
+0 @I4@ INDI
+1 NAME Alice /Nelson/
+2 GIVN Alice
+2 SURN Nelson
+2 _MARNM Nelson
+1 SEX F
+1 BIRT
+2 DATE 10 MAR 1925
+1 OCCU Housekeeper
+1 FAMS @F3@
+0 @I5@ INDI
+1 NAME Greg /Brady/
+2 GIVN Greg
+2 SURN Brady
+2 _MARNM Brady
+1 SEX M
+1 BIRT
+2 DATE 10 MAR 1955
+1 FAMS @F6@
+1 FAMC @F4@
+0 @I6@ INDI
+1 NAME Peter /Brady/
+2 GIVN Peter
+2 SURN Brady
+2 _MARNM Brady
+1 SEX M
+1 BIRT
+2 DATE 10 MAR 1950
+1 FAMC @F4@
+0 @I7@ INDI
+1 NAME Bobby /Brady/
+2 GIVN Bobby
+2 SURN Brady
+2 _MARNM Brady
+1 SEX M
+1 BIRT
+2 DATE 10 MAR 1960
+1 FAMC @F4@
+0 @I8@ INDI
+1 NAME Marcia /Nelson/
+2 GIVN Marcia
+2 SURN Nelson
+2 _MARNM Brady
+1 SEX F
+1 BIRT
+2 DATE 10 MAR 1956
+1 FAMC @F5@
+0 @I9@ INDI
+1 NAME Jan /Nelson/
+2 GIVN Jan
+2 SURN Nelson
+2 _MARNM Brady
+1 SEX F
+1 BIRT
+2 DATE 10 MAR 1958
+1 FAMC @F5@
+0 @I10@ INDI
+1 NAME Cindy /Nelson/
+2 GIVN Cindy
+2 SURN Nelson
+2 _MARNM Brady
+1 SEX F
+1 BIRT
+2 DATE 10 MAR 1960
+1 FAMC @F5@
+0 @I11@ INDI
+1 NAME Tiger /Brady/
+2 GIVN Tiger
+2 SURN Brady
+2 _MARNM Brady
+1 SEX M
+1 BIRT
+2 DATE 10 MAR 1965
+1 FAMC @F6@
+0 @I12@ INDI
+1 NAME Sally /Fields/
+2 GIVN Sally
+2 SURN Fields
+2 _MARNM Brady
+1 SEX F
+1 BIRT
+2 DATE 10 MAR 1942
+1 DEAT Y
+2 DATE 10 MAR 1968
+1 FAMS @F2@
+0 @F1@ FAM
+1 HUSB @I1@
+1 WIFE @I2@
+1 MARR
+2 DATE 10 MAR 1970
+2 PLAC Hollywood, CA
+1 _CURRENT Y
+0 @F2@ FAM
+1 HUSB @I1@
+1 WIFE @I12@
+1 _CURRENT N
+0 @F3@ FAM
+1 HUSB @I3@
+1 WIFE @I4@
+1 CHIL @I2@
+1 _CURRENT Y
+0 @F4@ FAM
+1 HUSB @I1@
+1 CHIL @I5@
+1 CHIL @I6@
+1 CHIL @I7@
+0 @F5@ FAM
+1 WIFE @I2@
+1 CHIL @I8@
+1 CHIL @I9@
+1 CHIL @I10@
+0 @F6@ FAM
+1 HUSB @I5@
+1 CHIL @I11@
+0 TRLR
