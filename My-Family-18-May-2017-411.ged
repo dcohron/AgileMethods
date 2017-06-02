@@ -1,17 +1,19 @@
 #  Class: SSW-555
-#  Project:  Homework Assignment #1
-#  Author: David N. Cohron
-#  Date: 18 May 2017
+#  Project:  Project Assignment Test File
+#  Author: Jeremy Doll, Amie Widerkehr, David N. Cohron
+#  Date: 2 June 2017
 
 # GEDCOM file for the Brady Family
 
 # Honor Code Statement
-# I pledge on my honor that I have not given or received any 
+# We pledge on my honor that we have not given or received any 
 # unauthorized assistance on this assignment/examination. 
-# I further pledge that I have not copied any material from 
+# We further pledge that we have not copied any material from 
 # a book, article, the Internet or any other source except 
-# where I have expressly cited the source.
-# Signature: David N. Cohron         Date: 18 May 2017
+# where we have expressly cited the source.
+# Signature: Jeremy Doll			Date: 2 June 2017
+# Signature: Amie Widerkehr			Date: 2 June 2017
+# Signature: David N. Cohron		Date: 2 June 2017
 
 # References:
 # 1)   https://familyecho.com/
@@ -20,6 +22,7 @@
 
 
 0 HEAD
+0 NOTE https://github.com/dcohron/AgileMethods
 1 SOUR Family Echo
 2 WWW http://www.familyecho.com/
 1 FILE My Family

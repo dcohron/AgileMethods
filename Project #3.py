@@ -13,7 +13,9 @@
 # We further pledge that we have not copied any material from 
 # a book, article, the Internet or any other source except 
 # where we have expressly cited the source.
-# Signature: David N. Cohron         Date: 2 June 2017
+# Signature: Jeremy Doll			Date: 2 June 2017
+# Signature: Amie Widerkehr			Date: 2 June 2017
+# Signature: David N. Cohron		Date: 2 June 2017
 
 # References:
 # 1) StackOverflow
