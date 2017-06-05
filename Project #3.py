@@ -25,9 +25,14 @@
 ### NOTE:
 # Data structure- 
 # individuals[individualID] = {'NAME':'NA', 'SEX':'NA', 'BIRT':'NA', 'DEAT':'NA'}
+# families[familyID] = {'HUSB':'NA', 'WIFE':'NA', 'CHIL':'NA', 'MARR':'NA', 'DIV':'NA'}
+# 	All values in dictionaries are strings and therefore
+#  		must be cast to other types prior to calculation
 # 	AGE and ALIVE are calculated fields 
 # 	CHIL, HUSB and WIFE are calculated from the "families" dictionary
-# families[familyID] = {'HUSB':'NA', 'WIFE':'NA', 'CHIL':'NA', 'MARR':'NA', 'DIV':'NA'}
+# 	CHIL value is a list of strings of the children's individual IDs
+
+
 
 
 # function to get next line and process into list of words
@@ -55,6 +60,7 @@ try:
 	tagLong = ["ABBR", "ADDR", "ADR1", "ADR2", "ADOP", "AFN", "AGE", "AGNC", "ALIA", "ANCE", "ANCI", "ANUL", "ASSO", "AUTH", "BAPL", "BAPM", "BARM", "BASM", "BIRT", "BLES", "BLOB", "BURI", "CALN", "CAST", "CAUS", "CENS", "CHAN", "CHAR", "CHIL", "SHR", "CHRA", "CITY", "CONC", "CONF", "CONL", "CONT", "COPR", "CORP", "CREM", "CTRY", "DATA", "DATE", "DEAT", "DESC", "DESI", "DEST", "DIV", "DIVF", "DSCR", "EDUC", "EMAIL", "EMIG", "ENDL", "ENGA", "EVEN", "FACT", "FAM", "FAMC", "FAMF", "FAMS", "FAX", "FCOM", "FILE", "FONE", "FORM", "GEDC", "GIVN", "GRAD", "HEAD", "HUSB", "IDNO", "IMMI", "INDI", "LANG", "LATI", "LEGA", "LONG", "MAP", "MARB", "MARC", "MARL", "MARR", "MARS", "MEDI", "NAME", "NATI", "NATU", "NCHI", "NICK", "NMR", "NOTE", "NPFX", "NSFX", "OBJE", "OCCU", "ORDI", "ORDN", "PAGE", "PEDI", "PHON", "PLAC", "POST", "PROB", "PROP", "PUBL", "QUAY", "REFN", "RELA", "RELI", "REPO", "RESI", "RESN", "RETI", "RFN", "RIN", "ROLE", "ROMN", "SEX", "SLGC", "SLGS", "SOUR", "SPFX", "SSN", "STAE", "STAT", "SUBM", "SUBN", "SURN", "TEMP", "TEXT", "TIME", "TITL", "TRLR", "TYPE", "VERS", "WIFE", "WWW", "WILL"]
 	tagShort = ["INDI", "NAME", "SEX", "BIRT", "DEAT", "FAMC", "FAMS", "FAM", "MARR", "HUSB", "WIFE", "CHIL", "DIV", "DATE", "HEAD", "TRLR", "NOTE"]
 	tagInterest = ["NAME", "SEX", "BIRT", "DEAT"]
+	famTags = ["HUSB", "WIFE", "CHIL", "MARR", "DIV"]
 	tagList = tagInterest
 	
 	# declare empty dictionary as primary data structure
@@ -67,12 +73,12 @@ try:
 
 	# remove empty lines from list of lines
 	data = list(filter(None, data))
-	print(data)
+	# print(data)
 	
 		
 	while data:
 		wordList = getWords(data)
-		print(wordList)
+		# print(wordList)
 		
 		# skips leading comments and any line that does not 
 		# start with a number
@@ -111,20 +117,60 @@ try:
 					continue				
 				else:
 					familyID = re.sub('@', '', wordList[1])
-					print("FamilyID= ", familyID)	
-					families[familyID] = {'HUSB':'NA', 'WIFE':'NA', 'CHIL':'NA', 'MARR':'NA', 'DIV':'NA'}
+					# print("FamilyID= ", familyID)	
+					families[familyID] = {'HUSB':'NA', 'WIFE':'NA', 'CHIL':[], 'MARR':'NA', 'DIV':'NA'}
+					wordList[0] = '1'
+					while wordList[0] != '0':
+						wordList = getWords(data)
+						# print(wordList)
+						if wordList[1] in famTags:
+							if (wordList[1] == "MARR") :
+								nextLine = getWords(data)
+								date = (nextLine[2] + nextLine[3] + nextLine[4])
+								families[familyID]["MARR"] = date
+								continue
+							elif (wordList[1] == "DIV"):
+								nextLine = getWords(data)
+								date = (nextLine[2] + nextLine[3] + nextLine[4])
+								families[familyID]["DIV"] = date	
+								continue
+							elif (wordList[1] == "CHIL"):
+								individualNum = re.sub('@', '', wordList[2])
+								families[familyID]["CHIL"].append(individualNum)
+							else:
+								# for tags "HUSB" and "WIFE"
+								individualNum = re.sub('@', '', wordList[2])
+								families[familyID][wordList[1]] = individualNum
+								continue
+						else:
+							# print("Not a family tag of interest- skipping to next line.")
+							continue							
+					
+					# we have read one item into data too far
+					# to check end of family list
+					# so need to add back to data to continue processing
+					wordList = ' '.join(wordList)
+					data.insert(0, wordList) 
 					continue
 			
 			# otherwise, invalid tag
 			else:
-				print("Tag not of interest- skipping to next line")
+				# print("Tag not of interest- skipping to next line.")
 				continue
 
 		else:
-			print("I do not know what")
+			# print("Exiting loop.")
 			continue
 
+	# this output is for development, comment out as necessary
 	print(individuals)
+	print(families)
+
+
+
+	### Output functionality
+	# Insert here
+
 
 except IOError:
 	print("An error occured trying to access the data file.")
@@ -132,8 +178,8 @@ except IOError:
 except ImportError:
 	print("No module found.")	
 
-# except:
-# 	print("An error occured.")
+except:
+	print("An error occured.")
 				
 				
 
