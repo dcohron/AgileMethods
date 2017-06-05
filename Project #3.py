@@ -22,7 +22,9 @@
 # 2) GEDCOM tag full list:  http://wiki-en.genealogy.net/GEDCOM-Tags
 # 3) Error Handling:  http://www.pythonforbeginners.com/error-handling/python-try-and-except
 
-
+def getLine(dataList):
+	line = dataList.pop(0)
+	return line
 
 # put code into try/except for error handling
 try: 
@@ -41,42 +43,52 @@ try:
 	tagInterest = ["NAME", "SEX", "BIRT", "DEAT", "CHIL", "HUSB", "WIFE", "MARR"]
 	tagList = tagInterest
 	
+	# declare empty dictionary as primary data structure
+	individuals = {}
 
-	with open(path) as fp:
-		# declare empty dictionary as primary data structure
-		individuals = {}
+	# read in entire file into list of lines
+	f = open(path, 'r')
+	data = f.read().splitlines()
 
-		## Read in the file line by line
-		# It is important to process file line by line because 
-		# we do not know how long the file is
-		for line in fp:
-			# skips leading comments and any line that does not 
-			# start with a number
-			if line[0].isdigit():
-				# strip trailing whitespace
-				line = line.rstrip()
+	# remove empty lines from list of lines
+	data = list(filter(None, data))
+	
+		
+	for line in data:
+		print(line)
+		
+		# skips leading comments and any line that does not 
+		# start with a number
+		if line[0].isdigit():
+			# strip trailing whitespace
+			line = line.rstrip()
+			
+			# split line into words
+			wordList = line.split()
+			print (wordList)
+			# print(len(wordList))
+			remainder = ''.join(str(w + " ") for w in wordList[2:])
+			# if word is in the list of tags, add to dictionary
+			if wordList[0] == '1' and wordList[1] in tagList:
+				individuals[id][wordList[1]] = remainder
 				
-				# split line into words
-				wordList = line.split()
-				print (wordList)
-				# print(len(wordList))
-				remainder = ''.join(str(w + " ") for w in wordList[2:])
-				# if word is in the list of tags, add to dictionary
-				if wordList[0] == '1' and wordList[1] in tagList:
-					individuals[id][wordList[1]] = wordList[2]
-					
-				# if tag in word 3 is one of two special tags, handle it	
-				elif len(wordList) > 2 and (wordList[2] == "INDI" or wordList[2] == "FAM"):
-					if wordList[2] == "INDI":
-						id = re.sub('@', '', wordList[1])
-						print(id)
-						individuals[id] = {'NAME':'NA', 'SEX':'NA', 'BIRT':'NA', 'DEAT':'NA', 'CHIL':'NA', 'HUSB':'NA', 'WIFE':'NA', 'MARR':'NA'}
-						print(individuals)
-				
-				
-				# otherwise, invalid tag
+			# if tag in word 3 is one of two special tags, handle it	
+			elif len(wordList) > 2 and (wordList[2] == "INDI" or wordList[2] == "FAM"):
+				if wordList[2] == "INDI":
+					individualID = re.sub('@', '', wordList[1])
+					print(individualID)
+					individuals[individualID] = {'NAME':'NA', 'SEX':'NA', 'BIRT':'NA', 'DEAT':'NA', 'CHIL':'NA', 'HUSB':'NA', 'WIFE':'NA', 'MARR':'NA'}
+					print(individuals)
 				else:
-					print("Tag not of interest- skipping to next line")
+					famID = re.sub('@', '', wordList[1])
+					print("FamilyID= ", famID)	
+			
+			# otherwise, invalid tag
+			else:
+				print("Tag not of interest- skipping to next line")
+
+		else:
+			continue
 
 except IOError:
 	print("An error occured trying to access the data file.")
