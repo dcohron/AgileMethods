@@ -52,7 +52,7 @@ try:
 	import re
 
 	# Define where to find the data file
-	path1 = "/Users/Nick/Stevens Institute of Technology/Agile Methods/Project/AgileMethods/My-Family-18-May-2017-411.ged"
+	path1 = "./My-Family-18-May-2017-411.ged"
 	path2 = ""
 	path = path1
 
