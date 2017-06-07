@@ -32,11 +32,10 @@
 # 	CHIL, HUSB and WIFE are calculated from the "families" dictionary
 # 	CHIL value is a list of strings of the children's individual IDs
 
+monthInts = {"JAN": 1, "FEB": 2, "MAR": 3, "APR": 4, "MAY": 5, "JUN": 6, "JUL": 7, "AUG": 8, "SEP": 9, "OCT": 10, "NOV": 11, "DEC": 12}
 
-
-
-# function to get next line and process into list of words
 def getWords(dataList):
+    '''function to get next line and process into list of words'''
     line = dataList.pop(0)
     # strip trailing whitespace
     line = line.rstrip()
@@ -45,15 +44,127 @@ def getWords(dataList):
     wordList = line.split()
     return wordList
 
+def addAlive(indFields, indData):
+    '''Adds header and data for an "alive" column for the individuals table'''
+    deathIndex = indFields.index("DEAT")
+    for i in range(len(indData)):
+        if indData[i][deathIndex] == "NA":
+            indData[i] += [True]
+        else:
+            indData[i] += [False]
+    indFields += ["Alive"]
+    return indFields, indData
+
+def parseDateString(date):
+    day = 0
+    month = 0
+    year = 0
+    if date[1:4] in monthInts:
+        #print(date[1:4])
+        day = date[0]
+        month = monthInts[date[1:4]]
+        year = date[4:]
+    else:
+        day = date[0:2]
+        month = monthInts[date[2:5]]
+        year = date[5:]
+    return int(day), int(month), int(year)
+        
+def addAge(indFields, indData):
+    '''Adds header and data for an "age" column for the individuals table'''
+    birthIndex = indFields.index("BIRT")
+    deathIndex = indFields.index("DEAT")
+    for i in range(len(indData)):
+        if indData[i][deathIndex] == "NA":
+            #need to use current date
+            bday, bmonth, byear = parseDateString(indData[i][birthIndex])
+            cday = datetime.date.today().day
+            cmonth = datetime.date.today().month
+            cyear = datetime.date.today().year
+            age = cyear - byear
+            if cmonth <= bmonth:
+                if cmonth == bmonth:
+                    if cday < bday:
+                        age -= 1
+                else:
+                    age -= 1
+            indData[i] += [age]
+        else:
+            #need to use death date
+            dday, dmonth, dyear = parseDateString(indData[i][deathIndex])
+            bday, bmonth, byear = parseDateString(indData[i][birthIndex])
+            age = dyear - byear
+            if dmonth <= bmonth:
+                if dmonth == bmonth:
+                    if dday < bday:
+                        age -= 1
+                else:
+                    age -= 1
+            indData[i] += [age]
+    
+    indFields += ["Age"]
+    return indFields, indData
+
+def addFamNames(indFields, indData, famFields, famData):
+    '''Adds header and data for spouse name columns for the families table'''
+    wifeIndex = famFields.index("WIFE")
+    husbIndex = famFields.index("HUSB")
+    nameIndex = indFields.index("NAME")
+    for i in range(len(famData)):
+        hname = "NA"
+        wname = "NA"
+        husbID = famData[i][husbIndex]
+        #print(husbID)
+        for j in range(len(indData)):
+            if(husbID == "NA"):
+                hname = "NA"
+                break
+            if(indData[j][0] == husbID):
+                hname = indData[j][nameIndex]
+                break
+        wifeID = famData[i][wifeIndex]
+        #print(wifeID)
+        for j in range(len(indData)):
+            if(wifeID == "NA"):
+                wname = "NA"
+                break
+            if(indData[j][0] == wifeID):
+                wname = indData[j][nameIndex]
+                break
+        famData[i] += [hname, wname]
+    famFields += ["HUSB Name", "WIFE Name"]
+    return famFields, famData
+
+def addChildSpouse(indFields, indData, famFields, famData):
+    '''Adds header and data for Child and Spouse columns for the individuals table'''
+    wifeIndex = famFields.index("WIFE")
+    husbIndex = famFields.index("HUSB")
+    childIndex = famFields.index("CHIL")
+    for i in range(len(indData)):
+        cID = indData[i][0]
+        childlist = []
+        for j in range(len(famData)):
+            if cID in famData[j][childIndex]:
+                childlist += [famData[j][0]]
+        spouselist = []
+        for j in range(len(famData)):
+            if (cID == famData[j][wifeIndex]) or (cID == famData[j][husbIndex]):
+                spouselist += [famData[j][0]]
+        indData[i] += [childlist, spouselist]
+    indFields += ["Child", "Spouse"]
+    return indFields, indData    
+
 # put code into try/except for error handling
 try: 
     ## Import needed libraries
     import re
+    import datetime
     from prettytable import PrettyTable
     finalp = PrettyTable()
     finalp2 = PrettyTable()
 
     # Define where to find the data file
+    #path1 = "./My-Family-18-May-2017-411.ged"
     path1 = "./My-Family-18-May-2017-411.ged"
     path2 = ""
     path = path1
@@ -221,6 +332,13 @@ try:
     # guide: https://pypi.python.org/pypi/PTable/0.9.2
     # if you get an import error run "pip install -U ptable" in the command line
     # Individual Table
+
+    indFields, indData = addAlive(indFields, indData)
+    indFields, indData = addAge(indFields, indData)
+    indFields, indData = addChildSpouse(indFields, indData, famFields, famData)
+
+    famFields, famData = addFamNames(indFields, indData, famFields, famData)    
+    
     finalp.field_names = indFields
     for i in range(len(indData)):
         finalp.add_row(indData[i])
@@ -238,8 +356,8 @@ except IOError:
 except ImportError:
     print("No module found.")	
 
-except:
-    print("An error occured.")
+except BaseException as e:
+    print(str(e))
 				
 				
 
