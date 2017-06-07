@@ -1,7 +1,7 @@
 #  Class: SSW-555
 #  Project:  Project Assignment #3
 #  Author: David N. Cohron, Amie Widerkehr, Jeremy Doll
-#  Date: 2 June 2017
+#  Date: 7 June 2017
 
 ## Other files:
 # My-Family-18-May-2017-411.ged   GEDCOM file for the Brady Family
@@ -13,9 +13,9 @@
 # We further pledge that we have not copied any material from 
 # a book, article, the Internet or any other source except 
 # where we have expressly cited the source.
-# Signature: Jeremy Doll			Date: 2 June 2017
-# Signature: Amie Widerkehr			Date: 2 June 2017
-# Signature: David N. Cohron		Date: 2 June 2017
+# Signature: Jeremy Doll			Date: 7 June 2017
+# Signature: Amie Widerkehr			Date: 7 June 2017
+# Signature: David N. Cohron		Date: 7 June 2017
 
 # References:
 # 1) StackOverflow
@@ -290,6 +290,8 @@ try:
     # are unordered, but the data is never gets mixed up because subdictionaries are always
     # relatively the same. The filthy snake language strikes again.
 
+    # We chose as a team to print empty set instead of 'NA' for table cells with no value.
+
     # Idea:
     # build list w/ indices 0, 1 , 2 etc as normal
     # where 0 = index of I1, 1 = index of I2, etc
@@ -359,7 +361,8 @@ except ImportError:
 except BaseException as e:
     print(str(e))
 				
-				
+except:
+	print("An unknown error occured.")				
 
 
 

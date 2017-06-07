@@ -1,0 +1,28 @@
+david-cohrons-macbook-5:AgileMethods Nick$ python proj3.py
++-----+----------------+-----+-----------+-----------+-------+-----+--------+--------------------+
+|  ID |      NAME      | SEX |    BIRT   |    DEAT   | Alive | Age | Child  |       Spouse       |
++-----+----------------+-----+-----------+-----------+-------+-----+--------+--------------------+
+|  I1 |  Mike/Brady/   |  M  | 10MAR1940 |     NA    |  True |  77 |   []   | ['F1', 'F2', 'F4'] |
+|  I2 | Carol/Martin/  |  F  | 10MAR1945 |     NA    |  True |  72 | ['F3'] |    ['F1', 'F5']    |
+|  I3 | Sam/Franklin/  |  M  | 10MAR1930 |     NA    |  True |  87 |   []   |       ['F3']       |
+|  I4 | Alice/Nelson/  |  F  | 10MAR1925 |     NA    |  True |  92 |   []   |       ['F3']       |
+|  I5 |  Greg/Brady/   |  M  | 10MAR1955 |     NA    |  True |  62 | ['F4'] |       ['F6']       |
+|  I6 |  Peter/Brady/  |  M  | 10MAR1950 |     NA    |  True |  67 | ['F4'] |         []         |
+|  I7 |  Bobby/Brady/  |  M  | 10MAR1960 |     NA    |  True |  57 | ['F4'] |         []         |
+|  I8 | Marcia/Nelson/ |  F  | 10MAR1956 |     NA    |  True |  61 | ['F5'] |         []         |
+|  I9 |  Jan/Nelson/   |  F  | 10MAR1958 |     NA    |  True |  59 | ['F5'] |         []         |
+| I10 | Cindy/Nelson/  |  F  | 10MAR1960 |     NA    |  True |  57 | ['F5'] |         []         |
+| I11 |  Tiger/Brady/  |  M  | 10MAR1965 |     NA    |  True |  52 | ['F6'] |         []         |
+| I12 | Sally/Fields/  |  F  | 10MAR1942 | 10MAR1968 | False |  26 |   []   |       ['F2']       |
++-----+----------------+-----+-----------+-----------+-------+-----+--------+--------------------+
++----+------+------+---------------------+-----------+-----+---------------+---------------+
+| ID | HUSB | WIFE |         CHIL        |    MARR   | DIV |   HUSB Name   |   WIFE Name   |
++----+------+------+---------------------+-----------+-----+---------------+---------------+
+| F1 |  I1  |  I2  |          []         | 10MAR1970 |  NA |  Mike/Brady/  | Carol/Martin/ |
+| F2 |  I1  | I12  |          []         |     NA    |  NA |  Mike/Brady/  | Sally/Fields/ |
+| F3 |  I3  |  I4  |        ['I2']       |     NA    |  NA | Sam/Franklin/ | Alice/Nelson/ |
+| F4 |  I1  |  NA  |  ['I5', 'I6', 'I7'] |     NA    |  NA |  Mike/Brady/  |       NA      |
+| F5 |  NA  |  I2  | ['I8', 'I9', 'I10'] |     NA    |  NA |       NA      | Carol/Martin/ |
+| F6 |  I5  |  NA  |       ['I11']       |     NA    |  NA |  Greg/Brady/  |       NA      |
++----+------+------+---------------------+-----------+-----+---------------+---------------+
+david-cohrons-macbook-5:AgileMethods Nick$ 
