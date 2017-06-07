@@ -290,7 +290,7 @@ try:
     # are unordered, but the data is never gets mixed up because subdictionaries are always
     # relatively the same. The filthy snake language strikes again.
 
-    # We chose as a team to print empty set instead of 'NA' for table cells with no value.
+    # We chose as a team to print empty set '[]' instead of 'NA' for table cells with no value.
 
     # Idea:
     # build list w/ indices 0, 1 , 2 etc as normal
