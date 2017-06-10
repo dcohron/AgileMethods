@@ -44,6 +44,32 @@ def getWords(dataList):
     wordList = line.split()
     return wordList
 
+
+####################################
+# Below are functions that make calculations based on/add to the data.
+# I will explain here how to work with it, with the following functions as examples.
+# So, if you read the paragraph at the bottom about dictionaries, you know that
+# they have some properties that make them annoying in some cases. In addition
+# to being easier to work with IMO, the data needs to be in list format for ptable.
+# To do anything with the data, you need the fields (keys) and data (values), which
+# I named the same in functions as when I made them down below for clarity.
+# The table printouts are a good visualisation of the data, if you imagine each 
+# data row as a sub-list.
+# First, find the index of what you want to work with with xxxFields.index(value)
+# Now, you have the proper index x to call on xxxData[n][x] to reference what you
+# need. 
+#
+# If you need to check dates, you may need to use the parseDateString function.
+# Noth that this returns multiple values, so you need to set multiple variables 
+# equal to its output. If you need the current date, use the datetime.date.today
+# method. addAge is a good example, as it has both forms of date comparison.
+#
+# If you wish to add a column to the output table, remember to add the value to 
+# xxxData[i] and not just xxxData, and add a header for the column to xxxFields.
+#
+# Other than that, just be aware of what data types you're working with and keep 
+# them consistent. 
+
 def addAlive(indFields, indData):
     '''Adds header and data for an "alive" column for the individuals table'''
     deathIndex = indFields.index("DEAT")
@@ -56,6 +82,8 @@ def addAlive(indFields, indData):
     return indFields, indData
 
 def parseDateString(date):
+    '''parses a date as given by the GEDCOM data and returns 3 corresponding integers
+       meant to take in a string'''
     day = 0
     month = 0
     year = 0
