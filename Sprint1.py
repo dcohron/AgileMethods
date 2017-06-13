@@ -184,20 +184,15 @@ def addChildSpouse(indFields, indData, famFields, famData):
 
 
 # function to test if date2 occurs after date1
-# passed two date strings and offset (in years), return boolean
+# passed two date strings and offset (in days), return boolean
 # used to test: birth/death, birth/marriage, marriage/divorce
 #               marriage/death, divorce/death, birth date of parents/children
 def checkDates(dateString1, dateString2, offsetDays=0):
     dateGood = True
     date1 = dt.datetime.strptime(dateString1, "%d%b%Y")
     date2 = dt.datetime.strptime(dateString2, "%d%b%Y") 
-<<<<<<< Updated upstream
     # print(date1 + dt.timedelta(days=offsetDays), date2)  
     if (date1 + dt.timedelta(days=offsetDays)) >= date2: 
-=======
-    # print(date1, date2)  
-    if (date1 + dt.timedelta(years=offsetDays)) >= date2: 
->>>>>>> Stashed changes
         dateGood = False
     # print(dateGood)
     return dateGood
@@ -410,7 +405,7 @@ try:
     print("Birth/Marriage check")
     # print(families)
     for key, value in families.items():
-        # print("Family number:", key)
+        print("Family number:", key)
         marrString = families[key]["MARR"]
         if marrString == "NA":
             print("For family %s no marriage date given." %key)
