@@ -408,7 +408,7 @@ try:
     # US02: Check Birth before Marriage
     print()
     print("Birth/Marriage check")
-    print(families)
+    # print(families)
     for key, value in families.items():
         # print("Family number:", key)
         marrString = families[key]["MARR"]
