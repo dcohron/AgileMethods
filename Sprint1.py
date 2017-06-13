@@ -408,9 +408,9 @@ try:
     # US02: Check Birth before Marriage
     print()
     print("Birth/Marriage check")
-    # print(families)
+    print(families)
     for key, value in families.items():
-        print("Family number:", key)
+        # print("Family number:", key)
         marrString = families[key]["MARR"]
         if marrString == "NA":
             print("For family %s no marriage date given." %key)
