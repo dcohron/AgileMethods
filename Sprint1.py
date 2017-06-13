@@ -191,7 +191,7 @@ def checkDates(dateString1, dateString2, offsetDays=0):
     dateGood = True
     date1 = dt.datetime.strptime(dateString1, "%d%b%Y")
     date2 = dt.datetime.strptime(dateString2, "%d%b%Y") 
-    # print(date1, date2)  
+    # print(date1 + dt.timedelta(days=offsetDays), date2)  
     if (date1 + dt.timedelta(days=offsetDays)) >= date2: 
         dateGood = False
     # print(dateGood)
@@ -210,7 +210,7 @@ try:
     finalp2 = PrettyTable()
 
     # Define where to find the data file
-    #path1 = "./My-Family-18-May-2017-411.ged"
+    #path1 = "./jdoll_family_01.ged"
     path1 = "./My-Family-18-May-2017-411.ged"
     path2 = ""
     path = path1
@@ -437,6 +437,7 @@ try:
     print("Birth/Death check")
     # print(individuals)
     for key, value in individuals.items():
+        # print(key)
         birthString = individuals[key]["BIRT"]
         deathString = individuals[key]["DEAT"]
         # print(birthString, deathString)
@@ -450,8 +451,100 @@ try:
             print(key, "- birth/death dates check.")
             continue
 
+    # US06: Check if Divorce Date is before Death Date
+    print()
+    print("Divorce/Death check")
+    # print(individuals)
+    for key, value in families.items():
 
+        if families[key]["HUSB"] != "NA":
+            husbDeathString = individuals[families[key]["HUSB"]]["DEAT"]
+        else:
+            husbDeathString = "NA"
+        if families[key]["WIFE"] != "NA":
+            wifeDeathString = individuals[families[key]["WIFE"]]["DEAT"]
+        else:
+            wifeDeathString = "NA"
+        divorceString = families[key]["DIV"]
+        if divorceString == 'NA':
+            print(key, "- spouses never divorced.")
+            continue
+        else:
+            if husbDeathString == "NA":
+                print(key, "/", families[key]["HUSB"], "- still alive or NA.")
+            else:
+                if not(checkDates(divorceString, husbDeathString)):
+                    print(key, "/", families[key]["HUSB"], "- death prior to divorce.")
+                    continue
+                else:
+                    print(key, "/", families[key]["HUSB"], "- divorce/death dates check.")
+                    continue
+            if wifeDeathString == "NA":
+                print(key, "/", families[key]["WIFE"], "- still alive or NA.")
+            else:
+                if not(checkDates(divorceString, wifeDeathString)):
+                    print(key, "/", families[key]["WIFE"], "- death prior to divorce.")
+                    continue
+                else:
+                    print(key, "/", families[key]["WIFE"], "- divorce/death dates check.")
+                    continue
+                
+    # US12: Check if Parents are too old
+    print()
+    print("Parent/child age check")
+    # print(individuals)
+    for key, value in families.items():
 
+        if families[key]["HUSB"] != "NA":
+            husbBirthString = individuals[families[key]["HUSB"]]["BIRT"]
+        else:
+            husbBirthString = "NA"
+        if families[key]["WIFE"] != "NA":
+            wifeBirthString = individuals[families[key]["WIFE"]]["BIRT"]
+        else:
+            wifeBirthString = "NA"
+        #if families[key]["CHIL"] != []:
+        childList = families[key]["CHIL"]
+        #else:
+         #   wifeBirthString = "NA"
+        
+        if childList == []:
+            print(key, "- no children.")
+            continue
+        else:
+            for i in range(len(childList)):
+                childBirth = individuals[childList[i]]["BIRT"]
+                if husbBirthString == "NA":
+                    # mother only
+                    if wifeBirthString == "NA":
+                        print("No mother or father listed for family, don't think this is possible")
+                    else:
+                        if checkDates(wifeBirthString, childBirth, 21915): # 60 years 15 leap
+                            print(key, "/", families[key]["WIFE"], "/", childList[i], "- mother > 60 years older than child.")
+                        else:
+                            print(key, "/", families[key]["HUSB"], "/", families[key]["WIFE"], "/", childList[i], "- parent/child birth dates check.")
+                elif wifeBirthString == "NA":
+                    #father only
+                    if husbBirthString == "NA":
+                        print("No mother or father listed for family, don't think this is possible")
+                    else:
+                        if checkDates(husbBirthString, childBirth, 29220): # 80 years 20 leap
+                            print(key, "/", families[key]["HUSB"], "/", childList[i], "- father > 80 years older than child.")
+                        else:
+                            print(key, "/", families[key]["HUSB"], "/", families[key]["WIFE"], "/", childList[i], "- parent/child birth dates check.")
+                else: # both parents present in row
+                    if checkDates(husbBirthString, childBirth, 29220): # 80 years
+                        print(key, "/", families[key]["HUSB"], "/", childList[i], "- father > 80 years older than child.")
+                        continue
+                    elif checkDates(wifeBirthString, childBirth, 21915): # 60 years
+                        print(key, "/", families[key]["WIFE"], "/", childList[i], "- mother > 60 years older than child.")
+                        continue
+                    else:
+                        print(key, "/", families[key]["HUSB"], "/", families[key]["WIFE"], "/", childList[i], "- parent/child birth dates check.")
+                        continue
+    # normal spacing is here
+    print()
+    
 
 except IOError:
     print("An error occured trying to access the data file.")
