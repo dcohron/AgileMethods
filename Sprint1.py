@@ -204,6 +204,7 @@ try:
     ## Import needed libraries
     import re
     import datetime as dt
+
     from dateutil.parser import parse as dtparse
     from prettytable import PrettyTable
     finalp = PrettyTable()
@@ -450,6 +451,70 @@ try:
         else:
             print(key, "- birth/death dates check.")
             continue
+
+    # US04: Check Marriage before Divorce
+    print()
+    print("Marriage before Divorce check")
+    # print(families)
+    for key, value in families.items():
+        #print("Family number:", key)
+        marrString = families[key]["MARR"]
+        if marrString == "NA":
+            print(key, ": was never married")
+            continue
+
+        divorceString = families[key]["DIV"]
+        if divorceString == "NA":
+            print(key, ": married and not divorced")
+        elif CheckDates(marrString, divorceString):
+            print("Divorce date is after marriage date check successful.")
+        else:
+            print("Divorce date is before marriage date, check unsuccessful.")
+
+    # US05: Check Marriage before Death
+    print()
+    print("Marriage before Death check")
+    # print(families)
+    for key, value in families.items():
+        #print("Family number:", key)
+
+        if families[key]["HUSB"] != "NA":
+            husbDeathString = individuals[families[key]["HUSB"]]["DEAT"]
+        else:
+            husbDeathString = "NA"
+        if families[key]["WIFE"] != "NA":
+            wifeDeathString = individuals[families[key]["WIFE"]]["DEAT"]
+        else:
+            wifeDeathString = "NA"
+        
+        if husbDeathString == "NA" and wifeDeathString == "NA":
+            print(key, ": husband and wife still alive")
+            continue
+
+        marrString = families[key]["MARR"]
+        if marrString == "NA":
+            print(key, ": was never married")
+            continue
+        else:
+            if husbDeathString == "NA":
+                print(key, "/", families[key]["HUSB"], "- still alive or NA.")
+            else:
+                if not(checkDates(marrString, husbDeathString)):
+                    print(key, "/", families[key]["HUSB"], "- marriage prior to death.")
+                    continue
+                else:
+                    print(key, "/", families[key]["HUSB"], "- marriage before death dates check.")
+                    continue
+            if wifeDeathString == "NA":
+                print(key, "/", families[key]["WIFE"], "- still alive or NA.")
+            else:
+                if not(checkDates(marrString, wifeDeathString)):
+                    print(key, "/", families[key]["WIFE"], "- marriage prior to death.")
+                    continue
+                else:
+                    print(key, "/", families[key]["WIFE"], "- marriage before death dates check.")
+                    continue
+
 
     # US06: Check if Divorce Date is before Death Date
     print()
