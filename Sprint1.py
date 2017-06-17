@@ -47,29 +47,36 @@ def getWords(dataList):
 
 ####################################
 # Below are functions that make calculations based on/add to the data.
-# I will explain here how to work with it, with the following functions as examples.
+# I will explain here how to work with it, with the following functions as
+# examples.
 # So, if you read the paragraph at the bottom about dictionaries, you know that
-# they have some properties that make them annoying in some cases. In addition
-# to being easier to work with IMO, the data needs to be in list format for ptable.
-# To do anything with the data, you need the fields (keys) and data (values), which
+# they have some properties that make them annoying in some cases.  In addition
+# to being easier to work with IMO, the data needs to be in list format for
+# ptable.
+# To do anything with the data, you need the fields (keys) and data (values),
+# which
 # I named the same in functions as when I made them down below for clarity.
-# The table printouts are a good visualisation of the data, if you imagine each 
+# The table printouts are a good visualisation of the data, if you imagine each
 # data row as a sub-list.
-# First, find the index of what you want to work with with xxxFields.index(value)
-# Now, you have the proper index x to call on xxxData[n][x] to reference what you
-# need. 
+# First, find the index of what you want to work with with
+# xxxFields.index(value)
+# Now, you have the proper index x to call on xxxData[n][x] to reference what
+# you
+# need.
 #
 # If you need to check dates, you may need to use the parseDateString function.
-# Noth that this returns multiple values, so you need to set multiple variables 
-# equal to its output. If you need the current date, use the datetime.date.today
-# method. addAge is a good example, as it has both forms of date comparison.
+# Noth that this returns multiple values, so you need to set multiple variables
+# equal to its output.  If you need the current date, use the
+# datetime.date.today
+# method.  addAge is a good example, as it has both forms of date comparison.
 #
-# If you wish to add a column to the output table, remember to add the value to 
-# xxxData[i] and not just xxxData, and add a header for the column to xxxFields.
+# If you wish to add a column to the output table, remember to add the value to
+# xxxData[i] and not just xxxData, and add a header for the column to
+# xxxFields.
 #
-# Other than that, just be aware of what data types you're working with and keep 
-# them consistent. 
-
+# Other than that, just be aware of what data types you're working with and
+# keep
+# them consistent.
 def addAlive(indFields, indData):
     '''Adds header and data for an "alive" column for the individuals table'''
     deathIndex = indFields.index("DEAT")
@@ -191,13 +198,55 @@ def checkDates(dateString1, dateString2, offsetDays=0):
     dateGood = True
     date1 = dt.datetime.strptime(dateString1, "%d%b%Y")
     date2 = dt.datetime.strptime(dateString2, "%d%b%Y") 
-    # print(date1 + dt.timedelta(days=offsetDays), date2)  
+    # print(date1 + dt.timedelta(days=offsetDays), date2)
     if (date1 + dt.timedelta(days=offsetDays)) >= date2: 
         dateGood = False
     # print(dateGood)
     return dateGood
 
+# Sprint1 US04 - Marriage Before Divorce Check
+def  marriageBeforeDivorce(marrString, divorceString):
+    print ()
+    print("Running Marriage Before Divorce Function")
+ 
+    if checkDates(marrString, divorceString):
+        if marrString < divorceString:
+            print("Divorce date is after marriage date check successful.")
+            return True
+        else:
+            print("Divorce date is before marriage date, check unsuccessful.")
+            return False
 
+
+# Sprint1 US05 - Marriage Before Death Check
+def marriageBeforeDeathCheck(key, marrString, husbDeathString, wifeDeathString):
+    print()
+
+    if husbDeathString == "NA":
+        print(key, "/", families[key]["HUSB"], "- still alive or NA.")
+        return True
+    else:
+        if checkDates(marrString, husbDeathString):
+            if marrString < husbDeathString:
+                print(key, "/", families[key]["HUSB"], "- marriage prior to death.")
+                return True
+            else:
+                print(key, "/", families[key]["HUSB"], "- marriage after death.")
+                return False
+            
+    if wifeDeathString == "NA":
+        print(key, "/", families[key]["WIFE"], "- still alive or NA.")
+        return True
+    else:
+        if checkDates(marrString, wifeDeathString):
+            if marrString < wifeDeathString:
+                print(key, "/", families[key]["WIFE"], "- marriage prior to death.")
+                return True
+            else:
+                print(key, "/", families[key]["WIFE"], "- marriage after death.")
+                return False
+            
+    # print(families)
 
 # put code into try/except for error handling
 try: 
@@ -239,7 +288,7 @@ try:
         wordList = getWords(data)
     	# print(wordList)
 		
-    	# skips leading comments and any line that does not 
+    	# skips leading comments and any line that does not
     	# start with a number
         if wordList[0].isdigit():
 			
@@ -276,7 +325,7 @@ try:
                     continue				
                 else:
                     familyID = re.sub('@', '', wordList[1])
-                    # print("FamilyID= ", familyID)	
+                    # print("FamilyID= ", familyID)
                     families[familyID] = {'HUSB':'NA', 'WIFE':'NA', 'CHIL':[], 'MARR':'NA', 'DIV':'NA'}
                     wordList[0] = '1'
                     while wordList[0] != '0':
@@ -302,7 +351,8 @@ try:
                                 families[familyID][wordList[1]] = individualNum
                                 continue
                         else:
-                            # print("Not a family tag of interest- skipping to next line.")
+                            # print("Not a family tag of interest- skipping to
+                            # next line.")
                             continue
                     # we have read one item into data too far
                     # to check end of family list
@@ -325,19 +375,24 @@ try:
 
 
 
-    ### Output functionality 
+    ### Output functionality
     # Some neat facts to know about this for better understanding:
     # Dictionarys in Python are unordered, meaning they do not have an index
-    # associated with KV pairs as a list of tuples might. This is why when you
+    # associated with KV pairs as a list of tuples might.  This is why when you
     # run this and print out the dictionaries, they appear in random orders.
     # The keys or values can be converted into a list, in the order that the
-    # program stores them. What is weird but also very nice is that the subdictonaries
-    # always have the same ordering relative to each other. So as you will see when you
-    # run this, the table columns are in different orders each time because dictionaries
-    # are unordered, but the data is never gets mixed up because subdictionaries are always
-    # relatively the same. The filthy snake language strikes again.
+    # program stores them.  What is weird but also very nice is that the
+    # subdictonaries
+    # always have the same ordering relative to each other.  So as you will see
+    # when you
+    # run this, the table columns are in different orders each time because
+    # dictionaries
+    # are unordered, but the data is never gets mixed up because
+    # subdictionaries are always
+    # relatively the same.  The filthy snake language strikes again.
 
-    # We chose as a team to print empty set '[]' instead of 'NA' for table cells with no value.
+    # We chose as a team to print empty set '[]' instead of 'NA' for table
+    # cells with no value.
 
     # Idea:
     # build list w/ indices 0, 1 , 2 etc as normal
@@ -352,10 +407,10 @@ try:
     # This creates lists as specified above
     for i in range(1, len(indiIndexList) + 1):        
         ckey = "I" + str(i) #create "current key" that we want to find
-        indiIndexList[i-1] = indi.index(ckey) #set list value to location of that key
+        indiIndexList[i - 1] = indi.index(ckey) #set list value to location of that key
     for i in range(1, len(famIndexList) + 1):        
         ckey = "F" + str(i)
-        famIndexList[i-1] = fami.index(ckey)
+        famIndexList[i - 1] = fami.index(ckey)
 
     # Uncomment these for a better visual on what I'm doing
     #print(indi)
@@ -367,7 +422,8 @@ try:
     indData = []
     famFields = ["ID"] + list(famv[famIndexList[0]].keys())
     famData = []
-    # Using those lists, we listify our data (for easier printing) and sort it in one go
+    # Using those lists, we listify our data (for easier printing) and sort it
+    # in one go
     for i in range(len(individuals)):
         #sortedInd.update({indi[indiIndexList[i]]: indv[indiIndexList[i]]})
         temp = [indi[indiIndexList[i]]] + list(indv[indiIndexList[i]].values())
@@ -379,7 +435,8 @@ try:
 
     # This is the formatting magic
     # guide: https://pypi.python.org/pypi/PTable/0.9.2
-    # if you get an import error run "pip install -U ptable" in the command line
+    # if you get an import error run "pip install -U ptable" in the command
+    # line
     # Individual Table
 
     indFields, indData = addAlive(indFields, indData)
@@ -409,7 +466,7 @@ try:
         print("Family number:", key)
         marrString = families[key]["MARR"]
         if marrString == "NA":
-            print("For family %s no marriage date given." %key)
+            print("For family %s no marriage date given." % key)
             continue
 
         # check husband birthdate
@@ -454,8 +511,8 @@ try:
 
     # US04: Check Marriage before Divorce
     print()
-    print("Marriage before Divorce check")
-    # print(families)
+    print("S1, US04 - Marriage before Divorce check")
+    
     for key, value in families.items():
         #print("Family number:", key)
         marrString = families[key]["MARR"]
@@ -466,14 +523,12 @@ try:
         divorceString = families[key]["DIV"]
         if divorceString == "NA":
             print(key, ": married and not divorced")
-        elif CheckDates(marrString, divorceString):
-            print("Divorce date is after marriage date check successful.")
         else:
-            print("Divorce date is before marriage date, check unsuccessful.")
+            marriageBeforeDivorce(marrString, divorceString)
 
     # US05: Check Marriage before Death
     print()
-    print("Marriage before Death check")
+    print("S1, US05 - Marriage before Death check")
     # print(families)
     for key, value in families.items():
         #print("Family number:", key)
@@ -492,29 +547,12 @@ try:
             continue
 
         marrString = families[key]["MARR"]
+
         if marrString == "NA":
             print(key, ": was never married")
             continue
         else:
-            if husbDeathString == "NA":
-                print(key, "/", families[key]["HUSB"], "- still alive or NA.")
-            else:
-                if not(checkDates(marrString, husbDeathString)):
-                    print(key, "/", families[key]["HUSB"], "- marriage prior to death.")
-                    continue
-                else:
-                    print(key, "/", families[key]["HUSB"], "- marriage before death dates check.")
-                    continue
-            if wifeDeathString == "NA":
-                print(key, "/", families[key]["WIFE"], "- still alive or NA.")
-            else:
-                if not(checkDates(marrString, wifeDeathString)):
-                    print(key, "/", families[key]["WIFE"], "- marriage prior to death.")
-                    continue
-                else:
-                    print(key, "/", families[key]["WIFE"], "- marriage before death dates check.")
-                    continue
-
+           marriageBeforeDeathCheck(key, marrString, husbDeathString, wifeDeathString)
 
     # US06: Check if Divorce Date is before Death Date
     print()

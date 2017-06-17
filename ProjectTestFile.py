@@ -19,20 +19,19 @@
 # 1) StackOverflow
 # 2) PyUnit Tutorial: "Page." PyUnit - Python Wiki. N.p., n.d. Web. 13 June 2017.
 
-
-
 import unittest
-
-from Sprint1 import checkDates  # code from module under test
-
+from Sprint1 import *
 
 class AgileProjectTests(unittest.TestCase):
 
     def setUp(self):
         # Call before every test case.
         # self.checkdates = checkDates()
+        
         self.date1 = ("10MAR1960")
         self.date2 = ("10MAR1970")
+        self.emptyDate = "NA"
+
         # set_verbose
 
     def tearDown(self):
@@ -41,7 +40,7 @@ class AgileProjectTests(unittest.TestCase):
 
     def testCompareDate(self):
         # Test case to check date comparison.
-        assert checkDates(self.date1, self.date2) == True, "Dates do not check."
+         assert checkDates(self.date1, self.date2) == True, "Dates do not check."
 	
     def testReverseCompareDate(self):
         # Test case to check date comparison of reversed.
@@ -63,10 +62,46 @@ class AgileProjectTests(unittest.TestCase):
         # Test case to check offset calculation.
         assert checkDates(self.date1, self.date1, -36000) == True, "Offset3 incorrect."
 
+    def testUS04_CheckDivorceAfterMarriage(self):
+        print()
+        
+        # Successful Path: Will be successful:
+        print("Testing US04_checkMarriageBeforeDivorce Check:")
+
+        assert marriageBeforeDivorce(self.date1, self.date2) == True, "Marriage: " + self.date1 + " Divorce: " + self.date2        
+
+        # Negative Test Case: Will Fail:
+        #print("Testing US04_checkMarriageBeforeDivorce Negative Test Case:")
+        #assert marriageBeforeDivorce(self.date2, self.date1) == True, "Marriage: " + self.date2 + " Divorce: " + self.date1
+
+    def testUS05_CheckDeathAfterMarriage(self):
+        print()
+
+         # Successful Path: Will be successful:
+        print("Testing US05_marriageBeforeDeathCheck:")
+
+        assert marriageBeforeDeathCheck("F1", self.date1, self.date2, self.date2) == True, "F1: " + "Marriage: " + self.date1 + " Husband Death: " + self.date2 + " Wife Death: " + self.date2
+    
+        assert marriageBeforeDeathCheck("F1", self.date1, self.date2, self.emptyDate) == True, "F1: " + "Marriage: " + self.date1 + " Husband Death: " + self.date2 + " Wife Death: " + self.emptyDate
+
+        assert marriageBeforeDeathCheck("F1", self.date1, self.emptyDate, self.date2) == True, "F1: " + "Marriage: " + self.date1 + " Husband Death: " + self.emptyDate + " Wife Death: " + self.date2
+
+        assert marriageBeforeDeathCheck("F1", self.date1, self.emptyDate, self.emptyDate) == True, "F1: " + "Marriage: " + self.date1 + " Husband Death: " + self.emptyDate + " Wife Death: " + self.emptyDate
+        
+        # Negative Test Case: Will Fail
+        
+        #print("Testing US05_marriageBeforeDeathCheck Negative Test Case:")
+
+        #assert marriageBeforeDeathCheck("F1", self.date2, self.date1, self.date2) == True, "F1: " + "Marriage: " + self.date2 + " Husband Death: " + self.date1 + " Wife Death: " + self.date2
+    
+        #assert marriageBeforeDeathCheck("F1", self.date2, self.date1, self.emptyDate) == True, "F1: " + "Marriage: " + self.date2+ " Husband Death: " + self.date1 + " Wife Death: " + self.emptyDate
+
+        #assert marriageBeforeDeathCheck("F1", self.date2, self.emptyDate, self.date1) == True, "F1: " + "Marriage: " + self.date2 + " Husband Death: " + self.emptyDate + " Wife Death: " + self.date1
+
 
 if __name__ == "__main__":
 
 	# run all tests
-    unittest.main(verbosity = 2) 
+    unittest.main() 
 
 # End of File
