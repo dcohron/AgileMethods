@@ -1,7 +1,7 @@
 #  Class: SSW-555
 #  Project:  Project Assignment #3
 #  Author: David N. Cohron, Amie Widerkehr, Jeremy Doll
-#  Date: 7 June 2017
+#  Date: 21 June 2017
 
 ## Other files:
 # My-Family-18-May-2017-411.ged   GEDCOM file for the Brady Family
@@ -13,9 +13,9 @@
 # We further pledge that we have not copied any material from 
 # a book, article, the Internet or any other source except 
 # where we have expressly cited the source.
-# Signature: Jeremy Doll			Date: 7 June 2017
-# Signature: Amie Widerkehr			Date: 7 June 2017
-# Signature: David N. Cohron		Date: 7 June 2017
+# Signature: Jeremy Doll			Date: 21 June 2017
+# Signature: Amie Widerkehr			Date: 21 June 2017
+# Signature: David N. Cohron		Date: 21 June 2017
 
 # References:
 # 1) StackOverflow
@@ -203,6 +203,7 @@ def checkDates(dateString1, dateString2, offsetDays=0):
         dateGood = False
     # print(dateGood)
     return dateGood
+
 
 # Sprint1 US04 - Marriage Before Divorce Check
 def  marriageBeforeDivorce(marrString, divorceString):
@@ -466,28 +467,28 @@ try:
         print("Family number:", key)
         marrString = families[key]["MARR"]
         if marrString == "NA":
-            print("For family %s no marriage date given." % key)
+            print("   For family %s no marriage date given." % key)
             continue
 
         # check husband birthdate
         husband = families[key]["HUSB"]
         husbandBirthString = individuals[husband]["BIRT"]
         if husbandBirthString == "NA":
-            print("No husband.")
+            print("   No husband.")
         elif checkDates(husbandBirthString, marrString):
-            print("Husband birth date checks.")
+            print("   Husband birth date checks.")
         else:
-            print("Husband birth date does not check.")        
+            print(f"   ERROR: Husband {husband} birth date does not check.")
 
         # check wife birthdate
         wife = families[key]["WIFE"]
         wifeBirthString = individuals[wife]["BIRT"]
         if wifeBirthString == "NA":
-            print("No wife.")
+            print("   No wife.")
         elif checkDates(wifeBirthString, marrString):
-            print("Wife birth date checks.")
+            print("   Wife birth date checks.")
         else:
-            print("Wife birth date does not check.")
+            print(f"   ERROR: Wife {wife} birth date does not check.")
 
 
     # US03: Check Birth before Death
@@ -503,11 +504,12 @@ try:
             print(key, "- individual still alive.")
             continue
         elif not(checkDates(birthString, deathString)):
-            print(key, "- death prior to birth.")
+            print(key, "- Error: death prior to birth.")
             continue
         else:
             print(key, "- birth/death dates check.")
             continue
+
 
     # US04: Check Marriage before Divorce
     print()
@@ -526,6 +528,7 @@ try:
         else:
             marriageBeforeDivorce(marrString, divorceString)
 
+\
     # US05: Check Marriage before Death
     print()
     print("S1, US05 - Marriage before Death check")
@@ -553,6 +556,7 @@ try:
             continue
         else:
            marriageBeforeDeathCheck(key, marrString, husbDeathString, wifeDeathString)
+
 
     # US06: Check if Divorce Date is before Death Date
     print()
@@ -591,7 +595,8 @@ try:
                 else:
                     print(key, "/", families[key]["WIFE"], "- divorce/death dates check.")
                     continue
-                
+
+
     # US12: Check if Parents are too old
     print()
     print("Parent/child age check")
@@ -653,13 +658,13 @@ except IOError:
     print("An error occured trying to access the data file.")
 
 except ImportError:
-    print("No module found.")	
+    print("No module found.")
 
 except BaseException as e:
     print("Base exception", str(e))
-				
+
 except:
-	print("An unknown error occured.")				
+    print("An unknown error occured.")
 
 
 
