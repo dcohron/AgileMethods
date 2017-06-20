@@ -206,46 +206,41 @@ def checkDates(dateString1, dateString2, offsetDays=0):
 
 # Sprint1 US04 - Marriage Before Divorce Check
 def  marriageBeforeDivorce(marrString, divorceString):
-    print ()
-    print("Running Marriage Before Divorce Function")
+    #print ()
+    #print("Running Marriage Before Divorce Function")
  
     if checkDates(marrString, divorceString):
-        if marrString < divorceString:
-            print("Divorce date is after marriage date check successful.")
-            return True
-        else:
-            print("Divorce date is before marriage date, check unsuccessful.")
-            return False
-
-
-# Sprint1 US05 - Marriage Before Death Check
-def marriageBeforeDeathCheck(key, marrString, husbDeathString, wifeDeathString):
-    print()
-
-    if husbDeathString == "NA":
-        print(key, "/", families[key]["HUSB"], "- still alive or NA.")
+        print("Divorce date is after marriage date check successful.")
         return True
     else:
+        print("Divorce date is before marriage date, check unsuccessful.")
+        return False
+    
+# Sprint1 US05 - Marriage Before Death Check
+def marriageBeforeDeathCheck(key, marrString, husbDeathString, wifeDeathString):
+    #print()
+
+    if husbDeathString == "NA":
+        print(key, ":", families[key]["HUSB"], "- still alive or NA.")
+    else:
         if checkDates(marrString, husbDeathString):
-            if marrString < husbDeathString:
-                print(key, "/", families[key]["HUSB"], "- marriage prior to death.")
-                return True
-            else:
-                print(key, "/", families[key]["HUSB"], "- marriage after death.")
-                return False
-            
+            print(key, ":", families[key]["HUSB"], "- marriage prior to death, Successful check!")
+            return True
+        else:
+            print(key, ":", families[key]["HUSB"], "- marriage after death, Failed check!")
+            return False
+                   
     if wifeDeathString == "NA":
-        print(key, "/", families[key]["WIFE"], "- still alive or NA.")
+        print(key, ":", families[key]["WIFE"], "- still alive or NA.")
         return True
     else:
         if checkDates(marrString, wifeDeathString):
-            if marrString < wifeDeathString:
-                print(key, "/", families[key]["WIFE"], "- marriage prior to death.")
-                return True
-            else:
-                print(key, "/", families[key]["WIFE"], "- marriage after death.")
-                return False
-            
+            print(key, ":", families[key]["WIFE"], "- marriage prior to death, Successful check!")
+            return True
+        else:
+            print(key, ":", families[key]["WIFE"], "- marriage after death, Failed check!")
+            return False
+     
     # print(families)
 
 # put code into try/except for error handling
@@ -552,6 +547,7 @@ try:
             print(key, ": was never married")
             continue
         else:
+           #print("Family Number:", key, " Marriage Date: ", marrString, " Husband Death: ", husbDeathString, " Wife Death: ", wifeDeathString)
            marriageBeforeDeathCheck(key, marrString, husbDeathString, wifeDeathString)
 
     # US06: Check if Divorce Date is before Death Date
