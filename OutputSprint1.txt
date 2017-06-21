@@ -1,0 +1,124 @@
+david-cohrons-macbook-5:AgileMethods Nick$ python Sprint1.py
++-----+--------------------+-----+-----------+-----------+-------+-----+--------+--------------------+
+|  ID |        NAME        | SEX |    BIRT   |    DEAT   | Alive | Age | Child  |       Spouse       |
++-----+--------------------+-----+-----------+-----------+-------+-----+--------+--------------------+
+|  I1 |    Mike/Brady/     |  M  | 10MAR1940 |     NA    |  True |  77 |   []   | ['F1', 'F2', 'F5'] |
+|  I2 |   Carol/Martin/    |  F  | 10MAR1945 |     NA    |  True |  72 | ['F3'] |    ['F1', 'F6']    |
+|  I3 |   Sam/Franklin/    |  M  | 10MAR1930 |     NA    |  True |  87 | ['F4'] |       ['F3']       |
+|  I4 |   Alice/Nelson/    |  F  | 10MAR1925 |     NA    |  True |  92 |   []   |       ['F3']       |
+|  I5 |    Greg/Brady/     |  M  | 10MAR1955 |     NA    |  True |  62 | ['F5'] |       ['F7']       |
+|  I6 |    Peter/Brady/    |  M  | 10MAR1950 |     NA    |  True |  67 | ['F5'] |         []         |
+|  I7 |    Bobby/Brady/    |  M  | 10MAR1960 |     NA    |  True |  57 | ['F5'] |         []         |
+|  I8 |   Marcia/Nelson/   |  F  | 10MAR1956 |     NA    |  True |  61 | ['F6'] |         []         |
+|  I9 |    Jan/Nelson/     |  F  | 10MAR1958 |     NA    |  True |  59 | ['F6'] |         []         |
+| I10 |   Cindy/Nelson/    |  F  | 10MAR1960 |     NA    |  True |  57 | ['F6'] |         []         |
+| I11 |    Tiger/Brady/    |  M  | 10MAR1965 |     NA    |  True |  52 | ['F7'] |         []         |
+| I12 |   Sally/Fields/    |  F  | 10MAR1942 | 10MAR1940 | False |  -2 |   []   |       ['F2']       |
+| I13 |  Samual/Jackson/   |  M  | 10MAR1979 |     NA    |  True |  38 |   []   |       ['F8']       |
+| I14 | Natashia/Richards/ |  F  | 30MAR1981 | 10MAR2012 | False |  30 |   []   |       ['F8']       |
+| I15 | Benjamin/Franklin/ |  M  | 17JAN1706 | 17APR1790 | False |  84 |   []   |       ['F4']       |
+| I16 |   Deborah/Reed/    |  F  | 10MAR1800 | 10MAR1880 | False |  80 |   []   |       ['F4']       |
+| I17 | Homestar/Franklin/ |  M  | 10MAR1990 |     NA    |  True |  27 | ['F4'] |         []         |
++-----+--------------------+-----+-----------+-----------+-------+-----+--------+--------------------+
++----+------+------+---------------------+-----------+-----------+--------------------+--------------------+
+| ID | HUSB | WIFE |         CHIL        |    MARR   |    DIV    |     HUSB Name      |     WIFE Name      |
++----+------+------+---------------------+-----------+-----------+--------------------+--------------------+
+| F1 |  I1  |  I2  |          []         | 10MAR1970 |     NA    |    Mike/Brady/     |   Carol/Martin/    |
+| F2 |  I1  | I12  |          []         | 10MAR1969 |     NA    |    Mike/Brady/     |   Sally/Fields/    |
+| F3 |  I3  |  I4  |        ['I2']       | 10MAR1928 |     NA    |   Sam/Franklin/    |   Alice/Nelson/    |
+| F4 | I15  | I16  |    ['I3', 'I17']    | 10MAR1990 | 10MAR1889 | Benjamin/Franklin/ |   Deborah/Reed/    |
+| F5 |  I1  |  NA  |  ['I5', 'I6', 'I7'] |     NA    |     NA    |    Mike/Brady/     |         NA         |
+| F6 |  NA  |  I2  | ['I8', 'I9', 'I10'] |     NA    |     NA    |         NA         |   Carol/Martin/    |
+| F7 |  I5  |  NA  |       ['I11']       |     NA    |     NA    |    Greg/Brady/     |         NA         |
+| F8 | I13  | I14  |          []         | 10MAR2013 |  1JAN1980 |  Samual/Jackson/   | Natashia/Richards/ |
++----+------+------+---------------------+-----------+-----------+--------------------+--------------------+
+
+Birth/Marriage check
+Family number: F1
+   Husband birth date checks.
+   Wife birth date checks.
+Family number: F2
+   Husband birth date checks.
+   Wife birth date checks.
+Family number: F3
+   ERROR: Husband I3 birth date does not check.
+   Wife birth date checks.
+Family number: F4
+   Husband birth date checks.
+   Wife birth date checks.
+Family number: F5
+   For family F5 no marriage date given.
+Family number: F6
+   For family F6 no marriage date given.
+Family number: F7
+   For family F7 no marriage date given.
+Family number: F8
+   Husband birth date checks.
+   Wife birth date checks.
+
+Birth/Death check
+I1 - individual still alive.
+I2 - individual still alive.
+I3 - individual still alive.
+I4 - individual still alive.
+I5 - individual still alive.
+I6 - individual still alive.
+I7 - individual still alive.
+I8 - individual still alive.
+I9 - individual still alive.
+I10 - individual still alive.
+I11 - individual still alive.
+I12 - Error: death prior to birth.
+I13 - individual still alive.
+I14 - birth/death dates check.
+I15 - birth/death dates check.
+I16 - birth/death dates check.
+I17 - individual still alive.
+
+S1, US04 - Marriage before Divorce check
+F1 : married and not divorced
+F2 : married and not divorced
+F3 : married and not divorced
+Divorce date is before marriage date, check unsuccessful.
+F5 : was never married
+F6 : was never married
+F7 : was never married
+Divorce date is before marriage date, check unsuccessful.
+
+S1, US05 - Marriage before Death check
+F1 : husband and wife still alive
+F2 : I1 - still alive or NA.
+F2 : I12 - marriage after death, Failed check!
+F3 : husband and wife still alive
+F4 : I15 - marriage after death, Failed check!
+F5 : husband and wife still alive
+F6 : husband and wife still alive
+F7 : husband and wife still alive
+F8 : I13 - still alive or NA.
+F8 : I14 - marriage after death, Failed check!
+
+Divorce/Death check
+F1 - spouses never divorced.
+F2 - spouses never divorced.
+F3 - spouses never divorced.
+F4 / I15 - death prior to divorce.
+F5 - spouses never divorced.
+F6 - spouses never divorced.
+F7 - spouses never divorced.
+F8 / I13 - still alive or NA.
+F8 / I14 - divorce/death dates check.
+
+Parent/child age check
+F1 - no children.
+F2 - no children.
+F3 - parent/child birth dates check.
+F4 - father > 80 years older than child.
+F4 - father > 80 years older than child.
+F5 - parent/child birth dates check.
+F5 - parent/child birth dates check.
+F5 - parent/child birth dates check.
+F6 - parent/child birth dates check.
+F6 - parent/child birth dates check.
+F6 - parent/child birth dates check.
+F7 - parent/child birth dates check.
+F8 - no children.
