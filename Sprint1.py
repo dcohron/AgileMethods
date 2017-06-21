@@ -205,10 +205,6 @@ def checkDates(dateString1, dateString2, offsetDays=0):
     return dateGood
 
 
-<<<<<<< HEAD
-# Sprint1 US04 - Marriage Before Divorce Check
-=======
->>>>>>> 86dec6f35bd1b8180f950a29b47f0cfd50b2a4a8
 def  marriageBeforeDivorce(marrString, divorceString):
     '''Sprint1 US04 - Marriage Before Divorce Check'''
     #print ()
@@ -247,7 +243,6 @@ def marriageBeforeDeathCheck(key, marrString, husbDeathString, wifeDeathString):
             print(key, ":", families[key]["WIFE"], "- marriage after death, Failed check!")
             return False
      
-    # print(families)
 
 def divorceBeforeDeath(key, divorceString, husbDeathString, wifeDeathString):
     '''Sprint 1 US06 - Check Divorce before death'''
@@ -264,6 +259,7 @@ def divorceBeforeDeath(key, divorceString, husbDeathString, wifeDeathString):
         else:
             print(key, "- divorce/death dates check.")
             return True
+
 
 def parentChildAgeCheck(key, childBirth, husbBirthString, wifeBirthString):
     '''Sprint 1 US12 - Check if parents are too old for their children'''
@@ -302,6 +298,8 @@ def parentChildAgeCheck(key, childBirth, husbBirthString, wifeBirthString):
         else:
             print(key, "- parent/child birth dates check.")
             return True
+
+
 
 # put code into try/except for error handling
 try: 
@@ -582,7 +580,7 @@ try:
         else:
             marriageBeforeDivorce(marrString, divorceString)
 
-\
+
     # US05: Check Marriage before Death
     print()
     print("S1, US05 - Marriage before Death check")
@@ -632,7 +630,6 @@ try:
             print(key, "- spouses never divorced.")
             continue
         else:
-<<<<<<< HEAD
             if husbDeathString == "NA":
                 print(key, "/", families[key]["HUSB"], "- still alive or NA.")
             else:
@@ -652,13 +649,10 @@ try:
                     print(key, "/", families[key]["WIFE"], "- divorce/death dates check.")
                     continue
 
-
-=======
             # from here goes into function
             divorceBeforeDeath(key, divorceString, husbDeathString, wifeDeathString)
 
                 
->>>>>>> 86dec6f35bd1b8180f950a29b47f0cfd50b2a4a8
     # US12: Check if Parents are too old
     print()
     print("Parent/child age check")
