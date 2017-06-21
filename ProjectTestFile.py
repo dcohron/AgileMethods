@@ -32,6 +32,9 @@ class AgileProjectTests(unittest.TestCase):
         self.date2 = ("10MAR1970")
         self.emptyDate = "NA"
 
+        self.date3 = ("10MAR1889")
+        self.date4 = ("10MAR1899")
+        self.date5 = ("10MAR1920")
         # set_verbose
 
     def tearDown(self):
@@ -98,6 +101,50 @@ class AgileProjectTests(unittest.TestCase):
 
         #assert marriageBeforeDeathCheck("F1", self.date2, self.emptyDate, self.date1) == True, "F1: " + "Marriage: " + self.date2 + " Husband Death: " + self.emptyDate + " Wife Death: " + self.date1
 
+    def testUS06_CheckDivorceBeforeDeath(self):
+        print()
+        print("Testing US06_divorceBeforeDeath:")
+
+        assert divorceBeforeDeath("F1", self.date1, self.date2, self.date2) == True, "F1: " + "Divorce: " + self.date1 + " Husband Death: " + self.date2 + " Wife Death: " + self.date2
+
+        assert divorceBeforeDeath("F1", self.date1, self.date2, self.emptyDate) == True, "F1: " + "Divorce: " + self.date1 + " Husband Death: " + self.date2 + " Wife Death: " + self.emptyDate
+
+        assert divorceBeforeDeath("F1", self.date1, self.emptyDate, self.date2) == True, "F1: " + "Divorce: " + self.date1 + " Husband Death: " + self.emptyDate + " Wife Death: " + self.date2
+
+        assert divorceBeforeDeath("F1", self.date1, self.emptyDate, self.emptyDate) == True, "F1: " + "Divorce: " + self.date1 + " Husband Death: " + self.emptyDate + " Wife Death: " + self.emptyDate
+
+        # Negative cases
+
+        # assert divorceBeforeDeath("F1", self.date2, self.date1, self.date2) == True, "F1: " + "Divorce: " + self.date2 + " Husband Death: " + self.date1 + " Wife Death: " + self.date2
+
+        # assert divorceBeforeDeath("F1", self.date2, self.date1, self.emptyDate) == True, "F1: " + "Divorce: " + self.date2 + " Husband Death: " + self.date1 + " Wife Death: " + self.emptyDate
+
+        # assert divorceBeforeDeath("F1", self.date2, self.emptyDate, self.date1) == True, "F1: " + "Divorce: " + self.date2 + " Husband Death: " + self.emptyDate + " Wife Death: " + self.date1
+
+    def testUS12_CheckParentsTooOld(self):
+        print()
+        print("Testing US12_parentChildAgeCheck:")
+        #self.date3 = ("10MAR1889")
+        #self.date4 = ("10MAR1899")
+        #self.date5 = ("10MAR1920")
+
+        assert parentChildAgeCheck("F1", self.date1, self.date5, self.date5) == True, "F1: " + "Child Birth: " + self.date1 + " Father Birth: " + self.date5 + " Mother Birth: " + self.date5
+        
+        assert parentChildAgeCheck("F1", self.date1, self.date5, self.date4) == False, "F1: " + "Child Birth: " + self.date1 + " Father Birth: " + self.date5 + " Mother Birth: " + self.date4
+        
+        assert parentChildAgeCheck("F1", self.date2, self.date3, self.date5) == False, "F1: " + "Child Birth: " + self.date2 + " Father Birth: " + self.date3 + " Mother Birth: " + self.date5
+        
+        assert parentChildAgeCheck("F1", self.date2, self.date3, self.date4) == False, "F1: " + "Child Birth: " + self.date2 + " Father Birth: " + self.date3 + " Mother Birth: " + self.date4
+       
+        #Negative Cases
+        # mother 61 years older
+        # assert parentChildAgeCheck("F1", self.date1, self.date5, self.date4) == True, "F1: " + "Child Birth: " + self.date1 + " Father Birth: " + self.date5 + " Mother Birth: " + self.date4
+        # father 81 years older
+        # assert parentChildAgeCheck("F1", self.date2, self.date3, self.date5) == True, "F1: " + "Child Birth: " + self.date2 + " Father Birth: " + self.date3 + " Mother Birth: " + self.date5
+        # both too old 
+        # assert parentChildAgeCheck("F1", self.date2, self.date3, self.date4) == True, "F1: " + "Child Birth: " + self.date2 + " Father Birth: " + self.date3 + " Mother Birth: " + self.date4
+
+        
 
 if __name__ == "__main__":
 

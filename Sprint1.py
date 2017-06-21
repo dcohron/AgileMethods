@@ -190,11 +190,11 @@ def addChildSpouse(indFields, indData, famFields, famData):
     return indFields, indData  
 
 
-# function to test if date2 occurs after date1
-# passed two date strings and offset (in days), return boolean
-# used to test: birth/death, birth/marriage, marriage/divorce
-#               marriage/death, divorce/death, birth date of parents/children
 def checkDates(dateString1, dateString2, offsetDays=0):
+    ''' function to test if date2 occurs after date1
+        passed two date strings and offset (in days), return boolean
+        used to test: birth/death, birth/marriage, marriage/divorce
+              marriage/death, divorce/death, birth date of parents/children'''
     dateGood = True
     date1 = dt.datetime.strptime(dateString1, "%d%b%Y")
     date2 = dt.datetime.strptime(dateString2, "%d%b%Y") 
@@ -204,8 +204,9 @@ def checkDates(dateString1, dateString2, offsetDays=0):
     # print(dateGood)
     return dateGood
 
-# Sprint1 US04 - Marriage Before Divorce Check
+
 def  marriageBeforeDivorce(marrString, divorceString):
+    '''Sprint1 US04 - Marriage Before Divorce Check'''
     #print ()
     #print("Running Marriage Before Divorce Function")
  
@@ -216,8 +217,9 @@ def  marriageBeforeDivorce(marrString, divorceString):
         print("Divorce date is before marriage date, check unsuccessful.")
         return False
     
-# Sprint1 US05 - Marriage Before Death Check
+
 def marriageBeforeDeathCheck(key, marrString, husbDeathString, wifeDeathString):
+    '''Sprint1 US05 - Marriage Before Death Check'''
     #print()
 
     if husbDeathString == "NA":
@@ -242,6 +244,60 @@ def marriageBeforeDeathCheck(key, marrString, husbDeathString, wifeDeathString):
             return False
      
     # print(families)
+
+def divorceBeforeDeath(key, divorceString, husbDeathString, wifeDeathString):
+    '''Sprint 1 US06 - Check Divorce before death'''
+    if husbDeathString == "NA" and  wifeDeathString == "NA":
+        print(key, "- both still alive or NA.")
+        return True
+    else:
+        if husbDeathString != "NA" and not(checkDates(divorceString, husbDeathString)):
+            print(key, "/", families[key]["HUSB"], "- husband death prior to divorce.")
+            return False
+        elif wifeDeathString != "NA" and not(checkDates(divorceString, wifeDeathString)):
+            print(key, "/", families[key]["WIFE"], "- wife death prior to divorce.")
+            return False
+        else:
+            print(key, "- divorce/death dates check.")
+            return True
+
+def parentChildAgeCheck(key, childBirth, husbBirthString, wifeBirthString):
+    '''Sprint 1 US12 - Check if parents are too old for their children'''
+
+    if husbBirthString == "NA":
+        # mother only
+        if wifeBirthString == "NA":
+            print("No mother or father listed for family, don't think this is possible")
+            return False
+        else:
+            if checkDates(wifeBirthString, childBirth, 21915): # 60 years 15 leap
+                print(key, "- mother > 60 years older than child.")
+                return False
+            else:
+                print(key, "- parent/child birth dates check.")
+                return True
+    elif wifeBirthString == "NA":
+        #father only
+        if husbBirthString == "NA":
+            print("No mother or father listed for family, don't think this is possible")
+            return False
+        else:
+            if checkDates(husbBirthString, childBirth, 29220): # 80 years 20 leap
+                print(key, "- father > 80 years older than child.")
+                return False
+            else:
+                print(key, "- parent/child birth dates check.")
+                return True
+    else: # both parents present in row
+        if checkDates(husbBirthString, childBirth, 29220): # 80 years
+            print(key, "- father > 80 years older than child.")
+            return False
+        elif checkDates(wifeBirthString, childBirth, 21915): # 60 years
+            print(key, "- mother > 60 years older than child.")
+            return False
+        else:
+            print(key, "- parent/child birth dates check.")
+            return True
 
 # put code into try/except for error handling
 try: 
@@ -569,24 +625,9 @@ try:
             print(key, "- spouses never divorced.")
             continue
         else:
-            if husbDeathString == "NA":
-                print(key, "/", families[key]["HUSB"], "- still alive or NA.")
-            else:
-                if not(checkDates(divorceString, husbDeathString)):
-                    print(key, "/", families[key]["HUSB"], "- death prior to divorce.")
-                    continue
-                else:
-                    print(key, "/", families[key]["HUSB"], "- divorce/death dates check.")
-                    continue
-            if wifeDeathString == "NA":
-                print(key, "/", families[key]["WIFE"], "- still alive or NA.")
-            else:
-                if not(checkDates(divorceString, wifeDeathString)):
-                    print(key, "/", families[key]["WIFE"], "- death prior to divorce.")
-                    continue
-                else:
-                    print(key, "/", families[key]["WIFE"], "- divorce/death dates check.")
-                    continue
+            # from here goes into function
+            divorceBeforeDeath(key, divorceString, husbDeathString, wifeDeathString)
+
                 
     # US12: Check if Parents are too old
     print()
@@ -613,34 +654,8 @@ try:
         else:
             for i in range(len(childList)):
                 childBirth = individuals[childList[i]]["BIRT"]
-                if husbBirthString == "NA":
-                    # mother only
-                    if wifeBirthString == "NA":
-                        print("No mother or father listed for family, don't think this is possible")
-                    else:
-                        if checkDates(wifeBirthString, childBirth, 21915): # 60 years 15 leap
-                            print(key, "/", families[key]["WIFE"], "/", childList[i], "- mother > 60 years older than child.")
-                        else:
-                            print(key, "/", families[key]["HUSB"], "/", families[key]["WIFE"], "/", childList[i], "- parent/child birth dates check.")
-                elif wifeBirthString == "NA":
-                    #father only
-                    if husbBirthString == "NA":
-                        print("No mother or father listed for family, don't think this is possible")
-                    else:
-                        if checkDates(husbBirthString, childBirth, 29220): # 80 years 20 leap
-                            print(key, "/", families[key]["HUSB"], "/", childList[i], "- father > 80 years older than child.")
-                        else:
-                            print(key, "/", families[key]["HUSB"], "/", families[key]["WIFE"], "/", childList[i], "- parent/child birth dates check.")
-                else: # both parents present in row
-                    if checkDates(husbBirthString, childBirth, 29220): # 80 years
-                        print(key, "/", families[key]["HUSB"], "/", childList[i], "- father > 80 years older than child.")
-                        continue
-                    elif checkDates(wifeBirthString, childBirth, 21915): # 60 years
-                        print(key, "/", families[key]["WIFE"], "/", childList[i], "- mother > 60 years older than child.")
-                        continue
-                    else:
-                        print(key, "/", families[key]["HUSB"], "/", families[key]["WIFE"], "/", childList[i], "- parent/child birth dates check.")
-                        continue
+                parentChildAgeCheck(key, childBirth, husbBirthString, wifeBirthString)
+
     # normal spacing is here
     print()
     
