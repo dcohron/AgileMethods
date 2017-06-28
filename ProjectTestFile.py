@@ -1,7 +1,7 @@
 #  Class: SSW-555
 #  Project:  GEDCOM Project Test Repository
 #  Author: David N. Cohron, Amie Widerkehr, Jeremy Doll
-#  Date: 13 June 2017
+#  Date: 27 June 2017
 
 # Testing Project Increments
 
@@ -11,16 +11,16 @@
 # We further pledge that we have not copied any material from 
 # a book, article, the Internet or any other source except 
 # where we have expressly cited the source.
-# Signature: Jeremy Doll            Date: 7 June 2017
-# Signature: Amie Widerkehr         Date: 7 June 2017
-# Signature: David N. Cohron        Date: 7 June 2017
+# Signature: Jeremy Doll            Date: 27 June 2017
+# Signature: Amie Widerkehr         Date: 27 June 2017
+# Signature: David N. Cohron        Date: 27 June 2017
 
 # References:
 # 1) StackOverflow
 # 2) PyUnit Tutorial: "Page." PyUnit - Python Wiki. N.p., n.d. Web. 13 June 2017.
 
 import unittest
-from Sprint1 import *
+from Sprint2 import *
 
 class AgileProjectTests(unittest.TestCase):
 
@@ -35,7 +35,9 @@ class AgileProjectTests(unittest.TestCase):
         self.date3 = ("10MAR1889")
         self.date4 = ("10MAR1899")
         self.date5 = ("10MAR1920")
-        # set_verbose
+        
+        self.individualsTest = {'I1': {'NAME': 'Mike/Brady/', 'SEX': 'M', 'BIRT': '10MAR1940', 'DEAT': 'NA'}, 'I2': {'NAME': 'Carol/Martin/', 'SEX': 'F', 'BIRT': '10MAR1945', 'DEAT': 'NA'}, 'I3': {'NAME': 'Sam/Franklin/', 'SEX': 'M', 'BIRT': '10MAR1930', 'DEAT': 'NA'}, 'I4': {'NAME': 'Alice/Nelson/', 'SEX': 'F', 'BIRT': '10MAR1925', 'DEAT': 'NA'}, 'I5': {'NAME': 'Greg/Brady/', 'SEX': 'M', 'BIRT': '10MAR1955', 'DEAT': 'NA'}, 'I6': {'NAME': 'Peter/Brady/', 'SEX': 'M', 'BIRT': '10MAR1950', 'DEAT': 'NA'}, 'I7': {'NAME': 'Bobby/Brady/', 'SEX': 'M', 'BIRT': '10MAR1960', 'DEAT': 'NA'}, 'I8': {'NAME': 'Marcia/Nelson/', 'SEX': 'F', 'BIRT': '10MAR1956', 'DEAT': 'NA'}, 'I9': {'NAME': 'Jan/Nelson/', 'SEX': 'F', 'BIRT': '10MAR1958', 'DEAT': 'NA'}, 'I10': {'NAME': 'Cindy/Nelson/', 'SEX': 'F', 'BIRT': '10MAR1960', 'DEAT': 'NA'}, 'I11': {'NAME': 'Tiger/Brady/', 'SEX': 'M', 'BIRT': '10MAR1965', 'DEAT': 'NA'}, 'I12': {'NAME': 'Sally/Fields/', 'SEX': 'F', 'BIRT': '10MAR1942', 'DEAT': '10MAR1940'}, 'I13': {'NAME': 'Samuel/Jackson/', 'SEX': 'M', 'BIRT': '10MAR1979', 'DEAT': 'NA'}, 'I14': {'NAME': 'Natashia/Richards/', 'SEX': 'F', 'BIRT': '30MAR1981', 'DEAT': '10MAR2012'}, 'I15': {'NAME': 'Benjamin/Franklin/', 'SEX': 'M', 'BIRT': '17JAN1706', 'DEAT': '17APR1790'}, 'I16': {'NAME': 'Deborah/Reed/', 'SEX': 'F', 'BIRT': '10MAR1800', 'DEAT': '10MAR1880'}, 'I17': {'NAME': 'Homestar/Franklin/', 'SEX': 'M', 'BIRT': '10MAR1990', 'DEAT': 'NA'}}
+        self.familiesTest = {'F1': {'HUSB': 'I1', 'WIFE': 'I2', 'CHIL': [], 'MARR': '10MAR1970', 'DIV': 'NA'}, 'F2': {'HUSB': 'I1', 'WIFE': 'I12', 'CHIL': [], 'MARR': '10MAR1969', 'DIV': 'NA'}, 'F3': {'HUSB': 'I3', 'WIFE': 'I4', 'CHIL': ['I2'], 'MARR': '10MAR1928', 'DIV': 'NA'}, 'F4': {'HUSB': 'I15', 'WIFE': 'I16', 'CHIL': ['I3', 'I17'], 'MARR': '10MAR1990', 'DIV': '10MAR1889'}, 'F5': {'HUSB': 'I1', 'WIFE': 'NA', 'CHIL': ['I5', 'I6', 'I7'], 'MARR': 'NA', 'DIV': 'NA'}, 'F6': {'HUSB': 'NA', 'WIFE': 'I2', 'CHIL': ['I8', 'I9', 'I10'], 'MARR': 'NA', 'DIV': 'NA'}, 'F7': {'HUSB': 'I5', 'WIFE': 'NA', 'CHIL': ['I11'], 'MARR': 'NA', 'DIV': 'NA'}, 'F8': {'HUSB': 'I13', 'WIFE': 'I14', 'CHIL': [], 'MARR': '10MAR2013', 'DIV': '1JAN1980'}}
 
     def tearDown(self):
         # Call after every test case.
@@ -144,7 +146,29 @@ class AgileProjectTests(unittest.TestCase):
         # both too old 
         # assert parentChildAgeCheck("F1", self.date2, self.date3, self.date4) == True, "F1: " + "Child Birth: " + self.date2 + " Father Birth: " + self.date3 + " Mother Birth: " + self.date4
 
-        
+    def testUniqueIDUS22(self):
+        # test case to check IndividualID is unique.
+        self.assertFalse(uniqueIDCheck('I1', individuals))
+
+        # test case to check FamilyID is unique.
+        self.assertFalse(uniqueIDCheck('F1', families))
+
+
+    def testRead(self):
+        # test if read is correct
+        path = "./My-Family-18-May-2017-411.ged"
+        individuals, families = readFile(path)
+        self.assertEqual(self.individualsTest, individuals) 
+        self.assertEqual(self.familiesTest, families)     
+
+    # def testUniqueFamilyUS24(self):
+    #     # test case to check IndividualID is unique.
+    #     assert uniqueIDCheck('I1', individuals) == False
+
+    #     # test case to check IndividualID is unique.
+    #     assert uniqueIDCheck('I1', individuals) == False                
+
+
 
 if __name__ == "__main__":
 

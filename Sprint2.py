@@ -34,12 +34,121 @@
 
 monthInts = {"JAN": 1, "FEB": 2, "MAR": 3, "APR": 4, "MAY": 5, "JUN": 6, "JUL": 7, "AUG": 8, "SEP": 9, "OCT": 10, "NOV": 11, "DEC": 12}
 
+def readFile(path):
+    '''Reads input file and returns two dictionaries.'''
+    # read in entire file into list of lines
+    f = open(path, 'r')
+    data = f.read().splitlines()
+    f.close()
+
+    # remove empty lines from list of lines
+    data = list(filter(None, data))
+    # print(data)
+            
+    while data:
+        wordList = getWords(data)
+        # print(wordList)
+        
+        # skips leading comments and any line that does not
+        # start with a number
+        if wordList[0].isdigit():
+            
+            # print (wordList)
+            # print(len(wordList))
+            remainder = ''.join(str(w + " ") for w in wordList[2:])
+            
+            # process individual tags
+            if wordList[0] == '1' and wordList[1] in tagList:
+                if wordList[1] == "NAME":
+                    name = (wordList[2] + wordList[3])
+                    individuals[individualID]["NAME"] = name
+                    continue
+                elif wordList[1] == "BIRT":
+                    nextLine = getWords(data)
+                    date = (nextLine[2] + nextLine[3] + nextLine[4])
+                    individuals[individualID]["BIRT"] = date
+                    continue
+                elif wordList[1] == "DEAT":
+                    nextLine = getWords(data)
+                    date = (nextLine[2] + nextLine[3] + nextLine[4])
+                    individuals[individualID]["DEAT"] = date
+                    continue
+                else:
+                    # only tag left is 'SEX'
+                    individuals[individualID][wordList[1]] = wordList[2]
+                    continue
+        
+        # if tag in word 3 is one of two special tags, handle it
+            elif (len(wordList) > 2) and ((wordList[2] == "INDI") or (wordList[2] == "FAM")):
+                if wordList[2] == "INDI":
+                    individualID = re.sub('@', '', wordList[1])
+
+                    # US22- Check that individual ID is unique (not seen before)
+                    if not uniqueIDCheck(individualID, individuals):
+                        IDErrorBuffer.append(f"ERROR: Individual: US22: Individual ID {individualID} not unique, new individual overwrote old.")
+                        
+
+                    individuals[individualID] = {'NAME':'NA', 'SEX':'NA', 'BIRT':'NA', 'DEAT':'NA'}
+                    continue                
+                else:
+                    familyID = re.sub('@', '', wordList[1])
+
+                    # US22- Check that family ID is unique (not seen before)
+                    if not uniqueIDCheck(familyID, families):
+                        IDErrorBuffer.append(f"ERROR: Family: US22: Family ID {familyID} not unique, new family overwrote old.")
+
+                    # print("FamilyID= ", familyID)
+                    families[familyID] = {'HUSB':'NA', 'WIFE':'NA', 'CHIL':[], 'MARR':'NA', 'DIV':'NA'}
+                    wordList[0] = '1'
+                    while wordList[0] != '0':
+                        wordList = getWords(data)
+                        #print(wordList)
+                        if wordList[1] in famTags:
+                            if (wordList[1] == "MARR") :
+                                nextLine = getWords(data)
+                                date = (nextLine[2] + nextLine[3] + nextLine[4])
+                                families[familyID]["MARR"] = date
+                                continue
+                            elif (wordList[1] == "DIV"):
+                                nextLine = getWords(data)
+                                date = (nextLine[2] + nextLine[3] + nextLine[4])
+                                families[familyID]["DIV"] = date
+                                continue
+                            elif (wordList[1] == "CHIL"):
+                                individualNum = re.sub('@', '', wordList[2])
+                                families[familyID]["CHIL"].append(individualNum)
+                            else:
+                                # for tags "HUSB" and "WIFE"
+                                individualNum = re.sub('@', '', wordList[2])
+                                families[familyID][wordList[1]] = individualNum
+                                continue
+                        else:
+                            # print("Not a family tag of interest- skipping to
+                            # next line.")
+                            continue
+                    # we have read one item into data too far
+                    # to check end of family list
+                    # so need to add back to data to continue processing
+                    wordList = ' '.join(wordList)
+                    data.insert(0, wordList)
+                    continue
+            
+        # otherwise, invalid tag
+            else:
+                # print("Tag not of interest- skipping to next line.")
+                continue
+        else:
+            # print("Exiting loop.")
+            continue
+    return individuals, families
+
+
 def getWords(dataList):
     '''function to get next line and process into list of words'''
     line = dataList.pop(0)
     # strip trailing whitespace
     line = line.rstrip()
-			
+            
     # split line into words
     wordList = line.split()
     return wordList
@@ -300,6 +409,11 @@ def parentChildAgeCheck(key, childBirth, husbBirthString, wifeBirthString):
             return True
 
 
+def uniqueIDCheck(IDToCheck, IDDictionary):
+    '''Sprint 2 US22 - Check that individual or family IDs are unique.'''
+    IDList = list(IDDictionary.keys()) 
+    return not (IDToCheck in IDList)
+
 
 # put code into try/except for error handling
 try: 
@@ -313,9 +427,7 @@ try:
     finalp2 = PrettyTable()
 
     # Define where to find the data file
-    #path1 = "./jdoll_family_01.ged"
     path1 = "./My-Family-18-May-2017-411.ged"
-    path2 = ""
     path = path1
 
     # List of valid GEDCOM tags
@@ -324,103 +436,15 @@ try:
     tagInterest = ["NAME", "SEX", "BIRT", "DEAT"]
     famTags = ["HUSB", "WIFE", "CHIL", "MARR", "DIV"]
     tagList = tagInterest
-	
+    
     # declare empty dictionary as primary data structure
     individuals = {}
     families = {}
-    # read in entire file into list of lines
-    f = open(path, 'r')
-    data = f.read().splitlines()
 
-    # remove empty lines from list of lines
-    data = list(filter(None, data))
-    # print(data)
-	
-		
-    while data:
-        wordList = getWords(data)
-    	# print(wordList)
-		
-    	# skips leading comments and any line that does not
-    	# start with a number
-        if wordList[0].isdigit():
-			
-            # print (wordList)
-            # print(len(wordList))
-            remainder = ''.join(str(w + " ") for w in wordList[2:])
-            
-            # process individual tags
-            if wordList[0] == '1' and wordList[1] in tagList:
-                if wordList[1] == "NAME":
-                    name = (wordList[2] + wordList[3])
-                    individuals[individualID]["NAME"] = name
-                    continue
-                elif wordList[1] == "BIRT":
-                    nextLine = getWords(data)
-                    date = (nextLine[2] + nextLine[3] + nextLine[4])
-                    individuals[individualID]["BIRT"] = date
-                    continue
-                elif wordList[1] == "DEAT":
-                    nextLine = getWords(data)
-                    date = (nextLine[2] + nextLine[3] + nextLine[4])
-                    individuals[individualID]["DEAT"] = date
-                    continue
-                else:
-                    # only tag left is 'SEX'
-                    individuals[individualID][wordList[1]] = wordList[2]
-                    continue
-		
-	    # if tag in word 3 is one of two special tags, handle it
-            elif (len(wordList) > 2) and ((wordList[2] == "INDI") or (wordList[2] == "FAM")):
-                if wordList[2] == "INDI":
-                    individualID = re.sub('@', '', wordList[1])
-                    individuals[individualID] = {'NAME':'NA', 'SEX':'NA', 'BIRT':'NA', 'DEAT':'NA'}
-                    continue				
-                else:
-                    familyID = re.sub('@', '', wordList[1])
-                    # print("FamilyID= ", familyID)
-                    families[familyID] = {'HUSB':'NA', 'WIFE':'NA', 'CHIL':[], 'MARR':'NA', 'DIV':'NA'}
-                    wordList[0] = '1'
-                    while wordList[0] != '0':
-                        wordList = getWords(data)
-                        #print(wordList)
-                        if wordList[1] in famTags:
-                            if (wordList[1] == "MARR") :
-                                nextLine = getWords(data)
-                                date = (nextLine[2] + nextLine[3] + nextLine[4])
-                                families[familyID]["MARR"] = date
-                                continue
-                            elif (wordList[1] == "DIV"):
-                                nextLine = getWords(data)
-                                date = (nextLine[2] + nextLine[3] + nextLine[4])
-                                families[familyID]["DIV"] = date
-                                continue
-                            elif (wordList[1] == "CHIL"):
-                                individualNum = re.sub('@', '', wordList[2])
-                                families[familyID]["CHIL"].append(individualNum)
-                            else:
-                                # for tags "HUSB" and "WIFE"
-                                individualNum = re.sub('@', '', wordList[2])
-                                families[familyID][wordList[1]] = individualNum
-                                continue
-                        else:
-                            # print("Not a family tag of interest- skipping to
-                            # next line.")
-                            continue
-                    # we have read one item into data too far
-                    # to check end of family list
-                    # so need to add back to data to continue processing
-                    wordList = ' '.join(wordList)
-                    data.insert(0, wordList)
-                    continue
-			
-	    # otherwise, invalid tag
-            else:
-                # print("Tag not of interest- skipping to next line.")
-                continue
-        else:
-            # print("Exiting loop.")
-            continue
+    # declare empty list to hold ID errors during read
+    IDErrorBuffer = []
+
+    individual, families = readFile(path)
     
     # this output is for development, comment out as necessary
     #print(individuals)
@@ -684,19 +708,38 @@ try:
     print()
     
 
+    ### Sprint #2
+
+    # US22:  Unique IDs
+    # This check is not useful in our implementation as the dictionary
+    # structure requires that the IDs for both individual and family be unique.
+    # Therefore must check as read in file.
+    # Checked in function "uniqueIDCheck"
+    # Stored in IDErrorBuffer and printed here
+    print()
+    print("Unique Individual and Family ID Check done at time of file read.")
+    for item in IDErrorBuffer:
+        print(item)
+
+
 except IOError:
     print("An error occured trying to access the data file.")
 
-except ImportError:
-    print("No module found.")
+# except ImportError:
+#     print("No module found.")
 
-except BaseException as e:
-    print("Base exception", str(e))
+# except BaseException as e:
+#     print("Base exception", str(e))
 
-except:
-    print("An unknown error occured.")
+# except:
+#     print("An unknown error occured.")
 
 
-
+print()
+print()
+print()
+print()
+# print(individuals)
+# print(families)
 
 # End of File
