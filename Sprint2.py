@@ -123,8 +123,7 @@ def readFile(path):
                                 families[familyID][wordList[1]] = individualNum
                                 continue
                         else:
-                            # print("Not a family tag of interest- skipping to
-                            # next line.")
+                            # print("Not a family tag of interest- skipping to next line.")
                             continue
                     # we have read one item into data too far
                     # to check end of family list
@@ -486,8 +485,9 @@ try:
     individuals = {}
     families = {}
 
-    # declare empty list to hold ID errors during read
+    # declare empty list to hold errors checked during read
     IDErrorBuffer = []
+    FamilyErrorBuffer = []
 
     individual, families = readFile(path)
     
@@ -720,7 +720,8 @@ try:
 
             # from here goes into function
             divorceBeforeDeath(key, divorceString, husbDeathString, wifeDeathString)
-          
+
+
     # US12: Check if Parents are too old
     print()
     print("Parent/child age check")
@@ -750,14 +751,9 @@ try:
 
     # normal spacing is here   
 
-    ### Sprint #2
 
-    # US22:  Unique IDs
-    # This check is not useful in our implementation as the dictionary
-    # structure requires that the IDs for both individual and family be unique.
-    # Therefore must check as read in file.
-    # Checked in function "uniqueIDCheck"
-    # Stored in IDErrorBuffer and printed here
+    ### Sprint #2
+    # US14 and US16
     print()
     for key, value in families.items():
        childList = families[key]["CHIL"]
@@ -768,10 +764,30 @@ try:
        # US16 - Male last name same as fathers
        CheckSameLastNameAsFather(childList)
 
+
+    # US22:  Unique IDs
+    # This check is not useful in our implementation as the dictionary
+    # structure requires that the IDs for both individual and family be unique.
+    # Therefore must check as read in file.
+    # Checked in function "uniqueIDCheck"
+    # Stored in IDErrorBuffer and printed here
     print()
-    print("Unique Individual and Family ID Check done at time of file read.")
+    print("US22: Unique individual and family ID check done at time of file read.")
     for item in IDErrorBuffer:
         print(item)
+
+
+    # US24: Unique families by spouse name and marriage date
+    # There are two ways to do this check;
+    # 1) At the time of reading in the family data, and
+    # 2) Parsing the family data at any time after "individuals" and "families" dictionaries are created.
+    # I have chosen to implement #1 in this increment, very similar to US22.
+    print()
+    print("US24: Unique family check by spouse names and marriage date.")
+
+    for item in FamilyErrorBuffer:
+        print(item)
+
 
 
 except IOError:
