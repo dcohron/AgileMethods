@@ -85,7 +85,7 @@ def readFile(path):
 
                     # US22- Check that individual ID is unique (not seen before)
                     if not uniqueIDCheck(individualID, individuals):
-                        IDErrorBuffer.append(f"ERROR: Individual: US22: Individual ID {individualID} not unique, new individual overwrote old.")
+                        IDErrorBuffer.append(f, "ERROR: Individual: US22: Individual ID {individualID} not unique, new individual overwrote old.")
                         
 
                     individuals[individualID] = {'NAME':'NA', 'SEX':'NA', 'BIRT':'NA', 'DEAT':'NA'}
@@ -93,9 +93,9 @@ def readFile(path):
                 else:
                     familyID = re.sub('@', '', wordList[1])
 
-                    # US22- Check that family ID is unique (not seen before)
+                    # US22- Check that family ID is , unique (not seen before)
                     if not uniqueIDCheck(familyID, families):
-                        IDErrorBuffer.append(f"ERROR: Family: US22: Family ID {familyID} not unique, new family overwrote old.")
+                        IDErrorBuffer.append(f, "ERROR: Family: US22: Family ID {familyID} not unique, new family overwrote old.")
 
                     # print("FamilyID= ", familyID)
                     families[familyID] = {'HUSB':'NA', 'WIFE':'NA', 'CHIL':[], 'MARR':'NA', 'DIV':'NA'}
@@ -414,6 +414,51 @@ def uniqueIDCheck(IDToCheck, IDDictionary):
     IDList = list(IDDictionary.keys()) 
     return not (IDToCheck in IDList)
 
+#US 14 - Check for less than 5 multiple births in family:
+def CheckMultipleBirths(childList):
+     
+     if childList == []:
+         return True
+
+     if len(childList) < 5:
+         return True
+     else:
+         counter = 0
+         newList = []
+         for i in range(len(childList)):
+             childsBirth = individuals[childList[i]]["BIRT"]
+             newList.append(childsBirth)
+         
+         opt = [i for i, x in enumerate(newList) if newList.count(x) > 1]
+
+         if len(opt) >= 5:
+             print("S2 US14 - ", key, ": Family has more than 5 births happening!", len(opt))
+             return False
+         else:
+             return True
+
+#US 16 - Check for children have the same name as father
+def CheckSameLastNameAsFather(childList):
+
+    if families[key]["HUSB"] != "NA":
+        fathers_name = individuals[families[key]["HUSB"]]["NAME"]
+    else:
+        return True
+
+    if childList == []:
+        return True
+
+    for i in range(len(childList)):
+        child_name = individuals[childList[i]]["NAME"]
+        childs_last_name = child_name.split('/')[1]
+        fathers_last_name = fathers_name.split('/')[1]
+        
+        if childs_last_name != fathers_last_name:
+            print ("S2 US16 - ", key, ": Family: Dad and Child don't have the same last name - Dad:", fathers_last_name, "Childs:", childs_last_name)
+            return False
+        else:
+            return True
+
 
 # put code into try/except for error handling
 try: 
@@ -554,7 +599,7 @@ try:
         elif checkDates(husbandBirthString, marrString):
             print("   Husband birth date checks.")
         else:
-            print(f"   ERROR: Husband {husband} birth date does not check.")
+            print("   ERROR: Husband {husband} birth date does not check.")
 
         # check wife birthdate
         wife = families[key]["WIFE"]
@@ -564,7 +609,7 @@ try:
         elif checkDates(wifeBirthString, marrString):
             print("   Wife birth date checks.")
         else:
-            print(f"   ERROR: Wife {wife} birth date does not check.")
+            print("   ERROR: Wife {wife} birth date does not check.")
 
 
     # US03: Check Birth before Death
@@ -675,8 +720,7 @@ try:
 
             # from here goes into function
             divorceBeforeDeath(key, divorceString, husbDeathString, wifeDeathString)
-
-                
+          
     # US12: Check if Parents are too old
     print()
     print("Parent/child age check")
@@ -704,9 +748,7 @@ try:
                 childBirth = individuals[childList[i]]["BIRT"]
                 parentChildAgeCheck(key, childBirth, husbBirthString, wifeBirthString)
 
-    # normal spacing is here
-    print()
-    
+    # normal spacing is here   
 
     ### Sprint #2
 
@@ -716,6 +758,16 @@ try:
     # Therefore must check as read in file.
     # Checked in function "uniqueIDCheck"
     # Stored in IDErrorBuffer and printed here
+    print()
+    for key, value in families.items():
+       childList = families[key]["CHIL"]
+         
+       # US14 - multiple births < 5
+       CheckMultipleBirths(childList)
+
+       # US16 - Male last name same as fathers
+       CheckSameLastNameAsFather(childList)
+
     print()
     print("Unique Individual and Family ID Check done at time of file read.")
     for item in IDErrorBuffer:

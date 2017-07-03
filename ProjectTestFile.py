@@ -146,6 +146,22 @@ class AgileProjectTests(unittest.TestCase):
         # both too old 
         # assert parentChildAgeCheck("F1", self.date2, self.date3, self.date4) == True, "F1: " + "Child Birth: " + self.date2 + " Father Birth: " + self.date3 + " Mother Birth: " + self.date4
 
+
+    def testUS14_CheckMultipleBirths(self):
+        # test case to check if multiple births have the same birthday
+        
+        for key, value in self.familiesTest.items():
+           childList = self.familiesTest[key]["CHIL"]
+           self.assertTrue(CheckMultipleBirths(childList))
+           #self.assertFalse(CheckMultipleBirths(childList))
+    
+    def testUS16_CheckSameLastNameAsFather(self):
+        # Test case to check if the last name of child, is same as father
+        
+       for key, value in self.familiesTest.items():
+           childList = self.familiesTest[key]["CHIL"]
+           #self.assertTrue(CheckSameLastNameAsFather(childList))
+
     def testUniqueIDUS22(self):
         # test case to check IndividualID is unique.
         self.assertFalse(uniqueIDCheck('I1', individuals))
