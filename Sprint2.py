@@ -413,6 +413,7 @@ def uniqueIDCheck(IDToCheck, IDDictionary):
     IDList = list(IDDictionary.keys()) 
     return not (IDToCheck in IDList)
 
+
 #US 14 - Check for less than 5 multiple births in family:
 def CheckMultipleBirths(childList):
      
@@ -459,6 +460,39 @@ def CheckSameLastNameAsFather(childList):
             return True
 
 
+def uniqueFamilyCheck(familyDict):
+    '''Sprint 2 US24 - Check that families are unique, by marriage date and spouse names.'''
+    # if any of marriage date or spouse names are 'NA', cannot check that family => skip to next family
+    uniqueTest = True
+    familyList = []
+
+    # iterate over dictionary of families looking for repeats
+    for family, value in familyDict.items():
+        marriageDate = familyDict[family]['MARR']
+        husbandID = familyDict[family]['HUSB']
+        wifeID = familyDict[family]['WIFE']
+
+        # check for conditions that invalidate uniqueness check
+        if marriageDate == 'NA' or husbandID == 'NA' or wifeID == 'NA':
+            continue
+
+        husbandName = individuals[husbandID]['NAME']
+        wifeName = individuals[wifeID]['NAME']
+        familyTuple = (marriageDate, husbandName, wifeName)
+
+        # check for conditions that invalidate uniqueness check
+        if 'NA' in familyTuple:
+            continue
+
+        if familyTuple in familyList:
+            uniqueTest = False
+            print("ERROR: Family: US24: Family", family,"not unique by marriage date and spouse names.")
+        else:
+            familyList.append(familyTuple)
+    return uniqueTest
+
+
+# Main body of code:
 # put code into try/except for error handling
 try: 
     ## Import needed libraries
@@ -487,7 +521,6 @@ try:
 
     # declare empty list to hold errors checked during read
     IDErrorBuffer = []
-    FamilyErrorBuffer = []
 
     individual, families = readFile(path)
     
@@ -781,26 +814,22 @@ try:
     # There are two ways to do this check;
     # 1) At the time of reading in the family data, and
     # 2) Parsing the family data at any time after "individuals" and "families" dictionaries are created.
-    # I have chosen to implement #1 in this increment, very similar to US22.
-    print()
-    print("US24: Unique family check by spouse names and marriage date.")
-
-    for item in FamilyErrorBuffer:
-        print(item)
+    # I have chosen to implement #2 in this increment.
+    uniqueFamilyCheck(families)
 
 
 
 except IOError:
     print("An error occured trying to access the data file.")
 
-# except ImportError:
-#     print("No module found.")
+except ImportError:
+    print("No module found.")
 
-# except BaseException as e:
-#     print("Base exception", str(e))
+except BaseException as e:
+    print("Base exception", str(e))
 
-# except:
-#     print("An unknown error occured.")
+except:
+    print("An unknown error occured.")
 
 
 print()

@@ -37,7 +37,8 @@ class AgileProjectTests(unittest.TestCase):
         self.date5 = ("10MAR1920")
         
         self.individualsTest = {'I1': {'NAME': 'Mike/Brady/', 'SEX': 'M', 'BIRT': '10MAR1940', 'DEAT': 'NA'}, 'I2': {'NAME': 'Carol/Martin/', 'SEX': 'F', 'BIRT': '10MAR1945', 'DEAT': 'NA'}, 'I3': {'NAME': 'Sam/Franklin/', 'SEX': 'M', 'BIRT': '10MAR1930', 'DEAT': 'NA'}, 'I4': {'NAME': 'Alice/Nelson/', 'SEX': 'F', 'BIRT': '10MAR1925', 'DEAT': 'NA'}, 'I5': {'NAME': 'Greg/Brady/', 'SEX': 'M', 'BIRT': '10MAR1955', 'DEAT': 'NA'}, 'I6': {'NAME': 'Peter/Brady/', 'SEX': 'M', 'BIRT': '10MAR1950', 'DEAT': 'NA'}, 'I7': {'NAME': 'Bobby/Brady/', 'SEX': 'M', 'BIRT': '10MAR1960', 'DEAT': 'NA'}, 'I8': {'NAME': 'Marcia/Nelson/', 'SEX': 'F', 'BIRT': '10MAR1956', 'DEAT': 'NA'}, 'I9': {'NAME': 'Jan/Nelson/', 'SEX': 'F', 'BIRT': '10MAR1958', 'DEAT': 'NA'}, 'I10': {'NAME': 'Cindy/Nelson/', 'SEX': 'F', 'BIRT': '10MAR1960', 'DEAT': 'NA'}, 'I11': {'NAME': 'Tiger/Brady/', 'SEX': 'M', 'BIRT': '10MAR1965', 'DEAT': 'NA'}, 'I12': {'NAME': 'Sally/Fields/', 'SEX': 'F', 'BIRT': '10MAR1942', 'DEAT': '10MAR1940'}, 'I13': {'NAME': 'Samuel/Jackson/', 'SEX': 'M', 'BIRT': '10MAR1979', 'DEAT': 'NA'}, 'I14': {'NAME': 'Natashia/Richards/', 'SEX': 'F', 'BIRT': '30MAR1981', 'DEAT': '10MAR2012'}, 'I15': {'NAME': 'Benjamin/Franklin/', 'SEX': 'M', 'BIRT': '17JAN1706', 'DEAT': '17APR1790'}, 'I16': {'NAME': 'Deborah/Reed/', 'SEX': 'F', 'BIRT': '10MAR1800', 'DEAT': '10MAR1880'}, 'I17': {'NAME': 'Homestar/Franklin/', 'SEX': 'M', 'BIRT': '10MAR1990', 'DEAT': 'NA'}}
-        self.familiesTest = {'F1': {'HUSB': 'I1', 'WIFE': 'I2', 'CHIL': [], 'MARR': '10MAR1970', 'DIV': 'NA'}, 'F2': {'HUSB': 'I1', 'WIFE': 'I12', 'CHIL': [], 'MARR': '10MAR1969', 'DIV': 'NA'}, 'F3': {'HUSB': 'I3', 'WIFE': 'I4', 'CHIL': ['I2'], 'MARR': '10MAR1928', 'DIV': 'NA'}, 'F4': {'HUSB': 'I15', 'WIFE': 'I16', 'CHIL': ['I3', 'I17'], 'MARR': '10MAR1990', 'DIV': '10MAR1889'}, 'F5': {'HUSB': 'I1', 'WIFE': 'NA', 'CHIL': ['I5', 'I6', 'I7'], 'MARR': 'NA', 'DIV': 'NA'}, 'F6': {'HUSB': 'NA', 'WIFE': 'I2', 'CHIL': ['I8', 'I9', 'I10'], 'MARR': 'NA', 'DIV': 'NA'}, 'F7': {'HUSB': 'I5', 'WIFE': 'NA', 'CHIL': ['I11'], 'MARR': 'NA', 'DIV': 'NA'}, 'F8': {'HUSB': 'I13', 'WIFE': 'I14', 'CHIL': [], 'MARR': '10MAR2013', 'DIV': '1JAN1980'}}
+        self.familiesTest1 = {'F1': {'HUSB': 'I1', 'WIFE': 'I2', 'CHIL': [], 'MARR': '10MAR1970', 'DIV': 'NA'}, 'F2': {'HUSB': 'I1', 'WIFE': 'I12', 'CHIL': [], 'MARR': '10MAR1969', 'DIV': 'NA'}, 'F3': {'HUSB': 'I3', 'WIFE': 'I4', 'CHIL': ['I2'], 'MARR': '10MAR1928', 'DIV': 'NA'}, 'F4': {'HUSB': 'I15', 'WIFE': 'I16', 'CHIL': ['I3', 'I17'], 'MARR': '10MAR1990', 'DIV': '10MAR1889'}, 'F5': {'HUSB': 'I1', 'WIFE': 'NA', 'CHIL': ['I5', 'I6', 'I7'], 'MARR': 'NA', 'DIV': 'NA'}, 'F6': {'HUSB': 'NA', 'WIFE': 'I2', 'CHIL': ['I8', 'I9', 'I10'], 'MARR': 'NA', 'DIV': 'NA'}, 'F7': {'HUSB': 'I5', 'WIFE': 'NA', 'CHIL': ['I11'], 'MARR': 'NA', 'DIV': 'NA'}, 'F8': {'HUSB': 'I13', 'WIFE': 'I14', 'CHIL': [], 'MARR': '10MAR2013', 'DIV': '1JAN1980'}}
+        self.familiesTest2 = {'F1': {'HUSB': 'I1', 'WIFE': 'I2', 'CHIL': [], 'MARR': '10MAR1970', 'DIV': 'NA'}, 'F2': {'HUSB': 'I1', 'WIFE': 'I12', 'CHIL': [], 'MARR': '10MAR1969', 'DIV': 'NA'}, 'F3': {'HUSB': 'I3', 'WIFE': 'I4', 'CHIL': ['I2'], 'MARR': '10MAR1928', 'DIV': 'NA'}, 'F4': {'HUSB': 'I15', 'WIFE': 'I16', 'CHIL': ['I3', 'I17'], 'MARR': '10MAR1990', 'DIV': '10MAR1889'}, 'F5': {'HUSB': 'I1', 'WIFE': 'NA', 'CHIL': ['I5', 'I6', 'I7'], 'MARR': 'NA', 'DIV': 'NA'}, 'F6': {'HUSB': 'NA', 'WIFE': 'I2', 'CHIL': ['I8', 'I9', 'I10'], 'MARR': 'NA', 'DIV': 'NA'}, 'F7': {'HUSB': 'I5', 'WIFE': 'NA', 'CHIL': ['I11'], 'MARR': 'NA', 'DIV': 'NA'}, 'F8': {'HUSB': 'I13', 'WIFE': 'I14', 'CHIL': [], 'MARR': '10MAR2013', 'DIV': '1JAN1980'}, 'F9': {'HUSB': 'I1', 'WIFE': 'I2', 'CHIL': [], 'MARR': '10MAR1970', 'DIV': 'NA'}}
 
     def tearDown(self):
         # Call after every test case.
@@ -46,7 +47,7 @@ class AgileProjectTests(unittest.TestCase):
     def testCompareDate(self):
         # Test case to check date comparison.
          assert checkDates(self.date1, self.date2) == True, "Dates do not check."
-	
+
     def testReverseCompareDate(self):
         # Test case to check date comparison of reversed.
         assert checkDates(self.date2, self.date1) == False, "Reverse dates do not check."
@@ -175,14 +176,14 @@ class AgileProjectTests(unittest.TestCase):
         path = "./My-Family-18-May-2017-411.ged"
         individuals, families = readFile(path)
         self.assertEqual(self.individualsTest, individuals) 
-        self.assertEqual(self.familiesTest, families)     
+        self.assertEqual(self.familiesTest1, families)
 
-    # def testUniqueFamilyUS24(self):
-    #     # test case to check IndividualID is unique.
-    #     assert uniqueIDCheck('I1', individuals) == False
+    def testUniqueFamilyUS24(self):
+        # test case to check IndividualID is False.
+        self.assertFalse(uniqueFamilyCheck(self.familiesTest2))
 
-    #     # test case to check IndividualID is unique.
-    #     assert uniqueIDCheck('I1', individuals) == False                
+        # test case to check IndividualID is True.
+        self.assertTrue(uniqueFamilyCheck(self.familiesTest1))
 
 
 
