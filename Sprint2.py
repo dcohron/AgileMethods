@@ -502,10 +502,10 @@ def checkUniqueChildrenNames(key, individuals, childList):
             names += [temp[0]] # add only first name as per spec
         if len(childList) != len(set(names)):
             print(key, "- has multiple children with the same name")
+            return False
         else:
             # print("US25 passed length check")
-            pass
-        return False
+            return True
 
 def checkFamToIndi26(key, families, individuals):
     '''US26 - Corresponding entries
@@ -520,16 +520,19 @@ def checkFamToIndi26(key, families, individuals):
             print("Key", item, "from", key, "not in table.")
     return True
 
-def checkIndiToFam26(key, individuals, families, US26):
+# This function is probably not necessary
+def checkIndiToFam26(key, families, US26):
     '''US26 - Corresponding entries
        makes sure all Family tags in a individual row appear in the families table'''
-    
+
     idList = US26[-1] + US26[-2] # the concatenated FIDs as appearing in the individuals table child and spouse columns
 
     for item in idList:
         if item not in families:
             print("Key", item, "from", key, "not in table.")
     return True
+
+
 # Main body of code:
 # put code into try/except for error handling
 try: 
@@ -857,7 +860,7 @@ try:
     i = 0
     for key, value in individuals.items():
         # do same butt different
-        checkIndiToFam26(key, individuals, families, US26[i])
+        checkIndiToFam26(key, families, US26[i])
         i += 1
 
 except IOError:
@@ -877,7 +880,7 @@ print()
 print()
 print()
 print()
-# print(individuals)
-# print(families)
+print(individuals)
+print(families)
 
 # End of File

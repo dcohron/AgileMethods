@@ -40,6 +40,13 @@ class AgileProjectTests(unittest.TestCase):
         self.familiesTest1 = {'F1': {'HUSB': 'I1', 'WIFE': 'I2', 'CHIL': [], 'MARR': '10MAR1970', 'DIV': 'NA'}, 'F2': {'HUSB': 'I1', 'WIFE': 'I12', 'CHIL': [], 'MARR': '10MAR1969', 'DIV': 'NA'}, 'F3': {'HUSB': 'I3', 'WIFE': 'I4', 'CHIL': ['I2'], 'MARR': '10MAR1928', 'DIV': 'NA'}, 'F4': {'HUSB': 'I15', 'WIFE': 'I16', 'CHIL': ['I3', 'I17'], 'MARR': '10MAR1990', 'DIV': '10MAR1889'}, 'F5': {'HUSB': 'I1', 'WIFE': 'NA', 'CHIL': ['I5', 'I6', 'I7'], 'MARR': 'NA', 'DIV': 'NA'}, 'F6': {'HUSB': 'NA', 'WIFE': 'I2', 'CHIL': ['I8', 'I9', 'I10'], 'MARR': 'NA', 'DIV': 'NA'}, 'F7': {'HUSB': 'I5', 'WIFE': 'NA', 'CHIL': ['I11'], 'MARR': 'NA', 'DIV': 'NA'}, 'F8': {'HUSB': 'I13', 'WIFE': 'I14', 'CHIL': [], 'MARR': '10MAR2013', 'DIV': '1JAN1980'}}
         self.familiesTest2 = {'F1': {'HUSB': 'I1', 'WIFE': 'I2', 'CHIL': [], 'MARR': '10MAR1970', 'DIV': 'NA'}, 'F2': {'HUSB': 'I1', 'WIFE': 'I12', 'CHIL': [], 'MARR': '10MAR1969', 'DIV': 'NA'}, 'F3': {'HUSB': 'I3', 'WIFE': 'I4', 'CHIL': ['I2'], 'MARR': '10MAR1928', 'DIV': 'NA'}, 'F4': {'HUSB': 'I15', 'WIFE': 'I16', 'CHIL': ['I3', 'I17'], 'MARR': '10MAR1990', 'DIV': '10MAR1889'}, 'F5': {'HUSB': 'I1', 'WIFE': 'NA', 'CHIL': ['I5', 'I6', 'I7'], 'MARR': 'NA', 'DIV': 'NA'}, 'F6': {'HUSB': 'NA', 'WIFE': 'I2', 'CHIL': ['I8', 'I9', 'I10'], 'MARR': 'NA', 'DIV': 'NA'}, 'F7': {'HUSB': 'I5', 'WIFE': 'NA', 'CHIL': ['I11'], 'MARR': 'NA', 'DIV': 'NA'}, 'F8': {'HUSB': 'I13', 'WIFE': 'I14', 'CHIL': [], 'MARR': '10MAR2013', 'DIV': '1JAN1980'}, 'F9': {'HUSB': 'I1', 'WIFE': 'I2', 'CHIL': [], 'MARR': '10MAR1970', 'DIV': 'NA'}}
 
+        #for us25
+        self.individualsTest2 = {'I6': {'DEAT': 'NA', 'BIRT': '10MAR1950', 'NAME': 'Peter/Brady/', 'SEX': 'M'}, 'I2': {'DEAT': 'NA', 'BIRT': '10MAR1945', 'NAME': 'Carol/Martin/', 'SEX': 'F'}, 'I1': {'DEAT': 'NA', 'BIRT': '10MAR1940', 'NAME': 'Mike/Brady/', 'SEX': 'M'}, 'I13': {'DEAT': 'NA', 'BIRT': '10MAR1979', 'NAME': 'Samuel/Jackson/', 'SEX': 'M'}, 'I17': {'DEAT': 'NA', 'BIRT': '10MAR1990', 'NAME': 'Homestar/Franklin/', 'SEX': 'M'}, 'I5': {'DEAT': 'NA', 'BIRT': '10MAR1955', 'NAME': 'Peter/Brady/', 'SEX': 'M'}, 'I11': {'DEAT': 'NA', 'BIRT': '10MAR1965', 'NAME': 'Tiger/Brady/', 'SEX': 'M'}, 'I8': {'DEAT': 'NA', 'BIRT': '10MAR1956', 'NAME': 'Marcia/Nelson/', 'SEX': 'F'}, 'I10': {'DEAT': 'NA', 'BIRT': '10MAR1960', 'NAME': 'Cindy/Nelson/', 'SEX': 'F'}, 'I9': {'DEAT': 'NA', 'BIRT': '10MAR1958', 'NAME': 'Jan/Nelson/', 'SEX': 'F'}, 'I14': {'DEAT': '10MAR2012', 'BIRT': '30MAR1981', 'NAME': 'Natashia/Richards/', 'SEX': 'F'}, 'I3': {'DEAT': 'NA', 'BIRT': '10MAR1930', 'NAME': 'Sam/Franklin/', 'SEX': 'M'}, 'I4': {'DEAT': 'NA', 'BIRT': '10MAR1925', 'NAME': 'Alice/Nelson/', 'SEX': 'F'}, 'I7': {'DEAT': 'NA', 'BIRT': '10MAR1960', 'NAME': 'Bobby/Brady/', 'SEX': 'M'}, 'I16': {'DEAT': '10MAR1880', 'BIRT': '10MAR1800', 'NAME': 'Deborah/Reed/', 'SEX': 'F'}, 'I15': {'DEAT': '17APR1790', 'BIRT': '17JAN1706', 'NAME': 'Benjamin/Franklin/', 'SEX': 'M'}, 'I12': {'DEAT': '10MAR1940', 'BIRT': '10MAR1942', 'NAME': 'Sally/Fields/', 'SEX': 'F'}}
+        self.familiesTest3 = {'F1': {'MARR': '10MAR1970', 'CHIL': ['I1', 'I2'], 'DIV': 'NA', 'HUSB': 'I1', 'WIFE': 'I2'}, 'F8': {'MARR': '10MAR2013', 'CHIL': ['I13', 'I14'], 'DIV': '1JAN1980', 'HUSB': 'I13', 'WIFE': 'I14'}, 'F9': {'MARR': '10MAR1970', 'CHIL': ['I1', 'I2'], 'DIV': 'NA', 'HUSB': 'I1', 'WIFE': 'I2'}, 'F7': {'MARR': 'NA', 'CHIL': ['I11', 'I5'], 'DIV': 'NA', 'HUSB': 'I5', 'WIFE': 'NA'}, 'F2': {'MARR': '10MAR1969', 'CHIL': ['I1', 'I12'], 'DIV': 'NA', 'HUSB': 'I1', 'WIFE': 'I12'}, 'F6': {'MARR': 'NA', 'CHIL': ['I8', 'I9', 'I10', 'I2'], 'DIV': 'NA', 'HUSB': 'NA', 'WIFE': 'I2'}, 'F3': {'MARR': '10MAR1928', 'CHIL': ['I2', 'I3', 'I4'], 'DIV': 'NA', 'HUSB': 'I3', 'WIFE': 'I4'}, 'F4': {'MARR': '10MAR1990', 'CHIL': ['I3', 'I17', 'I15', 'I16'], 'DIV': '10MAR1889', 'HUSB': 'I15', 'WIFE': 'I16'}, 'F5': {'MARR': 'NA', 'CHIL': ['I5', 'I6', 'I7', 'I1'], 'DIV': 'NA', 'HUSB': 'I1', 'WIFE': 'NA'}}
+
+        #for us26
+        self.familiesTest4 = {'F1': {'MARR': '10MAR1970', 'CHIL': ['I1', 'I2'], 'DIV': 'NA', 'HUSB': 'I1', 'WIFE': 'I2'}, 'F8': {'MARR': '10MAR2013', 'CHIL': ['I13', 'I14'], 'DIV': '1JAN1980', 'HUSB': 'I13', 'WIFE': 'I14'}, 'F9': {'MARR': '10MAR1970', 'CHIL': ['I1', 'I2'], 'DIV': 'NA', 'HUSB': 'I1', 'WIFE': 'I2'}, 'F7': {'MARR': 'NA', 'CHIL': ['I11', 'I5'], 'DIV': 'NA', 'HUSB': 'I5', 'WIFE': 'NA'}, 'F2': {'MARR': '10MAR1969', 'CHIL': ['I1', 'I12'], 'DIV': 'NA', 'HUSB': 'I1', 'WIFE': 'I12'}, 'F6': {'MARR': 'NA', 'CHIL': ['I8', 'I9', 'I10', 'I2'], 'DIV': 'NA', 'HUSB': 'NA', 'WIFE': 'I2'}, 'F3': {'MARR': '10MAR1928', 'CHIL': ['I2', 'I3', 'I4'], 'DIV': 'NA', 'HUSB': 'I3', 'WIFE': 'I4'}, 'F4': {'MARR': '10MAR1990', 'CHIL': ['I3', 'I17', 'I15', 'I16'], 'DIV': '10MAR1889', 'HUSB': 'I15', 'WIFE': 'I16'}, 'F5': {'MARR': 'NA', 'CHIL': ['I5', 'I6', 'I7', 'I1', 'I30'], 'DIV': 'NA', 'HUSB': 'I1', 'WIFE': 'NA'}}
+
     def tearDown(self):
         # Call after every test case.
         print("Test complete.")
@@ -185,7 +192,20 @@ class AgileProjectTests(unittest.TestCase):
         # test case to check IndividualID is True.
         self.assertTrue(uniqueFamilyCheck(self.familiesTest1))
 
+    def testUniqueChildrenNames(self):
+        # testing US25
+        print()
+        print("Testing US25_uniqueNames:")
+        self.assertFalse(checkUniqueChildrenNames("F5", self.individualsTest2, ["I5", "I6", "I7", "I1"]))
+        self.assertTrue(checkUniqueChildrenNames("F1", self.individualsTest2, ["I1", "I2"]))
+        self.assertTrue(checkUniqueChildrenNames("F2", self.individualsTest2, []))
 
+    def testCorrespondingIndividuals(self):
+        # testing US26 function checkFamToIndi26
+        print()
+        print("Testing US26_CorrespondingEntries")
+        self.assertTrue(checkFamToIndi26("F5", self.familiesTest4, self.individualsTest2))
+        self.assertTrue(checkFamToIndi26("F1", self.familiesTest4, self.individualsTest2))
 
 if __name__ == "__main__":
 
