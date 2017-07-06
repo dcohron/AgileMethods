@@ -355,9 +355,9 @@ def marriageBeforeDeathCheck(key, marrString, husbDeathString, wifeDeathString):
 def divorceBeforeDeath(key, divorceString, husbDeathString, wifeDeathString):
     '''Sprint 1 US06 - Check Divorce before death'''
     if husbDeathString == "NA" and  wifeDeathString == "NA":
-        print(key, "- both still alive or NA.")
+        # print(key, "- both still alive or NA.")
         return True
-    else:
+    else: # may need to check if both
         if husbDeathString != "NA" and not(checkDates(divorceString, husbDeathString)):
             print(key, "/", families[key]["HUSB"], "- husband death prior to divorce.")
             return False
@@ -365,7 +365,7 @@ def divorceBeforeDeath(key, divorceString, husbDeathString, wifeDeathString):
             print(key, "/", families[key]["WIFE"], "- wife death prior to divorce.")
             return False
         else:
-            print(key, "- divorce/death dates check.")
+            # print(key, "- divorce/death dates check.")
             return True
 
 
@@ -379,10 +379,10 @@ def parentChildAgeCheck(key, childBirth, husbBirthString, wifeBirthString):
             return False
         else:
             if checkDates(wifeBirthString, childBirth, 21915): # 60 years 15 leap
-                print(key, "- mother > 60 years older than child.")
+                print(key, "- mother (", families[key]["WIFE"], ") > 60 years older than child.")
                 return False
             else:
-                print(key, "- parent/child birth dates check.")
+                # print(key, "- parent/child birth dates check.")
                 return True
     elif wifeBirthString == "NA":
         #father only
@@ -391,20 +391,20 @@ def parentChildAgeCheck(key, childBirth, husbBirthString, wifeBirthString):
             return False
         else:
             if checkDates(husbBirthString, childBirth, 29220): # 80 years 20 leap
-                print(key, "- father > 80 years older than child.")
+                print(key, "- father (", families[key]["HUSB"], ") > 80 years older than child.")
                 return False
             else:
-                print(key, "- parent/child birth dates check.")
+                # print(key, "- parent/child birth dates check.")
                 return True
-    else: # both parents present in row
+    else: # both parents present in row, THIS MAY NEED WORK IF BOTH
         if checkDates(husbBirthString, childBirth, 29220): # 80 years
-            print(key, "- father > 80 years older than child.")
+            print(key, "- father (", families[key]["HUSB"], ") > 80 years older than child.")
             return False
         elif checkDates(wifeBirthString, childBirth, 21915): # 60 years
-            print(key, "- mother > 60 years older than child.")
+            print(key, "- mother (", families[key]["WIFE"], ") > 60 years older than child.")
             return False
         else:
-            print(key, "- parent/child birth dates check.")
+            # print(key, "- parent/child birth dates check.")
             return True
 
 
@@ -414,9 +414,9 @@ def uniqueIDCheck(IDToCheck, IDDictionary):
     return not (IDToCheck in IDList)
 
 
-#US 14 - Check for less than 5 multiple births in family:
+
 def CheckMultipleBirths(childList):
-     
+     '''US 14 - Check for less than 5 multiple births in family'''
      if childList == []:
          return True
 
@@ -437,9 +437,9 @@ def CheckMultipleBirths(childList):
          else:
              return True
 
-#US 16 - Check for children have the same name as father
+#
 def CheckSameLastNameAsFather(childList):
-
+    '''US 16 - Check for children have the same name as father'''
     if families[key]["HUSB"] != "NA":
         fathers_name = individuals[families[key]["HUSB"]]["NAME"]
     else:
@@ -491,7 +491,45 @@ def uniqueFamilyCheck(familyDict):
             familyList.append(familyTuple)
     return uniqueTest
 
+def checkUniqueChildrenNames(key, individuals, childList):
+    '''US25 - Check if each child in a family has a unique name'''
+    if len(childList) < 2:
+        return True
+    else:
+        names = []
+        for item in childList:
+            temp = individuals[item]["NAME"].rsplit("/")
+            names += [temp[0]] # add only first name as per spec
+        if len(childList) != len(set(names)):
+            print(key, "- has multiple children with the same name")
+        else:
+            # print("US25 passed length check")
+            pass
+        return False
 
+def checkFamToIndi26(key, families, individuals):
+    '''US26 - Corresponding entries
+       makes sure all Individual tags in a Family row appear in the individuals table'''
+    idList = families[key]["CHIL"] # get children IDs
+    if families[key]["HUSB"] != "NA":
+        idList += [families[key]["HUSB"]] # get HUSB Id if it exists
+    if families[key]["WIFE"] != "NA":
+        idList += [families[key]["WIFE"]] # get WIFE Id if it exists
+    for item in idList:
+        if item not in individuals:
+            print("Key", item, "from", key, "not in table.")
+    return True
+
+def checkIndiToFam26(key, individuals, families, US26):
+    '''US26 - Corresponding entries
+       makes sure all Family tags in a individual row appear in the families table'''
+    
+    idList = US26[-1] + US26[-2] # the concatenated FIDs as appearing in the individuals table child and spouse columns
+
+    for item in idList:
+        if item not in families:
+            print("Key", item, "from", key, "not in table.")
+    return True
 # Main body of code:
 # put code into try/except for error handling
 try: 
@@ -596,8 +634,8 @@ try:
 
     indFields, indData = addAlive(indFields, indData)
     indFields, indData = addAge(indFields, indData)
-    indFields, indData = addChildSpouse(indFields, indData, famFields, famData)
-
+    indFields, US26 = addChildSpouse(indFields, indData, famFields, famData)
+    indData = US26 # this variable is used in the US26 evaluation
     famFields, famData = addFamNames(indFields, indData, famFields, famData)    
     
     finalp.field_names = indFields
@@ -715,7 +753,7 @@ try:
 
     # US06: Check if Divorce Date is before Death Date
     print()
-    print("Divorce/Death check")
+    print("Sprint 1 US06: Divorce before Death check")
     # print(individuals)
     for key, value in families.items():
 
@@ -729,35 +767,17 @@ try:
             wifeDeathString = "NA"
         divorceString = families[key]["DIV"]
         if divorceString == 'NA':
-            print(key, "- spouses never divorced.")
+            # print(key, "- spouses never divorced.")
             continue
         else:
-            if husbDeathString == "NA":
-                print(key, "/", families[key]["HUSB"], "- still alive or NA.")
-            else:
-                if not(checkDates(divorceString, husbDeathString)):
-                    print(key, "/", families[key]["HUSB"], "- death prior to divorce.")
-                    continue
-                else:
-                    print(key, "/", families[key]["HUSB"], "- divorce/death dates check.")
-                    continue
-            if wifeDeathString == "NA":
-                print(key, "/", families[key]["WIFE"], "- still alive or NA.")
-            else:
-                if not(checkDates(divorceString, wifeDeathString)):
-                    print(key, "/", families[key]["WIFE"], "- death prior to divorce.")
-                    continue
-                else:
-                    print(key, "/", families[key]["WIFE"], "- divorce/death dates check.")
-                    continue
-
             # from here goes into function
+            # print("Calling func")
             divorceBeforeDeath(key, divorceString, husbDeathString, wifeDeathString)
 
 
     # US12: Check if Parents are too old
     print()
-    print("Parent/child age check")
+    print("Sprint 1 US12: Parent/child age check")
     # print(individuals)
     for key, value in families.items():
 
@@ -775,11 +795,12 @@ try:
          #   wifeBirthString = "NA"
         
         if childList == []:
-            print(key, "- no children.")
+            # print(key, "- no children.")
             continue
         else:
             for i in range(len(childList)):
                 childBirth = individuals[childList[i]]["BIRT"]
+                #print("CALLING us12")
                 parentChildAgeCheck(key, childBirth, husbBirthString, wifeBirthString)
 
     # normal spacing is here   
@@ -818,6 +839,26 @@ try:
     uniqueFamilyCheck(families)
 
 
+    # US25: Unique first names in families (no 2 children have the same name)
+    print()
+    print("Sprint 2 US25: Unique First Names in Families")
+    for key, value in families.items():
+        childList = families[key]["CHIL"] #get child individual IDs
+        checkUniqueChildrenNames(key, individuals, childList)
+
+    # US26: Corresponding entries
+    # Make sure everything that appears in the families table is in the individuals table
+    # and vice-versa
+    print()
+    print("Sprint 2 US26: Corresponding Entries")
+    for key, value in families.items():
+        # dostuff
+        checkFamToIndi26(key, families, individuals)
+    i = 0
+    for key, value in individuals.items():
+        # do same butt different
+        checkIndiToFam26(key, individuals, families, US26[i])
+        i += 1
 
 except IOError:
     print("An error occured trying to access the data file.")
