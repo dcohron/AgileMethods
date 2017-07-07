@@ -96,7 +96,7 @@ def readFile(path):
 
                     # US22- Check that family ID is , unique (not seen before)
                     if not uniqueIDCheck(familyID, families):
-                        errorString = "ERROR: Family: US22: Family ID" + familyID + " not unique, new family overwrote old."
+                        errorString = "ERROR: Family: US22: Family ID " + familyID + " not unique, new family overwrote old."
                         IDErrorBuffer.append(errorString)
 
                     # print("FamilyID= ", familyID)
@@ -141,6 +141,11 @@ def readFile(path):
         else:
             # print("Exiting loop.")
             continue
+
+    # for diagnostic purposes
+    # print(individuals)
+    # print(families)
+
     return individuals, families
 
 
@@ -894,11 +899,12 @@ except BaseException as e:
 except:
     print("An unknown error occured.")
 
+print()
+print()
+print()
+print()
 
-print()
-print()
-print()
-print()
+# for diagnostic purposes
 # print(individuals)
 # print(families)
 
