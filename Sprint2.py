@@ -429,6 +429,8 @@ def CheckMultipleBirths(childList):
          counter = 0
          newList = []
          for i in range(len(childList)):
+             if childList[i] not in individuals: # necessary for US26
+                 continue
              childsBirth = individuals[childList[i]]["BIRT"]
              newList.append(childsBirth)
          
@@ -452,6 +454,8 @@ def CheckSameLastNameAsFather(childList):
         return True
 
     for i in range(len(childList)):
+        if childList[i] not in individuals:
+            continue
         child_name = individuals[childList[i]]["NAME"]
         childs_last_name = child_name.split('/')[1]
         fathers_last_name = fathers_name.split('/')[1]
@@ -808,6 +812,8 @@ try:
             continue
         else:
             for i in range(len(childList)):
+                if childList[i] not in individuals:
+                    continue
                 childBirth = individuals[childList[i]]["BIRT"]
                 #print("CALLING us12")
                 parentChildAgeCheck(key, childBirth, husbBirthString, wifeBirthString)
@@ -853,7 +859,13 @@ try:
     # print("Sprint 2 US25: Unique First Names in Families")
     for key, value in families.items():
         childList = families[key]["CHIL"] #get child individual IDs
-        checkUniqueChildrenNames(key, individuals, childList)
+        clean = []
+        for item in childList:
+            if item not in individuals: # prevent US26 error from messing it up
+                continue
+            else:
+                clean += [item]
+        checkUniqueChildrenNames(key, individuals, clean)
 
     # US26: Corresponding entries
     # Make sure everything that appears in the families table is in the individuals table

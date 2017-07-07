@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9092503d-0df9-414a-9c9d-5c9e33bd399f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TeamNick_Jeremy_AmieReport.xlsx" afterPath="$PROJECT_DIR$/TeamNick_Jeremy_AmieReport.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProjectTestFile.py" afterPath="$PROJECT_DIR$/ProjectTestFile.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/My-Family-18-May-2017-411.ged" afterPath="$PROJECT_DIR$/My-Family-18-May-2017-411.ged" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sprint2.py" afterPath="$PROJECT_DIR$/Sprint2.py" />
     </list>
     <ignored path="AgileMethods.iws" />
@@ -23,42 +22,25 @@
     <favorites_list name="AgileMethods" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="Sprint2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Sprint2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="509" column="48" lean-forward="false" selection-start-line="509" selection-start-column="4" selection-end-line="509" selection-end-column="48" />
+            <state relative-caret-position="289">
+              <caret line="863" column="79" lean-forward="false" selection-start-line="863" selection-start-column="79" selection-end-line="863" selection-end-column="79" />
               <folding>
-                <element signature="n#!!doc" expanded="false" />
-                <element signature="e#1607#6538#0" expanded="false" />
-                <element signature="e#6569#6804#0" expanded="false" />
-                <element signature="e#6807#6843#0" expanded="false" />
-                <element signature="e#8323#8653#0" expanded="false" />
-                <element signature="e#8686#9120#0" expanded="false" />
-                <element signature="e#9166#10398#0" expanded="false" />
-                <element signature="e#10461#11425#0" expanded="false" />
-                <element signature="e#11491#12209#0" expanded="false" />
-                <element signature="e#12274#12854#0" expanded="false" />
-                <element signature="e#12916#13280#0" expanded="false" />
-                <element signature="e#13372#14312#0" expanded="false" />
-                <element signature="e#14402#15115#0" expanded="false" />
-                <element signature="e#15198#16895#0" expanded="false" />
-                <element signature="e#16946#17092#0" expanded="false" />
-                <element signature="e#17137#17765#0" expanded="false" />
-                <element signature="e#17813#18524#0" expanded="false" />
-                <element signature="e#18566#19740#0" expanded="false" />
-                <element signature="e#23420#23478#0" expanded="false" />
-                <element signature="e#26144#26174#0" expanded="false" />
-                <element signature="e#27125#28105#0" expanded="false" />
-                <element signature="e#28257#28739#0" expanded="false" />
-                <element signature="e#28896#29281#0" expanded="false" />
-                <element signature="e#29451#30355#0" expanded="false" />
-                <element signature="e#30547#31205#0" expanded="false" />
-                <element signature="e#31379#32186#0" expanded="false" />
-                <element signature="e#32313#32522#0" expanded="false" />
-                <element signature="e#32529#32548#0" expanded="false" />
-                <element signature="e#32986#33042#0" expanded="false" />
+                <element signature="e#1603#6636#0" expanded="false" />
+                <element signature="e#6667#6902#0" expanded="false" />
+                <element signature="e#11589#12307#0" expanded="false" />
+                <element signature="e#12372#12952#0" expanded="false" />
+                <element signature="e#13014#13394#0" expanded="false" />
+                <element signature="e#13486#14480#0" expanded="false" />
+                <element signature="e#14570#15315#0" expanded="false" />
+                <element signature="e#15398#17201#0" expanded="false" />
+                <element signature="e#17252#17398#0" expanded="false" />
+                <element signature="e#17443#18167#0" expanded="false" />
+                <element signature="e#18215#18993#0" expanded="false" />
+                <element signature="e#19035#20209#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -67,8 +49,8 @@
       <file leaf-file-name="ProjectTestFile.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ProjectTestFile.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="205" column="43" lean-forward="true" selection-start-line="205" selection-start-column="43" selection-end-line="205" selection-end-column="43" />
+            <state relative-caret-position="223">
+              <caret line="212" column="43" lean-forward="false" selection-start-line="212" selection-start-column="43" selection-end-line="212" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -82,17 +64,19 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Sprint2.py" />
         <option value="$PROJECT_DIR$/ProjectTestFile.py" />
+        <option value="$PROJECT_DIR$/Sprint2.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="957" />
-    <option name="height" value="1040" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -105,24 +89,7 @@
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AgileMethods" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AgileMethods" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -145,7 +112,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in ProjectTestFile.py">
+  <component name="RunManager" selected="Python.Sprint2">
     <configuration default="false" name="Sprint2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -281,8 +248,8 @@
     </list>
     <recent_temporary>
       <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in ProjectTestFile.py" />
-        <item index="1" class="java.lang.String" itemvalue="Python.Sprint2" />
+        <item index="0" class="java.lang.String" itemvalue="Python.Sprint2" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in ProjectTestFile.py" />
       </list>
     </recent_temporary>
     <configuration default="true" type="tests" factoryName="Attests">
@@ -349,9 +316,13 @@
     <history-entry file="Unittests_in_ProjectTestFile_py - 2017.07.06 at 19h 37m 18s.xml">
       <configuration name="Unittests in ProjectTestFile.py" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_in_ProjectTestFile_py - 2017.07.06 at 21h 55m 58s.xml">
+      <configuration name="Unittests in ProjectTestFile.py" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="957" height="1040" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50635594" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -361,9 +332,9 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40601504" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40549102" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -391,56 +362,59 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Sprint2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8653">
+          <caret line="509" column="48" lean-forward="false" selection-start-line="509" selection-start-column="4" selection-end-line="509" selection-end-column="48" />
+          <folding>
+            <element signature="e#1603#6636#0" expanded="false" />
+            <element signature="e#6667#6902#0" expanded="false" />
+            <element signature="e#11589#12307#0" expanded="false" />
+            <element signature="e#12372#12952#0" expanded="false" />
+            <element signature="e#13014#13394#0" expanded="false" />
+            <element signature="e#13486#14480#0" expanded="false" />
+            <element signature="e#14570#15315#0" expanded="false" />
+            <element signature="e#15398#17201#0" expanded="false" />
+            <element signature="e#17252#17398#0" expanded="false" />
+            <element signature="e#17443#18167#0" expanded="false" />
+            <element signature="e#18215#18993#0" expanded="false" />
+            <element signature="e#19035#20209#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ProjectTestFile.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="205" column="43" lean-forward="true" selection-start-line="205" selection-start-column="43" selection-end-line="205" selection-end-column="43" />
+        <state relative-caret-position="223">
+          <caret line="212" column="43" lean-forward="false" selection-start-line="212" selection-start-column="43" selection-end-line="212" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Sprint2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="509" column="48" lean-forward="false" selection-start-line="509" selection-start-column="4" selection-end-line="509" selection-end-column="48" />
+        <state relative-caret-position="289">
+          <caret line="863" column="79" lean-forward="false" selection-start-line="863" selection-start-column="79" selection-end-line="863" selection-end-column="79" />
           <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#1607#6538#0" expanded="false" />
-            <element signature="e#6569#6804#0" expanded="false" />
-            <element signature="e#6807#6843#0" expanded="false" />
-            <element signature="e#8323#8653#0" expanded="false" />
-            <element signature="e#8686#9120#0" expanded="false" />
-            <element signature="e#9166#10398#0" expanded="false" />
-            <element signature="e#10461#11425#0" expanded="false" />
-            <element signature="e#11491#12209#0" expanded="false" />
-            <element signature="e#12274#12854#0" expanded="false" />
-            <element signature="e#12916#13280#0" expanded="false" />
-            <element signature="e#13372#14312#0" expanded="false" />
-            <element signature="e#14402#15115#0" expanded="false" />
-            <element signature="e#15198#16895#0" expanded="false" />
-            <element signature="e#16946#17092#0" expanded="false" />
-            <element signature="e#17137#17765#0" expanded="false" />
-            <element signature="e#17813#18524#0" expanded="false" />
-            <element signature="e#18566#19740#0" expanded="false" />
-            <element signature="e#23420#23478#0" expanded="false" />
-            <element signature="e#26144#26174#0" expanded="false" />
-            <element signature="e#27125#28105#0" expanded="false" />
-            <element signature="e#28257#28739#0" expanded="false" />
-            <element signature="e#28896#29281#0" expanded="false" />
-            <element signature="e#29451#30355#0" expanded="false" />
-            <element signature="e#30547#31205#0" expanded="false" />
-            <element signature="e#31379#32186#0" expanded="false" />
-            <element signature="e#32313#32522#0" expanded="false" />
-            <element signature="e#32529#32548#0" expanded="false" />
-            <element signature="e#32986#33042#0" expanded="false" />
+            <element signature="e#1603#6636#0" expanded="false" />
+            <element signature="e#6667#6902#0" expanded="false" />
+            <element signature="e#11589#12307#0" expanded="false" />
+            <element signature="e#12372#12952#0" expanded="false" />
+            <element signature="e#13014#13394#0" expanded="false" />
+            <element signature="e#13486#14480#0" expanded="false" />
+            <element signature="e#14570#15315#0" expanded="false" />
+            <element signature="e#15398#17201#0" expanded="false" />
+            <element signature="e#17252#17398#0" expanded="false" />
+            <element signature="e#17443#18167#0" expanded="false" />
+            <element signature="e#18215#18993#0" expanded="false" />
+            <element signature="e#19035#20209#0" expanded="false" />
           </folding>
         </state>
       </provider>
