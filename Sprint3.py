@@ -540,6 +540,19 @@ def checkIndiToFam26(key, families, US26):
             print("ERROR: US26: Key", item, "from", key, "not in table.")
     return True
 
+def ageCalc(birthDateString, dateString = '0'):
+    '''US34 and US35- Calculate age in days at specific date.'''
+    # If do not pass in second date, use today's date
+    # print(birthDateString)
+    # print(dateString)
+    if dateString == '0':
+        date1 = dt.datetime.today()
+    else:
+        date1 = dt.datetime.strptime(dateString, "%d%b%Y")
+
+    birthDate = dt.datetime.strptime(birthDateString, "%d%b%Y")
+    return (date1 - birthDate).days
+
 
 # Main body of code:
 # put code into try/except for error handling
@@ -547,6 +560,7 @@ try:
     ## Import needed libraries
     import re
     import datetime as dt
+    # from datetime import date
 
     from dateutil.parser import parse as dtparse
     from prettytable import PrettyTable
@@ -660,6 +674,9 @@ try:
     
     print(finalp2)
 
+    print()
+    print()
+    print()
 
     ### Sprint 1:
     # US02: Check Birth before Marriage
@@ -879,25 +896,58 @@ try:
     # print()
     # print("Sprint 2 US26: Corresponding Entries")
     for key, value in families.items():
-        # dostuff
+        # do stuff
         checkFamToIndi26(key, families, individuals)
     i = 0
     for key, value in individuals.items():
-        # do same butt different
+        # do same but different
         checkIndiToFam26(key, families, US26[i])
         i += 1
+
+
+    ### Sprint 3
+
+    # US34- List large age differences
+    # List all couples who were married when the older spouse was more than twice as old as the younger spouse.
+    for key, value in families.items():
+        # eliminate cases with no marriage date
+        marriageDate = families[key]['MARR']
+        if marriageDate == 'NA':
+            continue
+        husbandID = families[key]['HUSB']
+        wifeID = families[key]['WIFE']
+
+        husbandAgeDays = ageCalc(individuals[husbandID]['BIRT'], marriageDate)
+        wifeAgeDays = ageCalc(individuals[wifeID]['BIRT'], marriageDate)
+        # print(husbandAgeDays, wifeAgeDays)
+
+        if husbandAgeDays > (2 * wifeAgeDays):
+            print("ERROR: Family: US34:", key,": Husband", husbandID, individuals[husbandID]['NAME'],"was more than twice his wife's age on the date of marriage. (", round(husbandAgeDays/365,1)," to", round(wifeAgeDays/365,1), ") years of age.")
+
+        elif wifeAgeDays > (2 * husbandAgeDays):
+            print("ERROR: Family: US34:", key, ": Wife", wifeID, individuals[wifeID]['NAME'],"was more than twice his wife's age on the date of marriage.")
+
+
+    # US35- List recent births
+    # List all people in a GEDCOM file who were born in the last 30 days.
+    for key, value in individuals.items():
+        ageDays = ageCalc(individuals[key]['BIRT'])
+        if ageDays <= 30:
+            print("ERROR: Individual: US35:", key, individuals[key]['NAME'], "is less than 30 days old: (",ageDays,") days old.")
+
+
 
 except IOError:
     print("An error occured trying to access the data file.")
 
-except ImportError:
-    print("No module found.")
-
-except BaseException as e:
-    print("Base exception", str(e))
-
-except:
-    print("An unknown error occured.")
+# except ImportError:
+#     print("No module found.")
+#
+# except BaseException as e:
+#     print("Base exception", str(e))
+#
+# except:
+#     print("An unknown error occured.")
 
 print()
 print()

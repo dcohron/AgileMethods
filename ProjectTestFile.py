@@ -20,7 +20,7 @@
 # 2) PyUnit Tutorial: "Page." PyUnit - Python Wiki. N.p., n.d. Web. 13 June 2017.
 
 import unittest
-from Sprint2 import *
+from Sprint3 import *
 
 class AgileProjectTests(unittest.TestCase):
 
@@ -214,6 +214,22 @@ class AgileProjectTests(unittest.TestCase):
         print("Testing US26_CorrespondingEntries:")
         self.assertTrue(checkFamToIndi26("F5", self.familiesTest4, self.individualsTest2))
         self.assertTrue(checkFamToIndi26("F1", self.familiesTest4, self.individualsTest2))
+
+    def testMarriageAge(self):
+        # testing US34- large age differences at marriage
+        print()
+        print("Testing US34_Large age differences at marriage:")
+        self.assertTrue(ageCalc("10MAR65", "10MAR2005") > (2 * ageCalc("10MAR1986", "10MAR2005")))
+        self.assertFalse(ageCalc("10MAR1965", "10MAR1985") > (2 * ageCalc("10MAR1965", "10MAR1985")))
+
+    def testNewBirth(self):
+        # testing US35- list all births within last 30 days
+        print()
+        print("Testing US35_List recent births:")
+        self.assertTrue(ageCalc("5JUL2017") < 30)
+        self.assertFalse(ageCalc("10MAR1965") > 30)
+
+
 
 if __name__ == "__main__":
 
