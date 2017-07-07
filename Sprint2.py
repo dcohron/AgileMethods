@@ -85,7 +85,7 @@ def readFile(path):
 
                     # US22- Check that individual ID is unique (not seen before)
                     if not uniqueIDCheck(individualID, individuals):
-                        errorString = "ERROR: Individual: US22: Individual ID" + individualID + "not unique, new individual overwrote old."
+                        errorString = "ERROR: Individual: US22: Individual ID" + individualID + " not unique, new individual overwrote old."
                         IDErrorBuffer.append(errorString)
                         
 
@@ -96,7 +96,7 @@ def readFile(path):
 
                     # US22- Check that family ID is , unique (not seen before)
                     if not uniqueIDCheck(familyID, families):
-                        errorString = "ERROR: Family: US22: Family ID" + familyID + "not unique, new family overwrote old."
+                        errorString = "ERROR: Family: US22: Family ID" + familyID + " not unique, new family overwrote old."
                         IDErrorBuffer.append(errorString)
 
                     # print("FamilyID= ", familyID)
@@ -324,7 +324,7 @@ def  marriageBeforeDivorce(marrString, divorceString):
         # print("Divorce date is after marriage date check successful.")
         return True
     else:
-        print("ERROR:  US04: Divorce date is before marriage date, check unsuccessful.")
+        print("ERROR: US04: Divorce date is before marriage date, check unsuccessful.")
         return False
     
 
@@ -351,7 +351,7 @@ def marriageBeforeDeathCheck(key, marrString, husbDeathString, wifeDeathString):
             # print(key, ":", families[key]["WIFE"], "- marriage prior to death, Successful check!")
             return True
         else:
-            print("ERROR: US O5:", key, ":", families[key]["WIFE"], "- marriage after death, Failed check!")
+            print("ERROR: USO5:", key, ":", families[key]["WIFE"], "- marriage after death, Failed check!")
             return False
      
 
@@ -429,15 +429,13 @@ def CheckMultipleBirths(childList):
          counter = 0
          newList = []
          for i in range(len(childList)):
-             if childList[i] not in individuals: # necessary for US26
-                 continue
              childsBirth = individuals[childList[i]]["BIRT"]
              newList.append(childsBirth)
          
          opt = [i for i, x in enumerate(newList) if newList.count(x) > 1]
 
          if len(opt) >= 5:
-             print("S2 US14 - ", key, ": Family has more than 5 births happening!", len(opt))
+             print("ERROR: US14:", key, " Family has more than 5 births happening! (", len(opt), ")")
              return False
          else:
              return True
@@ -454,8 +452,6 @@ def CheckSameLastNameAsFather(childList):
         return True
 
     for i in range(len(childList)):
-        if childList[i] not in individuals:
-            continue
         child_name = individuals[childList[i]]["NAME"]
         childs_last_name = child_name.split('/')[1]
         fathers_last_name = fathers_name.split('/')[1]
@@ -812,8 +808,6 @@ try:
             continue
         else:
             for i in range(len(childList)):
-                if childList[i] not in individuals:
-                    continue
                 childBirth = individuals[childList[i]]["BIRT"]
                 #print("CALLING us12")
                 parentChildAgeCheck(key, childBirth, husbBirthString, wifeBirthString)
@@ -859,13 +853,7 @@ try:
     # print("Sprint 2 US25: Unique First Names in Families")
     for key, value in families.items():
         childList = families[key]["CHIL"] #get child individual IDs
-        clean = []
-        for item in childList:
-            if item not in individuals: # prevent US26 error from messing it up
-                continue
-            else:
-                clean += [item]
-        checkUniqueChildrenNames(key, individuals, clean)
+        checkUniqueChildrenNames(key, individuals, childList)
 
     # US26: Corresponding entries
     # Make sure everything that appears in the families table is in the individuals table
