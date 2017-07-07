@@ -808,6 +808,8 @@ try:
             continue
         else:
             for i in range(len(childList)):
+                if childList[i] not in individuals:
+                    continue
                 childBirth = individuals[childList[i]]["BIRT"]
                 #print("CALLING us12")
                 parentChildAgeCheck(key, childBirth, husbBirthString, wifeBirthString)
@@ -820,12 +822,17 @@ try:
     # print()
     for key, value in families.items():
        childList = families[key]["CHIL"]
-         
+       temp = []
+       for item in childList:
+           if item not in individuals: # for US26
+               continue
+           else:
+               temp += [item]
        # US14 - multiple births < 5
-       CheckMultipleBirths(childList)
+       CheckMultipleBirths(temp)
 
        # US16 - Male last name same as fathers
-       CheckSameLastNameAsFather(childList)
+       CheckSameLastNameAsFather(temp)
 
 
     # US22:  Unique IDs
@@ -853,7 +860,13 @@ try:
     # print("Sprint 2 US25: Unique First Names in Families")
     for key, value in families.items():
         childList = families[key]["CHIL"] #get child individual IDs
-        checkUniqueChildrenNames(key, individuals, childList)
+        temp = []
+        for item in childList:
+            if item not in individuals:  # for US26
+                continue
+            else:
+                temp += [item]
+        checkUniqueChildrenNames(key, individuals, temp)
 
     # US26: Corresponding entries
     # Make sure everything that appears in the families table is in the individuals table

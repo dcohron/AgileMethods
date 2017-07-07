@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9092503d-0df9-414a-9c9d-5c9e33bd399f" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/My-Family-18-May-2017-411.ged" afterPath="$PROJECT_DIR$/My-Family-18-May-2017-411.ged" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sprint2.py" afterPath="$PROJECT_DIR$/Sprint2.py" />
     </list>
@@ -26,32 +27,13 @@
       <file leaf-file-name="Sprint2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Sprint2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="863" column="79" lean-forward="false" selection-start-line="863" selection-start-column="79" selection-end-line="863" selection-end-column="79" />
+            <state relative-caret-position="480">
+              <caret line="872" column="20" lean-forward="true" selection-start-line="872" selection-start-column="20" selection-end-line="872" selection-end-column="20" />
               <folding>
-                <element signature="e#1603#6636#0" expanded="false" />
-                <element signature="e#6667#6902#0" expanded="false" />
-                <element signature="e#11589#12307#0" expanded="false" />
-                <element signature="e#12372#12952#0" expanded="false" />
-                <element signature="e#13014#13394#0" expanded="false" />
-                <element signature="e#13486#14480#0" expanded="false" />
                 <element signature="e#14570#15315#0" expanded="false" />
                 <element signature="e#15398#17201#0" expanded="false" />
                 <element signature="e#17252#17398#0" expanded="false" />
-                <element signature="e#17443#18167#0" expanded="false" />
-                <element signature="e#18215#18993#0" expanded="false" />
-                <element signature="e#19035#20209#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProjectTestFile.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ProjectTestFile.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="212" column="43" lean-forward="false" selection-start-line="212" selection-start-column="43" selection-end-line="212" selection-end-column="43" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -289,15 +271,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_ProjectTestFile_py - 2017.07.06 at 19h 03m 07s.xml">
-      <configuration name="Unittests in ProjectTestFile.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_ProjectTestFile_py - 2017.07.06 at 19h 10m 25s.xml">
-      <configuration name="Unittests in ProjectTestFile.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_ProjectTestFile_py - 2017.07.06 at 19h 19m 04s.xml">
-      <configuration name="Unittests in ProjectTestFile.py" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_in_ProjectTestFile_py - 2017.07.06 at 19h 19m 37s.xml">
       <configuration name="Unittests in ProjectTestFile.py" configurationId="tests" />
     </history-entry>
@@ -319,6 +292,15 @@
     <history-entry file="Unittests_in_ProjectTestFile_py - 2017.07.06 at 21h 55m 58s.xml">
       <configuration name="Unittests in ProjectTestFile.py" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_in_ProjectTestFile_py - 2017.07.06 at 22h 32m 22s.xml">
+      <configuration name="Unittests in ProjectTestFile.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_ProjectTestFile_py - 2017.07.06 at 22h 36m 00s.xml">
+      <configuration name="Unittests in ProjectTestFile.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_ProjectTestFile_py - 2017.07.06 at 22h 42m 33s.xml">
+      <configuration name="Unittests in ProjectTestFile.py" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -326,13 +308,13 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50635594" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32946146" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32946146" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40549102" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40549102" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -367,18 +349,9 @@
         <state relative-caret-position="8653">
           <caret line="509" column="48" lean-forward="false" selection-start-line="509" selection-start-column="4" selection-end-line="509" selection-end-column="48" />
           <folding>
-            <element signature="e#1603#6636#0" expanded="false" />
-            <element signature="e#6667#6902#0" expanded="false" />
-            <element signature="e#11589#12307#0" expanded="false" />
-            <element signature="e#12372#12952#0" expanded="false" />
-            <element signature="e#13014#13394#0" expanded="false" />
-            <element signature="e#13486#14480#0" expanded="false" />
             <element signature="e#14570#15315#0" expanded="false" />
             <element signature="e#15398#17201#0" expanded="false" />
             <element signature="e#17252#17398#0" expanded="false" />
-            <element signature="e#17443#18167#0" expanded="false" />
-            <element signature="e#18215#18993#0" expanded="false" />
-            <element signature="e#19035#20209#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -392,7 +365,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ProjectTestFile.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
+        <state relative-caret-position="309">
           <caret line="212" column="43" lean-forward="false" selection-start-line="212" selection-start-column="43" selection-end-line="212" selection-end-column="43" />
           <folding />
         </state>
@@ -400,21 +373,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Sprint2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="863" column="79" lean-forward="false" selection-start-line="863" selection-start-column="79" selection-end-line="863" selection-end-column="79" />
+        <state relative-caret-position="480">
+          <caret line="872" column="20" lean-forward="true" selection-start-line="872" selection-start-column="20" selection-end-line="872" selection-end-column="20" />
           <folding>
-            <element signature="e#1603#6636#0" expanded="false" />
-            <element signature="e#6667#6902#0" expanded="false" />
-            <element signature="e#11589#12307#0" expanded="false" />
-            <element signature="e#12372#12952#0" expanded="false" />
-            <element signature="e#13014#13394#0" expanded="false" />
-            <element signature="e#13486#14480#0" expanded="false" />
             <element signature="e#14570#15315#0" expanded="false" />
             <element signature="e#15398#17201#0" expanded="false" />
             <element signature="e#17252#17398#0" expanded="false" />
-            <element signature="e#17443#18167#0" expanded="false" />
-            <element signature="e#18215#18993#0" expanded="false" />
-            <element signature="e#19035#20209#0" expanded="false" />
           </folding>
         </state>
       </provider>
