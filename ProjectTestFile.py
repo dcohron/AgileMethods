@@ -75,6 +75,15 @@ class AgileProjectTests(unittest.TestCase):
         # Test case to check offset calculation.
         assert checkDates(self.date1, self.date1, -36000) == True, "Offset3 incorrect."
 
+    def testRead(self):
+        # test if read is correct
+        print()
+        print("Testing file read:")
+        path = "./My-Family-18-May-2017-411.ged"
+        individuals, families = readFile(path)
+        self.assertEqual(self.individualsTest, individuals) 
+        self.assertEqual(self.familiesTest2, families)
+
     def testUS04_CheckDivorceAfterMarriage(self):
         print()
         
@@ -157,36 +166,34 @@ class AgileProjectTests(unittest.TestCase):
 
     def testUS14_CheckMultipleBirths(self):
         # test case to check if multiple births have the same birthday
-        
-        for key, value in self.familiesTest.items():
-           childList = self.familiesTest[key]["CHIL"]
+        print()
+        print("Testing US14_multipleBirths:")       
+        for key, value in self.familiesTest1.items():
+           childList = self.familiesTest1[key]["CHIL"]
            self.assertTrue(CheckMultipleBirths(childList))
            #self.assertFalse(CheckMultipleBirths(childList))
     
     def testUS16_CheckSameLastNameAsFather(self):
         # Test case to check if the last name of child, is same as father
-        
-       for key, value in self.familiesTest.items():
-           childList = self.familiesTest[key]["CHIL"]
+        print()
+        print("Testing US16_lastNames:")       
+        for key, value in self.familiesTest1.items():
+           childList = self.familiesTest1[key]["CHIL"]
            #self.assertTrue(CheckSameLastNameAsFather(childList))
 
     def testUniqueIDUS22(self):
         # test case to check IndividualID is unique.
+        print()
+        print("Testing US22_uniqueIDs:")
         self.assertFalse(uniqueIDCheck('I1', individuals))
 
         # test case to check FamilyID is unique.
         self.assertFalse(uniqueIDCheck('F1', families))
 
-
-    def testRead(self):
-        # test if read is correct
-        path = "./My-Family-18-May-2017-411.ged"
-        individuals, families = readFile(path)
-        self.assertEqual(self.individualsTest, individuals) 
-        self.assertEqual(self.familiesTest1, families)
-
     def testUniqueFamilyUS24(self):
         # test case to check IndividualID is False.
+        print()
+        print("Testing US24_uniqueFamilies:")
         self.assertFalse(uniqueFamilyCheck(self.familiesTest2))
 
         # test case to check IndividualID is True.

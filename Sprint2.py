@@ -1,7 +1,7 @@
 #  Class: SSW-555
 #  Project:  Project Assignment #3
 #  Author: David N. Cohron, Amie Widerkehr, Jeremy Doll
-#  Date: 21 June 2017
+#  Date: 6 July 2017
 
 ## Other files:
 # My-Family-18-May-2017-411.ged   GEDCOM file for the Brady Family
@@ -13,9 +13,9 @@
 # We further pledge that we have not copied any material from 
 # a book, article, the Internet or any other source except 
 # where we have expressly cited the source.
-# Signature: Jeremy Doll			Date: 21 June 2017
-# Signature: Amie Widerkehr			Date: 21 June 2017
-# Signature: David N. Cohron		Date: 21 June 2017
+# Signature: Jeremy Doll			Date: 6 July 2017
+# Signature: Amie Widerkehr			Date: 6 July 2017
+# Signature: David N. Cohron		Date: 6 July 2017
 
 # References:
 # 1) StackOverflow
@@ -85,7 +85,8 @@ def readFile(path):
 
                     # US22- Check that individual ID is unique (not seen before)
                     if not uniqueIDCheck(individualID, individuals):
-                        IDErrorBuffer.append(f, "ERROR: Individual: US22: Individual ID {individualID} not unique, new individual overwrote old.")
+                        errorString = "ERROR: Individual: US22: Individual ID" + individualID + "not unique, new individual overwrote old."
+                        IDErrorBuffer.append(errorString)
                         
 
                     individuals[individualID] = {'NAME':'NA', 'SEX':'NA', 'BIRT':'NA', 'DEAT':'NA'}
@@ -95,7 +96,8 @@ def readFile(path):
 
                     # US22- Check that family ID is , unique (not seen before)
                     if not uniqueIDCheck(familyID, families):
-                        IDErrorBuffer.append(f, "ERROR: Family: US22: Family ID {familyID} not unique, new family overwrote old.")
+                        errorString = "ERROR: Family: US22: Family ID" + familyID + "not unique, new family overwrote old."
+                        IDErrorBuffer.append(errorString)
 
                     # print("FamilyID= ", familyID)
                     families[familyID] = {'HUSB':'NA', 'WIFE':'NA', 'CHIL':[], 'MARR':'NA', 'DIV':'NA'}
@@ -880,7 +882,7 @@ print()
 print()
 print()
 print()
-print(individuals)
-print(families)
+# print(individuals)
+# print(families)
 
 # End of File
