@@ -1,7 +1,7 @@
 #  Class: SSW-555
 #  Project:  Project Assignment #3
 #  Author: David N. Cohron, Amie Widerkehr, Jeremy Doll
-#  Date: 6 July 2017
+#  Date: 19 July 2017
 
 ## Other files:
 # My-Family-18-May-2017-411.ged   GEDCOM file for the Brady Family
@@ -13,9 +13,9 @@
 # We further pledge that we have not copied any material from 
 # a book, article, the Internet or any other source except 
 # where we have expressly cited the source.
-# Signature: Jeremy Doll			Date: 6 July 2017
-# Signature: Amie Widerkehr			Date: 6 July 2017
-# Signature: David N. Cohron		Date: 6 July 2017
+# Signature: Jeremy Doll			Date: 19 July 2017
+# Signature: Amie Widerkehr			Date: 19 July 2017
+# Signature: David N. Cohron		Date: 19 July 2017
 
 # References:
 # 1) StackOverflow
@@ -940,14 +940,14 @@ try:
 except IOError:
     print("An error occured trying to access the data file.")
 
-# except ImportError:
-#     print("No module found.")
-#
-# except BaseException as e:
-#     print("Base exception", str(e))
-#
-# except:
-#     print("An unknown error occured.")
+except ImportError:
+    print("No module found.")
+
+except BaseException as e:
+    print("Base exception", str(e))
+
+except:
+    print("An unknown error occured.")
 
 print()
 print()
