@@ -66,7 +66,13 @@ def readFile(path):
                 elif wordList[1] == "BIRT":
                     nextLine = getWords(data)
                     date = (nextLine[2] + nextLine[3] + nextLine[4])
-                    individuals[individualID]["BIRT"] = date
+                    # US32 - Check for multiple birth dates
+                    #        Ignores any dates it tries to add after the first one.
+                    if individuals[individualID]["BIRT"] != "NA":
+                        errorString = "ERROR: US32- " + individualID + " has multiple birth dates listed."
+                        IDErrorBuffer.append(errorString)
+                    else:
+                        individuals[individualID]["BIRT"] = date
                     continue
                 elif wordList[1] == "DEAT":
                     nextLine = getWords(data)
@@ -540,8 +546,23 @@ def checkIndiToFam26(key, families, US26):
             print("ERROR: US26: Key", item, "from", key, "not in table.")
     return True
 
+def checkOrphan(key, individuals, childList, wifeID, husbID):
+    '''Checks a family for orphans, returns false if any children qualify'''
+    # US33
+    retVal = True
+    for item in childList:
+        if item not in individuals or wifeID == "NA" or husbID == "NA":
+            continue # Skip any bad input
+        else:
+            if individuals[wifeID]["DEAT"] != "NA" and individuals[husbID]["DEAT"] != "NA":
+                birthString = individuals[item]["BIRT"]
+                if birthString != "NA" and ageCalc(birthString, "0") < 6570: # < 18 years
+                    retVal = False
+                    print("ERROR: US33: " + key + "/" + item + ": child is orphan.")
+    return retVal
+
 def ageCalc(birthDateString, dateString = '0'):
-    '''US34 and US35- Calculate age in days at specific date.'''
+    '''US34 and US35- Calculate age in days or years at specific date.'''
     # If do not pass in second date, use today's date
     # print(birthDateString)
     # print(dateString)
@@ -906,6 +927,14 @@ try:
 
 
     ### Sprint 3
+    # US32- in input read
+    # US33- List all orphaned children
+    # Does NOT catch things with missing info (I.E. husb or wife of family is "NA"
+    for key, value in families.items():
+        childList = families[key]["CHIL"]
+        wifeID = families[key]["WIFE"]
+        husbID = families[key]["HUSB"]
+        checkOrphan(key, individuals, childList, wifeID, husbID)
 
     # US34- List large age differences
     # List all couples who were married when the older spouse was more than twice as old as the younger spouse.

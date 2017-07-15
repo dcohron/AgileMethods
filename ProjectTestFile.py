@@ -215,6 +215,13 @@ class AgileProjectTests(unittest.TestCase):
         self.assertTrue(checkFamToIndi26("F5", self.familiesTest4, self.individualsTest2))
         self.assertTrue(checkFamToIndi26("F1", self.familiesTest4, self.individualsTest2))
 
+    def testOrphan(self):
+        print()
+        print("Testing US33_orphans")
+        self.assertTrue(checkOrphan("F3", self.individualsTest, ["I18"], "I12", "I13"))
+        self.assertTrue(checkOrphan("F3", self.individualsTest, ["I18", "I21"], "I12", "I13"))
+        self.assertFalse(checkOrphan("F3", self.individualsTest, ["I11", "I18"], "I14", "I15"))
+
     def testMarriageAge(self):
         # testing US34- large age differences at marriage
         print()
