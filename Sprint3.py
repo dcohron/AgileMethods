@@ -574,6 +574,51 @@ def ageCalc(birthDateString, dateString = '0'):
     birthDate = dt.datetime.strptime(birthDateString, "%d%b%Y")
     return (date1 - birthDate).days
 
+def SortChildrenByAge(key, childList):
+     '''US 28 - Sort Children By Age'''
+     if childList == []:
+         return True
+     
+     t = ()
+     myList = []
+     
+     for i in childList:
+         dob =  dt.datetime.strptime(individuals[i]["BIRT"], "%d%b%Y")
+         t = (i, dob)
+         myList.append(t)
+       
+     myList.sort(key=lambda tup:tup[1])
+
+     print("US 28 - Sort Children by Age:")
+     print("Family: ", key)
+     for items in myList:
+        print("---------->DOB: ", items[1], "Child Name: ", individuals[items[0]]["NAME"])
+
+     return True
+       
+def ListMarriedLiving(key):
+    '''US 30 - Display if living and married'''
+
+    if families[key]["HUSB"] != "NA":
+            husbDeathString = individuals[families[key]["HUSB"]]["DEAT"]
+    else:
+            husbDeathString = "NA"
+    if families[key]["WIFE"] != "NA":
+            wifeDeathString = individuals[families[key]["WIFE"]]["DEAT"]
+    else:
+            wifeDeathString = "NA"
+        
+    if husbDeathString != "NA" or wifeDeathString != "NA":
+        return False
+
+    marrString = families[key]["MARR"]
+
+    if marrString == "NA":
+        print("Error: US30: Family number:", key, " Not maried or a non living member")
+        return False
+    else:
+        print("US 30: Family Number:", key, " Is Married and Living, Married On: " + marrString, " Death is: " + husbDeathString, "/" + wifeDeathString)
+        return True
 
 # Main body of code:
 # put code into try/except for error handling
@@ -927,6 +972,27 @@ try:
 
 
     ### Sprint 3
+    # US28 - Order children by age
+    # Collect all children, order by their age
+    for key, value in families.items():
+        childList = families[key]["CHIL"]
+
+        temp = []
+        
+        for item in childList:
+           if item not in individuals: 
+               continue
+           else:
+               temp += [item]
+        
+        SortChildrenByAge(key, temp)
+
+    # US30 - List if living and married
+    # See who is married and living, list them
+    for key, value in families.items():
+        
+        ListMarriedLiving(key)
+
     # US32- in input read
     # US33- List all orphaned children
     # Does NOT catch things with missing info (I.E. husb or wife of family is "NA"

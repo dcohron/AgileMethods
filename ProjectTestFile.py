@@ -215,6 +215,19 @@ class AgileProjectTests(unittest.TestCase):
         self.assertTrue(checkFamToIndi26("F5", self.familiesTest4, self.individualsTest2))
         self.assertTrue(checkFamToIndi26("F1", self.familiesTest4, self.individualsTest2))
 
+    def testSortChildrenByAge(self):
+        # testing US28 function SortChildrenByAge
+        print()
+        print("Testing US28_SortChildrenByAge")
+        self.assertTrue(SortChildrenByAge("F5", ["I5", "I6", "I7", "I1"]))
+
+    def testMarriedLiving(self):
+        # testing US30 function ListMarriedLiving
+        print()
+        print("Testing US30_List Living and Married:")
+        self.assertTrue(ListMarriedLiving("F1"))
+        self.assertFalse(ListMarriedLiving("F5"))
+
     def testOrphan(self):
         print()
         print("Testing US33_orphans")
