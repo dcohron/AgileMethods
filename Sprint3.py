@@ -1,7 +1,7 @@
 #  Class: SSW-555
 #  Project:  Project Assignment #3
 #  Author: David N. Cohron, Amie Widerkehr, Jeremy Doll
-#  Date: 19 July 2017
+#  Date: 16 July 2017
 
 ## Other files:
 # My-Family-18-May-2017-411.ged   GEDCOM file for the Brady Family
@@ -13,9 +13,9 @@
 # We further pledge that we have not copied any material from 
 # a book, article, the Internet or any other source except 
 # where we have expressly cited the source.
-# Signature: Jeremy Doll			Date: 19 July 2017
-# Signature: Amie Widerkehr			Date: 19 July 2017
-# Signature: David N. Cohron		Date: 19 July 2017
+# Signature: Jeremy Doll			Date: 16 July 2017
+# Signature: Amie Widerkehr			Date: 16 July 2017
+# Signature: David N. Cohron		Date: 16 July 2017
 
 # References:
 # 1) StackOverflow
@@ -69,7 +69,7 @@ def readFile(path):
                     # US32 - Check for multiple birth dates
                     #        Ignores any dates it tries to add after the first one.
                     if individuals[individualID]["BIRT"] != "NA":
-                        errorString = "ERROR: US32- " + individualID + " has multiple birth dates listed."
+                        errorString = "ERROR: Individual: US32- " + individualID + "/" + individuals[individualID]["NAME"] + " has multiple birth dates listed."
                         IDErrorBuffer.append(errorString)
                     else:
                         individuals[individualID]["BIRT"] = date
@@ -335,7 +335,7 @@ def  marriageBeforeDivorce(marrString, divorceString):
         # print("Divorce date is after marriage date check successful.")
         return True
     else:
-        print("ERROR: US04: Divorce date is before marriage date, check unsuccessful.")
+        # print("ERROR: Family: US04: Divorce date is before marriage date, check unsuccessful.")
         return False
     
 
@@ -351,7 +351,7 @@ def marriageBeforeDeathCheck(key, marrString, husbDeathString, wifeDeathString):
             # print(key, ":", families[key]["HUSB"], "- marriage prior to death, Successful check!")
             return True
         else:
-            print("ERROR: US05:", key, ":", families[key]["HUSB"], "- marriage after death, Failed check!")
+            print("ERROR: Family: US05:", key, ":", families[key]["HUSB"], "- marriage after death, Failed check!")
             return False
                    
     if wifeDeathString == "NA":
@@ -362,7 +362,7 @@ def marriageBeforeDeathCheck(key, marrString, husbDeathString, wifeDeathString):
             # print(key, ":", families[key]["WIFE"], "- marriage prior to death, Successful check!")
             return True
         else:
-            print("ERROR: USO5:", key, ":", families[key]["WIFE"], "- marriage after death, Failed check!")
+            print("ERROR: Family: USO5:", key, ":", families[key]["WIFE"], "- marriage after death, Failed check!")
             return False
      
 
@@ -373,10 +373,10 @@ def divorceBeforeDeath(key, divorceString, husbDeathString, wifeDeathString):
         return True
     else: # may need to check if both
         if husbDeathString != "NA" and not(checkDates(divorceString, husbDeathString)):
-            print("ERROR: US06:", key, "/", families[key]["HUSB"], "- husband death prior to divorce.")
+            print("ERROR: Family: US06:", key, "/", families[key]["HUSB"], "- husband death prior to divorce.")
             return False
         elif wifeDeathString != "NA" and not(checkDates(divorceString, wifeDeathString)):
-            print("ERROR: US06:", key, "/", families[key]["WIFE"], "- wife death prior to divorce.")
+            print("ERROR: Family: US06:", key, "/", families[key]["WIFE"], "- wife death prior to divorce.")
             return False
         else:
             # print(key, "- divorce/death dates check.")
@@ -389,11 +389,11 @@ def parentChildAgeCheck(key, childBirth, husbBirthString, wifeBirthString):
     if husbBirthString == "NA":
         # mother only
         if wifeBirthString == "NA":
-            print("ERROR: US12:", key, "No mother or father listed for family, don't think this is possible")
+            print("ERROR: Family: US12:", key, "No mother or father listed for family, don't think this is possible")
             return False
         else:
             if checkDates(wifeBirthString, childBirth, 21915): # 60 years 15 leap
-                print("ERROR: US12:", key, "- mother (", families[key]["WIFE"], ") > 60 years older than child.")
+                print("ERROR: Family: US12:", key, "- mother (", families[key]["WIFE"], ") > 60 years older than child.")
                 return False
             else:
                 # print(key, "- parent/child birth dates check.")
@@ -401,21 +401,21 @@ def parentChildAgeCheck(key, childBirth, husbBirthString, wifeBirthString):
     elif wifeBirthString == "NA":
         #father only
         if husbBirthString == "NA":
-            print("ERROR: US12:", key, "No mother or father listed for family, don't think this is possible")
+            print("ERROR: Family: US12:", key, "No mother or father listed for family, don't think this is possible")
             return False
         else:
             if checkDates(husbBirthString, childBirth, 29220): # 80 years 20 leap
-                print("ERROR: US12:", key, "- father (", families[key]["HUSB"], ") > 80 years older than child.")
+                print("ERROR: Family: US12:", key, "- father (", families[key]["HUSB"], ") > 80 years older than child.")
                 return False
             else:
                 # print(key, "- parent/child birth dates check.")
                 return True
     else: # both parents present in row, THIS MAY NEED WORK IF BOTH
         if checkDates(husbBirthString, childBirth, 29220): # 80 years
-            print("ERROR: US12:", key, "- father (", families[key]["HUSB"], ") > 80 years older than child.")
+            print("ERROR: Family: US12:", key, "- father (", families[key]["HUSB"], ") > 80 years older than child.")
             return False
         elif checkDates(wifeBirthString, childBirth, 21915): # 60 years
-            print("ERROR: US12:", key, "- mother (", families[key]["WIFE"], ") > 60 years older than child.")
+            print("ERROR: Family: US12:", key, "- mother (", families[key]["WIFE"], ") > 60 years older than child.")
             return False
         else:
             # print(key, "- parent/child birth dates check.")
@@ -446,7 +446,7 @@ def CheckMultipleBirths(childList):
          opt = [i for i, x in enumerate(newList) if newList.count(x) > 1]
 
          if len(opt) >= 5:
-             print("ERROR: US14:", key, " Family has more than 5 births happening! (", len(opt), ")")
+             print("ERROR: Family: US14:", key, " Family has more than 5 births happening! (", len(opt), ")")
              return False
          else:
              return True
@@ -468,7 +468,7 @@ def CheckSameLastNameAsFather(childList):
         fathers_last_name = fathers_name.split('/')[1]
         
         if childs_last_name != fathers_last_name:
-            print ("ERROR: US16:", key, ": Family: Dad and Child don't have the same last name - Dad:", fathers_last_name, "Childs:", childs_last_name)
+            print ("ERROR: Family: US16:", key, ": Father and Child don't have the same last name - Dad:", fathers_last_name, "Childs:", childs_last_name)
             return False
         else:
             return True
@@ -515,7 +515,7 @@ def checkUniqueChildrenNames(key, individuals, childList):
             temp = individuals[item]["NAME"].rsplit("/")
             names += [temp[0]] # add only first name as per spec
         if len(childList) != len(set(names)):
-            print("ERROR: US25:", key, "- has multiple children with the same name")
+            print("ERROR: Family: US25:", key, "- has multiple children with the same name")
             return False
         else:
             # print("US25 passed length check")
@@ -531,7 +531,7 @@ def checkFamToIndi26(key, families, individuals):
         idList += [families[key]["WIFE"]] # get WIFE Id if it exists
     for item in idList:
         if item not in individuals:
-            print("ERROR: US26: Key", item, "from", key, "not in table.")
+            print("ERROR: Family: US26: Key", item, "from", key, "not in table.")
     return True
 
 # This function is probably not necessary
@@ -543,7 +543,7 @@ def checkIndiToFam26(key, families, US26):
 
     for item in idList:
         if item not in families:
-            print("ERROR: US26: Key", item, "from", key, "not in table.")
+            print("ERROR: Family: US26: Key", item, "from", key, "not in table.")
     return True
 
 def checkOrphan(key, individuals, childList, wifeID, husbID):
@@ -558,7 +558,7 @@ def checkOrphan(key, individuals, childList, wifeID, husbID):
                 birthString = individuals[item]["BIRT"]
                 if birthString != "NA" and ageCalc(birthString, "0") < 6570: # < 18 years
                     retVal = False
-                    print("ERROR: US33: " + key + "/" + item + ": child is orphan.")
+                    print("ERROR: Individual: US33: " + key + "/" + item + "/" + individuals[item]['NAME'] + ": child is orphan.")
     return retVal
 
 def ageCalc(birthDateString, dateString = '0'):
@@ -589,6 +589,7 @@ def SortChildrenByAge(key, childList):
        
      myList.sort(key=lambda tup:tup[1])
 
+     print()
      print("US 28 - Sort Children by Age:")
      print("Family: ", key)
      for items in myList:
@@ -614,7 +615,7 @@ def ListMarriedLiving(key):
     marrString = families[key]["MARR"]
 
     if marrString == "NA":
-        print("Error: US30: Family number:", key, " Not maried or a non living member")
+        print("Error: Family: US30: Family number:", key, " Not maried or a non-living member")
         return False
     else:
         print("US 30: Family Number:", key, " Is Married and Living, Married On: " + marrString, " Death is: " + husbDeathString, "/" + wifeDeathString)
@@ -753,30 +754,30 @@ try:
         # print("Family number:", key)
         marrString = families[key]["MARR"]
         if marrString == "NA":
-            print("ERROR: US02: For family %s no marriage date given." % key)
+            print("ERROR: Family: US02: For family %s no marriage date given." % key)
             continue
 
         # check husband birthdate
         husband = families[key]["HUSB"]
         husbandBirthString = individuals[husband]["BIRT"]
         if husbandBirthString == "NA":
-            print("ERROR: US02: No husband.")
+            print("ERROR: Family: US02: No husband.")
         elif checkDates(husbandBirthString, marrString):
             # print("   Husband birth date checks.")
             pass
         else:
-            print("ERROR: US02: Husband", husband,"birth date does not check.")
+            print("ERROR: Family: US02: Husband", husband,"birth date does not check.")
 
         # check wife birthdate
         wife = families[key]["WIFE"]
         wifeBirthString = individuals[wife]["BIRT"]
         if wifeBirthString == "NA":
-            print("ERROR: US02  No wife.")
+            print("ERROR: Family: US02  No wife.")
         elif checkDates(wifeBirthString, marrString):
             # print("   Wife birth date checks.")
             pass
         else:
-            print("ERROR: US02: Wife", wife,"birth date does not check.")
+            print("ERROR: Family: US02: Wife", wife,"birth date does not check.")
 
 
     # US03: Check Birth before Death
@@ -792,7 +793,7 @@ try:
             # print(key, "- individual still alive.")
             continue
         elif not(checkDates(birthString, deathString)):
-            print("ERROR: US03", key, "- death prior to birth.")
+            print("ERROR: Individual: US03:", key, "- death prior to birth.")
             continue
         else:
             # print(key, "- birth/death dates check.")
@@ -815,7 +816,9 @@ try:
             # print(key, ": married and not divorced")
             pass
         else:
-            marriageBeforeDivorce(marrString, divorceString)
+            if not(marriageBeforeDivorce(marrString, divorceString)):
+                print("ERROR: Family: US04:", key,"Divorce date is before marriage date, check unsuccessful.")
+
 
 
     # US05: Check Marriage before Death
@@ -989,8 +992,8 @@ try:
 
     # US30 - List if living and married
     # See who is married and living, list them
-    for key, value in families.items():
-        
+    print()
+    for key, value in families.items(): 
         ListMarriedLiving(key)
 
     # US32- in input read
