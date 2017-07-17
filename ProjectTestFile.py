@@ -1,7 +1,7 @@
 #  Class: SSW-555
 #  Project:  GEDCOM Project Test Repository
 #  Author: David N. Cohron, Amie Widerkehr, Jeremy Doll
-#  Date: 16 July 2017
+#  Date: 02 August 2017
 
 # Testing Project Increments
 
@@ -11,16 +11,16 @@
 # We further pledge that we have not copied any material from 
 # a book, article, the Internet or any other source except 
 # where we have expressly cited the source.
-# Signature: Jeremy Doll            Date: 16 July 2017
-# Signature: Amie Widerkehr         Date: 16 July 2017
-# Signature: David N. Cohron        Date: 16 July 2017
+# Signature: Jeremy Doll            Date: 02 August 2017
+# Signature: Amie Widerkehr         Date: 02 August 2017
+# Signature: David N. Cohron        Date: 02 August 2017
 
 # References:
 # 1) StackOverflow
 # 2) PyUnit Tutorial: "Page." PyUnit - Python Wiki. N.p., n.d. Web. 13 June 2017.
 
 import unittest
-from Sprint3 import *
+from Sprint4 import *
 
 class AgileProjectTests(unittest.TestCase):
 
@@ -36,7 +36,7 @@ class AgileProjectTests(unittest.TestCase):
         self.date4 = ("10MAR1899")
         self.date5 = ("10MAR1920")
         
-        self.individualsTest ={'I1': {'NAME': 'Mike/Brady/', 'SEX': 'M', 'BIRT': '10MAR1940', 'DEAT': 'NA'}, 'I2': {'NAME': 'Carol/Martin/', 'SEX': 'F', 'BIRT': '10MAR1945', 'DEAT': 'NA'}, 'I3': {'NAME': 'Sam/Franklin/', 'SEX': 'M', 'BIRT': '10MAR1915', 'DEAT': 'NA'}, 'I4': {'NAME': 'Alice/Nelson/', 'SEX': 'F', 'BIRT': '10MAR1925', 'DEAT': 'NA'}, 'I5': {'NAME': 'Greg/Brady/', 'SEX': 'M', 'BIRT': '10MAR1955', 'DEAT': 'NA'}, 'I6': {'NAME': 'Peter/Brady/', 'SEX': 'M', 'BIRT': '10MAR1950', 'DEAT': 'NA'}, 'I7': {'NAME': 'Bobby/Brady/', 'SEX': 'M', 'BIRT': '10MAR1960', 'DEAT': 'NA'}, 'I8': {'NAME': 'Marcia/Nelson/', 'SEX': 'F', 'BIRT': '10MAR1956', 'DEAT': 'NA'}, 'I9': {'NAME': 'Jan/Nelson/', 'SEX': 'F', 'BIRT': '10MAR1958', 'DEAT': 'NA'}, 'I10': {'NAME': 'Cindy/Nelson/', 'SEX': 'F', 'BIRT': '10MAR1960', 'DEAT': 'NA'}, 'I11': {'NAME': 'Tiger/Brady/', 'SEX': 'M', 'BIRT': '5JUL2017', 'DEAT': 'NA'}, 'I12': {'NAME': 'Sally/Fields/', 'SEX': 'F', 'BIRT': '10MAR1942', 'DEAT': '10MAR1940'}, 'I13': {'NAME': 'Samuel/Jackson/', 'SEX': 'M', 'BIRT': '10MAR1979', 'DEAT': 'NA'}, 'I14': {'NAME': 'Natashia/Richards/', 'SEX': 'F', 'BIRT': '30MAR1981', 'DEAT': '10MAR2012'}, 'I15': {'NAME': 'Benjamin/Franklin/', 'SEX': 'M', 'BIRT': '17JAN1706', 'DEAT': '17APR1790'}, 'I16': {'NAME': 'Deborah/Reed/', 'SEX': 'F', 'BIRT': '10MAR1800', 'DEAT': '10MAR1880'}, 'I17': {'NAME': 'Homestar/Runner/', 'SEX': 'M', 'BIRT': '10MAR2010', 'DEAT': 'NA'}, 'I18': {'NAME': 'Marzipan/Chapman/', 'SEX': 'F', 'BIRT': '1APR1990', 'DEAT': 'NA'}, 'I19': {'NAME': 'Strongbad/Runner/', 'SEX': 'M', 'BIRT': '6FEB1990', 'DEAT': 'NA'}, 'I20': {'NAME': 'Strongbad/Runner/', 'SEX': 'M', 'BIRT': '6FEB1990', 'DEAT': 'NA'}, 'I21': {'NAME': 'Cheat/Runner/', 'SEX': 'NA', 'BIRT': '6FEB1990', 'DEAT': 'NA'}, 'I22': {'NAME': 'Strongmad/Runner/', 'SEX': 'M', 'BIRT': '6FEB1990', 'DEAT': 'NA'}, 'I23': {'NAME': 'Strongsad/Runner/', 'SEX': 'M', 'BIRT': '6FEB1990', 'DEAT': 'NA'}, 'I24': {'NAME': 'Homsar/Runner/', 'SEX': 'M', 'BIRT': '6FEB1990', 'DEAT': 'NA'}, 'I25': {'NAME': 'Bubs/Runner/', 'SEX': 'M', 'BIRT': '6FEB1990', 'DEAT': 'NA'}}
+        self.individualsTest = {'I1': {'NAME': 'Mike/Brady/', 'SEX': 'M', 'BIRT': '10MAR1940', 'DEAT': 'NA'}, 'I2': {'NAME': 'Carol/Martin/', 'SEX': 'F', 'BIRT': '10MAR1945', 'DEAT': 'NA'}, 'I3': {'NAME': 'Sam/Franklin/', 'SEX': 'M', 'BIRT': '10MAR1915', 'DEAT': 'NA'}, 'I4': {'NAME': 'Alice/Nelson/', 'SEX': 'F', 'BIRT': '10MAR1925', 'DEAT': 'NA'}, 'I5': {'NAME': 'Greg/Brady/', 'SEX': 'M', 'BIRT': '10MAR1955', 'DEAT': 'NA'}, 'I6': {'NAME': 'Peter/Brady/', 'SEX': 'M', 'BIRT': '10MAR1950', 'DEAT': 'NA'}, 'I7': {'NAME': 'Bobby/Brady/', 'SEX': 'M', 'BIRT': '10MAR1960', 'DEAT': 'NA'}, 'I8': {'NAME': 'Marcia/Nelson/', 'SEX': 'F', 'BIRT': '10MAR1956', 'DEAT': 'NA'}, 'I9': {'NAME': 'Jan/Nelson/', 'SEX': 'F', 'BIRT': '10MAR1958', 'DEAT': 'NA'}, 'I10': {'NAME': 'Cindy/Nelson/', 'SEX': 'F', 'BIRT': '10MAR1960', 'DEAT': 'NA'}, 'I11': {'NAME': 'Tiger/Brady/', 'SEX': 'M', 'BIRT': '5JUL2017', 'DEAT': 'NA'}, 'I12': {'NAME': 'Sally/Fields/', 'SEX': 'F', 'BIRT': '10MAR1942', 'DEAT': '10MAR1940'}, 'I13': {'NAME': 'Samuel/Jackson/', 'SEX': 'M', 'BIRT': '10MAR1979', 'DEAT': 'NA'}, 'I14': {'NAME': 'Natashia/Richards/', 'SEX': 'F', 'BIRT': '30MAR1981', 'DEAT': '10MAR2012'}, 'I15': {'NAME': 'Benjamin/Franklin/', 'SEX': 'M', 'BIRT': '17JAN1706', 'DEAT': '17APR1790'}, 'I16': {'NAME': 'Deborah/Reed/', 'SEX': 'F', 'BIRT': '10MAR1800', 'DEAT': '16JUL2017'}, 'I17': {'NAME': 'Homestar/Runner/', 'SEX': 'M', 'BIRT': '10MAR2010', 'DEAT': 'NA'}, 'I18': {'NAME': 'Marzipan/Chapman/', 'SEX': 'F', 'BIRT': '1APR1990', 'DEAT': 'NA'}, 'I19': {'NAME': 'Strongbad/Runner/', 'SEX': 'M', 'BIRT': '6FEB1990', 'DEAT': 'NA'}, 'I20': {'NAME': 'Strongbad/Runner/', 'SEX': 'M', 'BIRT': '6FEB1990', 'DEAT': 'NA'}, 'I21': {'NAME': 'Cheat/Runner/', 'SEX': 'NA', 'BIRT': '6FEB1990', 'DEAT': 'NA'}, 'I22': {'NAME': 'Strongmad/Runner/', 'SEX': 'M', 'BIRT': '6FEB1990', 'DEAT': 'NA'}, 'I23': {'NAME': 'Strongsad/Runner/', 'SEX': 'M', 'BIRT': '6FEB1990', 'DEAT': 'NA'}, 'I24': {'NAME': 'Homsar/Runner/', 'SEX': 'M', 'BIRT': '6FEB1990', 'DEAT': 'NA'}, 'I25': {'NAME': 'Bubs/Runner/', 'SEX': 'M', 'BIRT': '6FEB1990', 'DEAT': 'NA'}}
         self.familiesTest1 = {'F1': {'HUSB': 'I1', 'WIFE': 'I2', 'CHIL': [], 'MARR': '10MAR1970', 'DIV': 'NA'}, 'F2': {'HUSB': 'I1', 'WIFE': 'I12', 'CHIL': [], 'MARR': '10MAR1969', 'DIV': 'NA'}, 'F3': {'HUSB': 'I3', 'WIFE': 'I4', 'CHIL': ['I2'], 'MARR': '10MAR1928', 'DIV': 'NA'}, 'F4': {'HUSB': 'I15', 'WIFE': 'I16', 'CHIL': ['I3', 'I17'], 'MARR': '10MAR1990', 'DIV': '10MAR1889'}, 'F5': {'HUSB': 'I1', 'WIFE': 'NA', 'CHIL': ['I5', 'I6', 'I7'], 'MARR': 'NA', 'DIV': 'NA'}, 'F6': {'HUSB': 'NA', 'WIFE': 'I2', 'CHIL': ['I8', 'I9', 'I10'], 'MARR': 'NA', 'DIV': 'NA'}, 'F7': {'HUSB': 'I5', 'WIFE': 'NA', 'CHIL': ['I11'], 'MARR': 'NA', 'DIV': 'NA'}, 'F8': {'HUSB': 'I13', 'WIFE': 'I14', 'CHIL': [], 'MARR': '10MAR2013', 'DIV': '1JAN1980'}}
         self.familiesTest2 = {'F1': {'HUSB': 'I1', 'WIFE': 'I2', 'CHIL': [], 'MARR': '10MAR1970', 'DIV': 'NA'}, 'F2': {'HUSB': 'I1', 'WIFE': 'I12', 'CHIL': [], 'MARR': '10MAR1969', 'DIV': 'NA'}, 'F3': {'HUSB': 'I3', 'WIFE': 'I4', 'CHIL': ['I2'], 'MARR': '10MAR1928', 'DIV': 'NA'}, 'F4': {'HUSB': 'I15', 'WIFE': 'I16', 'CHIL': ['I3', 'I17'], 'MARR': '10MAR1990', 'DIV': '10MAR1889'}, 'F5': {'HUSB': 'I1', 'WIFE': 'NA', 'CHIL': ['I5', 'I6', 'I7'], 'MARR': 'NA', 'DIV': 'NA'}, 'F6': {'HUSB': 'NA', 'WIFE': 'I2', 'CHIL': ['I8', 'I9', 'I10'], 'MARR': 'NA', 'DIV': 'NA'}, 'F7': {'HUSB': 'I5', 'WIFE': 'NA', 'CHIL': ['I11'], 'MARR': 'NA', 'DIV': 'NA'}, 'F8': {'HUSB': 'I13', 'WIFE': 'I14', 'CHIL': [], 'MARR': '10MAR2013', 'DIV': '1JAN1980'}, 'F9': {'HUSB': 'I17', 'WIFE': 'I18', 'CHIL': ['I19', 'I20', 'I21', 'I22', 'I23', 'I24', 'I25', 'I90'], 'MARR': 'NA', 'DIV': 'NA'}, 'F10': {'HUSB': 'I1', 'WIFE': 'I2', 'CHIL': [], 'MARR': '10MAR1970', 'DIV': 'NA'}}
 
@@ -249,6 +249,19 @@ class AgileProjectTests(unittest.TestCase):
         self.assertTrue(ageCalc("5JUL2017") < 30)
         self.assertFalse(ageCalc("10MAR1965") < 30)
 
+    def testDeath(self):
+        # testing US36- list all deaths within last 30 days
+        print()
+        print("Testing US36_List recent births:")
+        self.assertTrue(ageCalc("15JUL2017") < 30)
+        self.assertFalse(ageCalc("10MAR1965") < 30)
+
+    def testAge(self):
+        # testing US07- check <= 150 years old today (if alive) or at time of death
+        print()
+        print("Testing US07_Age less than 150:")
+        self.assertTrue(ageCalc("10MAR1950") < (150*365))
+        self.assertFalse(ageCalc("10MAR1850") < (150*365))
 
 
 if __name__ == "__main__":

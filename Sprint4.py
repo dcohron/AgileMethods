@@ -615,7 +615,7 @@ def ListMarriedLiving(key):
     marrString = families[key]["MARR"]
 
     if marrString == "NA":
-        print("Error: Family: US30: Family number:", key, " Not maried or a non-living member")
+        print("ERROR: Family: US30: Family number:", key, " Not married or a non-living member")
         return False
     else:
         print("US 30: Family Number:", key, " Is Married and Living, Married On: " + marrString, " Death is: " + husbDeathString, "/" + wifeDeathString)
@@ -1025,7 +1025,6 @@ try:
         elif wifeAgeDays > (2 * husbandAgeDays):
             print("ERROR: Family: US34:", key, ": Wife", wifeID, individuals[wifeID]['NAME'],"was more than twice his wife's age on the date of marriage.")
 
-
     # US35- List recent births
     # List all people in a GEDCOM file who were born in the last 30 days.
     for key, value in individuals.items():
@@ -1033,6 +1032,29 @@ try:
         if ageDays <= 30:
             print("ERROR: Individual: US35:", key, individuals[key]['NAME'], "is less than 30 days old: (",ageDays,") days old.")
 
+
+    #### Sprint 4
+    # US07- Less than 150 years old
+    # List all people in a GEDCOM file who are over 150 years old if alive, or were at time of death.
+    maxAge = 150
+    for key, value in individuals.items():
+        if individuals[key]['DEAT'] =='NA':
+            ageDays = ageCalc(individuals[key]['BIRT'])
+            if ageDays >= (maxAge * 365):
+                print("ERROR: Individual: US07:", key, individuals[key]['NAME'], "is over 150 years old and still alive. Age = ", round(ageDays/365, 1), " years.")
+        else:
+            ageDays = ageCalc(individuals[key]['BIRT'], individuals[key]['DEAT'])
+            if ageDays >= (maxAge * 365):
+                print("ERROR: Individual: US07:", key, individuals[key]['NAME'], "was over 150 years old at time of death. Age = ", round(ageDays/365,1), " years.")
+
+    # US36- List recent deaths
+    # List all people in a GEDCOM file who died in the last 30 days.
+    for key, value in individuals.items():
+        if individuals[key]['DEAT'] == 'NA':
+            continue
+        ageDays = ageCalc(individuals[key]['DEAT'])
+        if ageDays <= 30:
+            print("ERROR: Individual: US36:", key, individuals[key]['NAME'], "died less than 30 days ago: (",ageDays,") days ago.")
 
 
 except IOError:
