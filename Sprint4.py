@@ -621,6 +621,26 @@ def ListMarriedLiving(key):
         print("US 30: Family Number:", key, " Is Married and Living, Married On: " + marrString, " Death is: " + husbDeathString, "/" + wifeDeathString)
         return True
 
+def ListIfDeceased(key):
+    '''US 29 - Display if deceased'''
+
+    deathString = individuals[key]["DEAT"]
+
+    if deathString != "NA":
+        print("US 29: Individual: ", individuals[key]["NAME"], " Is deceased on: " + deathString)
+        return True
+    else:
+        return False
+
+def CheckForChildList(childList):
+    ''' US- 15 - Check if child list is <= 15 '''
+    
+    if len(childList) >= 15:
+        print("ERROR: US15 - Family: ", key, " Has: ", len(childList), "siblings, Should have less than 15!")
+        return True
+    else:
+        return False
+
 # Main body of code:
 # put code into try/except for error handling
 try: 
@@ -1056,6 +1076,19 @@ try:
         if ageDays <= 30:
             print("ERROR: Individual: US36:", key, individuals[key]['NAME'], "died less than 30 days ago: (",ageDays,") days ago.")
 
+
+  # US29 - List of Deceased
+  # List all the people who are deceased
+  
+    for key, value in individuals.items():
+      ListIfDeceased(key)
+
+ # US15 - Child list is less than 15
+ # Check to see if the Child list is less than 15
+
+    for key, value in families.items():
+        childList = families[key]["CHIL"]
+        CheckForChildList(childList)
 
 except IOError:
     print("An error occured trying to access the data file.")

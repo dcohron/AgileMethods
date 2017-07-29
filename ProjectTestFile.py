@@ -48,6 +48,9 @@ class AgileProjectTests(unittest.TestCase):
         #for us26
         self.familiesTest4 = {'F1': {'MARR': '10MAR1970', 'CHIL': ['I1', 'I2'], 'DIV': 'NA', 'HUSB': 'I1', 'WIFE': 'I2'}, 'F8': {'MARR': '10MAR2013', 'CHIL': ['I13', 'I14'], 'DIV': '1JAN1980', 'HUSB': 'I13', 'WIFE': 'I14'}, 'F9': {'MARR': '10MAR1970', 'CHIL': ['I1', 'I2'], 'DIV': 'NA', 'HUSB': 'I1', 'WIFE': 'I2'}, 'F7': {'MARR': 'NA', 'CHIL': ['I11', 'I5'], 'DIV': 'NA', 'HUSB': 'I5', 'WIFE': 'NA'}, 'F2': {'MARR': '10MAR1969', 'CHIL': ['I1', 'I12'], 'DIV': 'NA', 'HUSB': 'I1', 'WIFE': 'I12'}, 'F6': {'MARR': 'NA', 'CHIL': ['I8', 'I9', 'I10', 'I2'], 'DIV': 'NA', 'HUSB': 'NA', 'WIFE': 'I2'}, 'F3': {'MARR': '10MAR1928', 'CHIL': ['I2', 'I3', 'I4'], 'DIV': 'NA', 'HUSB': 'I3', 'WIFE': 'I4'}, 'F4': {'MARR': '10MAR1990', 'CHIL': ['I3', 'I17', 'I15', 'I16'], 'DIV': '10MAR1889', 'HUSB': 'I15', 'WIFE': 'I16'}, 'F5': {'MARR': 'NA', 'CHIL': ['I5', 'I6', 'I7', 'I1', 'I30'], 'DIV': 'NA', 'HUSB': 'I1', 'WIFE': 'NA'}}
 
+        #for us15
+        self.familiesTest5 = {'F1': {'MARR': '10MAR1970', 'CHIL': ['I1', 'I2', 'I3', 'I4', 'I5', 'I6', 'I7', 'I8', 'I9', 'I10', 'I11', 'I12', 'I13', 'I14', 'I15'], 'DIV': 'NA', 'HUSB': 'I1', 'WIFE': 'I2'}}
+
     def tearDown(self):
         # Call after every test case.
         print("Test complete.")
@@ -263,6 +266,23 @@ class AgileProjectTests(unittest.TestCase):
         self.assertTrue(ageCalc("10MAR1950") < (150*365))
         self.assertFalse(ageCalc("10MAR1850") < (150*365))
 
+    def testDeceased(self):
+        # Testing US29 - List if individual is deceased
+        print()
+        print("Testing US29 - List of individuals deceased")
+
+        self.assertTrue(ListIfDeceased("I12"))
+    
+    def test15ChildList(self):
+        # Testing US15 - Check if the childlist < 15
+        print()
+        print("Testing US15 - < than 15 siblings")
+
+        childList = ['I1', 'I2', 'I3', 'I4', 'I5', 'I6', 'I7', 'I8', 'I9', 'I10', 'I11', 'I12', 'I13', 'I14', 'I15']
+
+        self.assertTrue(CheckForChildList(childList))
+
+        
 
 if __name__ == "__main__":
 
