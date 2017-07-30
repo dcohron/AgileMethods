@@ -641,6 +641,33 @@ def CheckForChildList(childList):
     else:
         return False
 
+def checkUpcomingAnniversary(key, date1, today):
+    ''' US39- check if an anniversary is in the next 30 days
+        date should be the marriage date from the families table'''
+    if date1 == "NA": # filter blanks
+        return False
+
+    ann_date = dt.datetime.strptime(date1, "%d%b%Y")
+
+    if ann_date.month == 1 and ann_date.day <= 29 and today.month != 1: # account for year wrap-around
+        temp = dt.datetime(today.year + 1, ann_date.month, ann_date.day)
+    else: # for everything else
+        temp = dt.datetime(today.year, ann_date.month, ann_date.day)
+    td = temp - today
+    # print(td.days)
+    if td.days <= 30 and td.days >= 0:
+        print("US39: Family " + key + " has an anniversary in the next 30 days")
+        return True
+    return False
+
+def checkProperRoles(key, indID, indSex, indRole):
+    '''US21 - Make sure husband is male and wife is female'''
+    if (indRole == "HUSB" and indSex != "M") or (indRole == "WIFE" and indSex != "F"):
+        print("ERROR: Family: US21: " + indID + " is listed as " + indRole + " for " + key + " but has sex listed as " + indSex + ".")
+        return False
+    else:
+        return True
+
 # Main body of code:
 # put code into try/except for error handling
 try: 
@@ -655,8 +682,9 @@ try:
     finalp2 = PrettyTable()
 
     # Define where to find the data file
+    path2 = "./Family-4-30-Jul-2017-506.ged"
     path1 = "./My-Family-18-May-2017-411.ged"
-    path = path1
+    path = path2
 
     # List of valid GEDCOM tags
     tagLong = ["ABBR", "ADDR", "ADR1", "ADR2", "ADOP", "AFN", "AGE", "AGNC", "ALIA", "ANCE", "ANCI", "ANUL", "ASSO", "AUTH", "BAPL", "BAPM", "BARM", "BASM", "BIRT", "BLES", "BLOB", "BURI", "CALN", "CAST", "CAUS", "CENS", "CHAN", "CHAR", "CHIL", "SHR", "CHRA", "CITY", "CONC", "CONF", "CONL", "CONT", "COPR", "CORP", "CREM", "CTRY", "DATA", "DATE", "DEAT", "DESC", "DESI", "DEST", "DIV", "DIVF", "DSCR", "EDUC", "EMAIL", "EMIG", "ENDL", "ENGA", "EVEN", "FACT", "FAM", "FAMC", "FAMF", "FAMS", "FAX", "FCOM", "FILE", "FONE", "FORM", "GEDC", "GIVN", "GRAD", "HEAD", "HUSB", "IDNO", "IMMI", "INDI", "LANG", "LATI", "LEGA", "LONG", "MAP", "MARB", "MARC", "MARL", "MARR", "MARS", "MEDI", "NAME", "NATI", "NATU", "NCHI", "NICK", "NMR", "NOTE", "NPFX", "NSFX", "OBJE", "OCCU", "ORDI", "ORDN", "PAGE", "PEDI", "PHON", "PLAC", "POST", "PROB", "PROP", "PUBL", "QUAY", "REFN", "RELA", "RELI", "REPO", "RESI", "RESN", "RETI", "RFN", "RIN", "ROLE", "ROMN", "SEX", "SLGC", "SLGS", "SOUR", "SPFX", "SSN", "STAE", "STAT", "SUBM", "SUBN", "SURN", "TEMP", "TEXT", "TIME", "TITL", "TRLR", "TYPE", "VERS", "WIFE", "WWW", "WILL"]
@@ -1083,6 +1111,18 @@ try:
     for key, value in individuals.items():
       ListIfDeceased(key)
 
+    # US 21- Correct gender for role (wife is female, husb is male)
+    for key, value in families.items():
+        w = families[key]["WIFE"]
+        h = families[key]["HUSB"]
+        if w != "NA":
+            checkProperRoles(key, w, individuals[w]["SEX"], "WIFE")
+        if h != "NA":
+            checkProperRoles(key, h, individuals[h]["SEX"], "HUSB")
+    # US39 - List All upcoming anniversaries (in next 30 days)
+    todDate = dt.datetime.today() # variable efficiency, named weird so it wont conflict, also for better unittests
+    for key, value in families.items():
+        checkUpcomingAnniversary(key, families[key]["MARR"], todDate)
  # US15 - Child list is less than 15
  # Check to see if the Child list is less than 15
 

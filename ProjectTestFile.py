@@ -282,7 +282,26 @@ class AgileProjectTests(unittest.TestCase):
 
         self.assertTrue(CheckForChildList(childList))
 
-        
+    def testUpcomingAnniversary(self):
+        # Testing US39- Upcoming anniversary (next 30 days)
+        print()
+        print("Testing US39 - Anniversary in next 30 days")
+        self.assertTrue(checkUpcomingAnniversary("F6", "10NOV1986", dt.datetime(2017, 11, 6)))
+        self.assertTrue(checkUpcomingAnniversary("F5", "6JAN2001", dt.datetime(2017, 12, 16)))
+        self.assertTrue(checkUpcomingAnniversary("F50", "6JAN2001", dt.datetime(2017, 1, 2)))
+        self.assertFalse(checkUpcomingAnniversary("F10", "NA", dt.datetime(2017, 11, 6)))
+        self.assertFalse(checkUpcomingAnniversary("F1", "31OCT1923", dt.datetime(2017, 11, 6)))
+
+    def testProperRoles(self):
+        # Testinf US21- Proper Roles
+        # HUSB must be Male
+        # Wife must be Female
+        print()
+        print("Testing US21 - Proper Roles in Marriage")
+        self.assertTrue(checkProperRoles("F9", "I2", "F", "WIFE"))
+        self.assertTrue(checkProperRoles("F9", "I3", "M", "HUSB"))
+        self.assertFalse(checkProperRoles("F10", "I4", "F", "HUSB"))
+        self.assertFalse(checkProperRoles("F10", "I5", "M", "WIFE"))
 
 if __name__ == "__main__":
 
