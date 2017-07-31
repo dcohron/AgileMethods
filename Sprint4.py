@@ -1104,10 +1104,8 @@ try:
         if ageDays <= 30:
             print("ERROR: Individual: US36:", key, individuals[key]['NAME'], "died less than 30 days ago: (",ageDays,") days ago.")
 
-
-  # US29 - List of Deceased
-  # List all the people who are deceased
-  
+    # US29 - List of Deceased
+    # List all the people who are deceased
     for key, value in individuals.items():
       ListIfDeceased(key)
 
@@ -1119,13 +1117,14 @@ try:
             checkProperRoles(key, w, individuals[w]["SEX"], "WIFE")
         if h != "NA":
             checkProperRoles(key, h, individuals[h]["SEX"], "HUSB")
+ 
     # US39 - List All upcoming anniversaries (in next 30 days)
     todDate = dt.datetime.today() # variable efficiency, named weird so it wont conflict, also for better unittests
     for key, value in families.items():
         checkUpcomingAnniversary(key, families[key]["MARR"], todDate)
- # US15 - Child list is less than 15
- # Check to see if the Child list is less than 15
 
+    # US15 - Child list is less than 15
+    # Check to see if the Child list is less than 15
     for key, value in families.items():
         childList = families[key]["CHIL"]
         CheckForChildList(childList)
