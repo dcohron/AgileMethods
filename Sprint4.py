@@ -590,7 +590,7 @@ def SortChildrenByAge(key, childList):
      myList.sort(key=lambda tup:tup[1])
 
      print()
-     print("US 28 - Sort Children by Age:")
+     print("ANOMALY: US 28 - Sort Children by Age:")
      print("Family: ", key)
      for items in myList:
         print("---------->DOB: ", items[1], "Child Name: ", individuals[items[0]]["NAME"])
@@ -618,7 +618,7 @@ def ListMarriedLiving(key):
         print("ERROR: Family: US30: Family number:", key, " Not married or a non-living member")
         return False
     else:
-        print("US 30: Family Number:", key, " Is Married and Living, Married On: " + marrString, " Death is: " + husbDeathString, "/" + wifeDeathString)
+        print("ANOMALY: US 30: Family Number:", key, " Is Married and Living, Married On: " + marrString, " Death is: " + husbDeathString, "/" + wifeDeathString)
         return True
 
 def ListIfDeceased(key):
@@ -627,7 +627,7 @@ def ListIfDeceased(key):
     deathString = individuals[key]["DEAT"]
 
     if deathString != "NA":
-        print("US 29: Individual: ", individuals[key]["NAME"], " Is deceased on: " + deathString)
+        print("ANOMALY: US 29: Individual: ", individuals[key]["NAME"], " Is deceased on: " + deathString)
         return True
     else:
         return False
@@ -656,7 +656,7 @@ def checkUpcomingAnniversary(key, date1, today):
     td = temp - today
     # print(td.days)
     if td.days <= 30 and td.days >= 0:
-        print("US39: Family " + key + " has an anniversary in the next 30 days")
+        print("ANOMALY: US39: Family " + key + " has an anniversary in the next 30 days")
         return True
     return False
 
@@ -684,7 +684,7 @@ try:
     # Define where to find the data file
     path2 = "./Family-4-30-Jul-2017-506.ged"
     path1 = "./My-Family-18-May-2017-411.ged"
-    path = path2
+    path = path1
 
     # List of valid GEDCOM tags
     tagLong = ["ABBR", "ADDR", "ADR1", "ADR2", "ADOP", "AFN", "AGE", "AGNC", "ALIA", "ANCE", "ANCI", "ANUL", "ASSO", "AUTH", "BAPL", "BAPM", "BARM", "BASM", "BIRT", "BLES", "BLOB", "BURI", "CALN", "CAST", "CAUS", "CENS", "CHAN", "CHAR", "CHIL", "SHR", "CHRA", "CITY", "CONC", "CONF", "CONL", "CONT", "COPR", "CORP", "CREM", "CTRY", "DATA", "DATE", "DEAT", "DESC", "DESI", "DEST", "DIV", "DIVF", "DSCR", "EDUC", "EMAIL", "EMIG", "ENDL", "ENGA", "EVEN", "FACT", "FAM", "FAMC", "FAMF", "FAMS", "FAX", "FCOM", "FILE", "FONE", "FORM", "GEDC", "GIVN", "GRAD", "HEAD", "HUSB", "IDNO", "IMMI", "INDI", "LANG", "LATI", "LEGA", "LONG", "MAP", "MARB", "MARC", "MARL", "MARR", "MARS", "MEDI", "NAME", "NATI", "NATU", "NCHI", "NICK", "NMR", "NOTE", "NPFX", "NSFX", "OBJE", "OCCU", "ORDI", "ORDN", "PAGE", "PEDI", "PHON", "PLAC", "POST", "PROB", "PROP", "PUBL", "QUAY", "REFN", "RELA", "RELI", "REPO", "RESI", "RESN", "RETI", "RFN", "RIN", "ROLE", "ROMN", "SEX", "SLGC", "SLGS", "SOUR", "SPFX", "SSN", "STAE", "STAT", "SUBM", "SUBN", "SURN", "TEMP", "TEXT", "TIME", "TITL", "TRLR", "TYPE", "VERS", "WIFE", "WWW", "WILL"]
