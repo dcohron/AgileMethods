@@ -656,7 +656,7 @@ def checkUpcomingAnniversary(key, date1, today):
     td = temp - today
     # print(td.days)
     if td.days <= 30 and td.days >= 0:
-        print("ANOMALY: US39: Family " + key + " has an anniversary in the next 30 days")
+        print("ANOMALY: US39: Family " + key + " has an anniversary in the next 30 days.")
         return True
     return False
 
@@ -701,7 +701,7 @@ try:
     IDErrorBuffer = []
 
     individual, families = readFile(path)
-    
+
     # this output is for development, comment out as necessary
     #print(individuals)
     #print(families)
